@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Crystal Healing Meditation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0d0e1a;--bg2:#13152b;--bg3:#1a1d35;--surface:#1f2240;--surface2:#272a4a;
+  --border:rgba(140,120,220,0.15);--border2:rgba(140,120,220,0.28);
+  --gold:#c9a84c;--amethyst:#9b72d0;--amethyst-lt:#c4a0f0;
+  --jade:#4caf85;--rose:#d07899;--ruby:#c94c6a;--sapphire:#4c82c9;
+  --text:#e8e4f8;--text-2:#a09cc0;--text-3:#6a6880;
+  --radius:16px;--radius-sm:10px;--shadow:0 4px 32px rgba(0,0,0,0.5);
+  font-size:16px;
+}
+body.light{--bg:#f5f3ff;--bg2:#ede9fe;--bg3:#e5e0ff;--surface:#fff;--surface2:#f0ecff;--border:rgba(100,80,180,0.15);--border2:rgba(100,80,180,0.3);--text:#1a1535;--text-2:#4a3f80;--text-3:#8a80b0;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;color:inherit;}
+input,textarea,select{font-family:inherit;font-size:.9rem;color:var(--text);background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:.6rem .85rem;width:100%;outline:none;transition:border .2s;}
+input:focus,textarea:focus,select:focus{border-color:var(--amethyst);}
+select option{background:var(--bg2);}
+textarea{resize:vertical;}
+#particleCanvas{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.55;}
+#app{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 1rem 6rem;}
+#appHeader{position:sticky;top:0;z-index:100;background:rgba(13,14,26,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+body.light #appHeader{background:rgba(245,243,255,.9);}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;padding:.85rem 1.25rem;}
+.logo{display:flex;align-items:center;gap:.5rem;}
+.logo-gem{font-size:1.4rem;color:var(--gold);animation:gemPulse 3s ease-in-out infinite;}
+@keyframes gemPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.12)}}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;letter-spacing:.04em;}
+.header-nav{display:flex;gap:.2rem;margin-left:auto;}
+.nav-btn{padding:.38rem .8rem;border-radius:999px;font-size:.78rem;font-weight:400;color:var(--text-2);transition:all .2s;}
+.nav-btn:hover{color:var(--text);background:var(--surface2);}
+.nav-btn.active{color:#fff;background:var(--amethyst);}
+#menuToggle{display:none;font-size:1.4rem;color:var(--text-2);margin-left:auto;padding:.3rem .5rem;}
+.view{display:none;padding-top:2rem;}
+.view.active{display:block;}
+
+/* HERO */
+.hero{text-align:center;padding:3rem 1rem 2rem;}
+.hero-eyebrow{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,7vw,4.5rem);font-weight:300;line-height:1.1;margin-bottom:1rem;}
+.hero-title em{color:var(--amethyst-lt);font-style:italic;}
+.hero-sub{font-size:.9rem;color:var(--text-2);letter-spacing:.06em;}
+
+/* AMBIENT */
+.ambient-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.85rem 1.1rem;margin-bottom:2rem;}
+.ambient-top{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;}
+.ambient-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--text-3);white-space:nowrap;}
+.vol-wrap{display:flex;align-items:center;gap:.4rem;color:var(--text-3);font-size:.85rem;margin-left:auto;}
+.vol-wrap input[type=range]{width:70px;padding:0;border:none;background:transparent;accent-color:var(--amethyst);}
+.ambient-row{display:flex;gap:.4rem;flex-wrap:wrap;}
+.sound-chip{padding:.28rem .65rem;border-radius:999px;font-size:.72rem;border:1px solid var(--border2);color:var(--text-2);transition:all .2s;}
+.sound-chip:hover{border-color:var(--amethyst);color:var(--text);}
+.sound-chip.active{background:var(--amethyst);border-color:var(--amethyst);color:#fff;}
+
+/* SESSION CARDS */
+.sessions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-bottom:2.5rem;}
+.session-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;position:relative;transition:transform .25s,box-shadow .25s;overflow:hidden;}
+.session-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--card-color,#9b72d0) 0%,transparent 60%);opacity:.07;pointer-events:none;}
+.session-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+.card-header{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:.85rem;}
+.card-emoji{font-size:1.8rem;line-height:1;}
+.card-meta{flex:1;}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;}
+.card-purpose{font-size:.72rem;color:var(--text-2);margin-top:.2rem;letter-spacing:.05em;}
+.card-edit{color:var(--text-3);font-size:.8rem;padding:.25rem .5rem;border-radius:6px;transition:all .2s;}
+.card-edit:hover{color:var(--amethyst-lt);background:var(--surface2);}
+.card-duration{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--gold);letter-spacing:.08em;margin-bottom:.85rem;}
+.card-duration::before{content:'◷';}
+.card-crystals{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem;}
+.crystal-tag{font-size:.72rem;padding:.25rem .6rem;border-radius:999px;background:var(--surface2);border:1px solid var(--border);color:var(--text-2);}
+.start-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:.75rem 1rem;background:linear-gradient(135deg,var(--amethyst) 0%,#6a42b0 100%);border-radius:var(--radius-sm);color:#fff;font-size:.85rem;font-weight:500;letter-spacing:.05em;transition:opacity .2s;}
+.start-btn:hover{opacity:.88;}
+.btn-arrow{font-size:1rem;}
+
+/* COMMUTE */
+.commute-section{margin-bottom:3rem;}
+.commute-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;}
+.commute-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;}
+.commute-icon{font-size:2rem;}
+.commute-header h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;}
+.commute-header p{font-size:.75rem;color:var(--text-2);margin-top:.15rem;}
+.commute-header .edit-btn{margin-left:auto;color:var(--text-3);font-size:.85rem;padding:.3rem .6rem;border-radius:8px;transition:all .2s;}
+.commute-header .edit-btn:hover{background:var(--surface2);color:var(--amethyst-lt);}
+.commute-crystals{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;}
+.commute-affirmations{margin-bottom:1.25rem;}
+.commute-affirmations p{font-size:.82rem;color:var(--text-2);padding:.3rem 0;border-bottom:1px solid var(--border);}
+.commute-affirmations p:last-child{border:none;}
+.commute-start{background:linear-gradient(135deg,var(--jade) 0%,#2d8a60 100%);}
+
+/* PAGE HERO */
+.page-hero{padding:2rem 0 1.5rem;}
+.page-hero h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;}
+.page-hero h2 em{color:var(--amethyst-lt);font-style:italic;}
+.page-hero p{font-size:.85rem;color:var(--text-2);margin-top:.4rem;}
+
+/* ═══════════════════════════════════════
+   MANTRA CARDS
+═══════════════════════════════════════ */
+.mantra-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;padding-bottom:3rem;}
+.mantra-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;cursor:pointer;}
+.mantra-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--mc,#c9a84c) 0%,transparent 55%);opacity:.07;pointer-events:none;}
+.mantra-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.4);}
+.mantra-card.playing-card{border-color:var(--mc,#c9a84c);box-shadow:0 0 0 2px var(--mc,#c9a84c),0 8px 32px rgba(0,0,0,.4);}
+.mc-top{display:flex;align-items:center;gap:.85rem;margin-bottom:.75rem;}
+.mc-icon{font-size:2rem;line-height:1;}
+.mc-info{flex:1;}
+.mc-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:.2rem;}
+.mc-benefit{font-size:.7rem;color:var(--text-3);letter-spacing:.04em;}
+.mc-sanskrit{font-size:.82rem;color:var(--amethyst-lt);font-style:italic;line-height:1.7;margin-bottom:.85rem;white-space:pre-line;}
+.mc-meaning{font-size:.75rem;color:var(--text-2);line-height:1.55;margin-bottom:1rem;}
+.mc-audio-bar{display:flex;align-items:center;gap:.6rem;}
+.mc-play{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;background:var(--mc,#c9a84c);color:#1a1000;flex-shrink:0;transition:transform .15s,opacity .2s;}
+.mc-play:hover{transform:scale(1.08);}
+.mc-play:disabled{opacity:.5;}
+.mc-progress-wrap{flex:1;}
+.mc-audio-label{font-size:.68rem;color:var(--text-3);margin-bottom:.3rem;}
+.mc-progress{height:3px;background:var(--surface2);border-radius:2px;overflow:hidden;}
+.mc-progress-fill{height:100%;width:0%;background:var(--mc,#c9a84c);border-radius:2px;transition:width .5s;}
+.mc-time{font-size:.65rem;color:var(--text-3);margin-top:.25rem;display:flex;justify-content:space-between;}
+.mc-status{font-size:.72rem;color:var(--text-3);margin-top:.35rem;}
+.mc-loading{animation:pulse 1.2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+.mc-error{color:var(--ruby);font-size:.7rem;margin-top:.4rem;}
+
+/* WEEKLY */
+.weekly-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;padding-bottom:3rem;}
+.weekly-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;position:relative;overflow:hidden;transition:transform .2s;}
+.weekly-card:hover{transform:translateY(-2px);}
+.weekly-day{font-size:.65rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.5rem;}
+.weekly-day.today{color:var(--jade);}
+.weekly-day.today::after{content:' ← today';}
+.weekly-title{font-family:'Cormorant Garamond',serif;font-size:1rem;margin-bottom:.6rem;}
+.weekly-focus{font-size:.75rem;color:var(--text-2);margin-bottom:.75rem;font-style:italic;}
+.weekly-edit{position:absolute;top:.75rem;right:.75rem;font-size:.75rem;color:var(--text-3);padding:.2rem .4rem;border-radius:6px;transition:all .2s;}
+.weekly-edit:hover{background:var(--surface2);color:var(--amethyst-lt);}
+.weekly-start{font-size:.75rem;padding:.45rem .85rem;background:var(--amethyst);border-radius:8px;color:#fff;transition:opacity .2s;}
+.weekly-start:hover{opacity:.85;}
+
+/* MANAGE */
+.manage-list{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem;}
+.manage-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;}
+.manage-item .mi-emoji{font-size:1.4rem;}
+.manage-item .mi-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;flex:1;}
+.manage-item .mi-dur{font-size:.75rem;color:var(--text-2);}
+.manage-item .mi-edit{padding:.35rem .75rem;border:1px solid var(--border2);border-radius:8px;font-size:.8rem;color:var(--text-2);transition:all .2s;}
+.manage-item .mi-edit:hover{border-color:var(--amethyst);color:var(--amethyst-lt);}
+.add-session-btn{display:block;width:100%;padding:1rem;border:2px dashed var(--border2);border-radius:var(--radius);text-align:center;color:var(--text-2);font-size:.9rem;transition:all .2s;}
+.add-session-btn:hover{border-color:var(--amethyst);color:var(--amethyst-lt);background:var(--surface);}
+
+/* SETTINGS */
+.settings-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;margin-bottom:1.25rem;}
+.settings-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:1rem;}
+.settings-card label{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.85rem;font-size:.8rem;color:var(--text-2);}
+.settings-card label:last-child{margin-bottom:0;}
+.settings-hint{font-size:.78rem;color:var(--text-3);margin-bottom:.75rem;line-height:1.55;}
+.toggle-label{flex-direction:row!important;align-items:center!important;gap:.75rem!important;}
+.toggle-label input[type=checkbox]{display:none;}
+.toggle-track{width:40px;height:22px;border-radius:999px;background:var(--surface2);border:1px solid var(--border2);position:relative;cursor:pointer;transition:background .25s;}
+.toggle-track::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--text-3);transition:transform .25s,background .25s;}
+input[type=checkbox]:checked+.toggle-track{background:var(--amethyst);border-color:var(--amethyst);}
+input[type=checkbox]:checked+.toggle-track::after{transform:translateX(18px);background:#fff;}
+.file-upload-label{display:inline-flex!important;flex-direction:row!important;align-items:center;gap:.5rem;cursor:pointer;padding:.5rem 1rem;border:1px solid var(--border2);border-radius:var(--radius-sm);font-size:.82rem;color:var(--text-2);transition:all .2s;}
+.file-upload-label:hover{border-color:var(--amethyst);color:var(--amethyst-lt);}
+.file-upload-label input{display:none;}
+#uploadedFiles{margin-top:.75rem;display:flex;flex-wrap:wrap;gap:.5rem;}
+.audio-chip{font-size:.75rem;padding:.3rem .7rem;background:var(--surface2);border:1px solid var(--border2);border-radius:999px;color:var(--text-2);}
+.test-btn{padding:.5rem 1.1rem;border:1px solid var(--amethyst);border-radius:var(--radius-sm);font-size:.82rem;color:var(--amethyst-lt);transition:all .2s;margin-top:.5rem;}
+.test-btn:hover{background:var(--amethyst);color:#fff;}
+.outline-btn{display:inline-block;padding:.5rem 1rem;border:1px solid var(--border2);border-radius:var(--radius-sm);font-size:.82rem;color:var(--text-2);transition:all .2s;margin-right:.5rem;margin-top:.4rem;}
+.outline-btn:hover{border-color:var(--amethyst);color:var(--amethyst-lt);}
+.outline-btn.danger{border-color:rgba(201,76,106,.4);color:var(--ruby);}
+.outline-btn.danger:hover{background:var(--ruby);color:#fff;border-color:var(--ruby);}
+
+/* MODAL */
+.modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;}
+.modal.hidden{display:none;}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);}
+.modal-panel{position:relative;z-index:1;background:var(--bg2);border:1px solid var(--border2);border-radius:24px;padding:2.5rem 2rem;width:min(520px,92vw);max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.8);animation:slideUp .3s ease-out;}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:1rem;right:1rem;width:34px;height:34px;border-radius:50%;background:var(--surface2);color:var(--text-2);font-size:.85rem;transition:all .2s;display:flex;align-items:center;justify-content:center;}
+.modal-close:hover{background:var(--ruby);color:#fff;}
+
+/* PLAYER MODAL */
+#playerModal .modal-panel{text-align:center;padding:2rem 1.75rem;}
+.player-crystal-row{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem;}
+.player-crystal{font-size:.78rem;padding:.35rem .75rem;border-radius:999px;background:var(--surface2);border:1px solid var(--border2);color:var(--text-2);}
+.player-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;margin-bottom:.3rem;}
+.player-subtitle{font-size:.78rem;color:var(--text-2);letter-spacing:.08em;margin-bottom:1.5rem;}
+.timer-ring-wrap{position:relative;width:200px;height:200px;margin:0 auto 1.5rem;}
+.timer-ring{width:100%;height:100%;transform:rotate(-90deg);}
+.ring-track{fill:none;stroke:var(--surface2);stroke-width:8;}
+.ring-fill{fill:none;stroke:var(--amethyst-lt);stroke-width:8;stroke-linecap:round;stroke-dasharray:553;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .5s;}
+.timer-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.timer-display{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;line-height:1;}
+.timer-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--text-3);margin-top:.2rem;}
+.affirmation-box{min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:1rem;}
+.affirmation-count{font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:.4rem;}
+.affirmation-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--amethyst-lt);line-height:1.6;padding:0 .5rem;}
+@keyframes fadeText{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.visualize-box{font-size:.8rem;color:var(--text-3);font-style:italic;margin-bottom:1.25rem;min-height:1.5em;}
+.player-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;}
+.ctrl-btn{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--surface2);border:1px solid var(--border2);color:var(--text-2);font-size:.9rem;transition:all .2s;}
+.ctrl-btn:hover{border-color:var(--amethyst);color:var(--amethyst-lt);}
+.ctrl-btn.primary{width:58px;height:58px;font-size:1.3rem;background:var(--amethyst);border-color:var(--amethyst);color:#fff;}
+.ctrl-btn.active{background:var(--amethyst);border-color:var(--amethyst);color:#fff;}
+.player-progress{margin-top:.5rem;}
+.progress-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin-bottom:.5rem;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--amethyst),var(--gold));border-radius:2px;transition:width .4s;width:0%;}
+.progress-label{font-size:.72rem;color:var(--text-3);}
+
+/* EDIT */
+.edit-panel label{display:flex;flex-direction:column;gap:.4rem;font-size:.8rem;color:var(--text-2);margin-bottom:.85rem;}
+.edit-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:1.25rem;}
+.edit-actions{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:1rem;}
+.save-btn{padding:.65rem 1.5rem;background:var(--amethyst);color:#fff;border-radius:var(--radius-sm);font-size:.9rem;font-weight:500;transition:all .2s;}
+.save-btn:hover{background:var(--amethyst-lt);}
+.save-btn.danger{background:var(--ruby);}
+.confirm-panel{text-align:center;max-width:340px;}
+.confirm-panel p{font-size:1rem;margin-bottom:1.5rem;line-height:1.5;}
+.confirm-actions{display:flex;justify-content:center;gap:1rem;}
+#toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--surface2);border:1px solid var(--border2);border-radius:999px;padding:.65rem 1.5rem;font-size:.85rem;color:var(--text-2);box-shadow:var(--shadow);z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+#toast.show{opacity:1;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+@media(max-width:640px){
+  .header-nav{display:none;}
+  #menuToggle{display:flex;}
+  .header-nav.open{display:flex;flex-direction:column;position:fixed;top:58px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem;gap:.5rem;z-index:99;}
+  .header-nav.open .nav-btn{text-align:left;border-radius:var(--radius-sm);padding:.65rem 1rem;}
+  .sessions-grid,.mantra-grid{grid-template-columns:1fr;}
+  .weekly-grid{grid-template-columns:1fr 1fr;}
+  .timer-ring-wrap{width:160px;height:160px;}
+  .timer-display{font-size:2rem;}
+  .player-title{font-size:1.4rem;}
+  .modal-panel{padding:1.5rem 1.1rem;}
+  #appHeader .logo-text{display:none;}
+}
+@media(max-width:380px){.weekly-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<canvas id="particleCanvas"></canvas>
+<div id="app">
+  <header id="appHeader">
+    <div class="header-inner">
+      <div class="logo"><span class="logo-gem">✦</span><span class="logo-text">Crystal Healing</span></div>
+      <nav class="header-nav">
+        <button class="nav-btn active" data-view="home">Home</button>
+        <button class="nav-btn" data-view="mantras">🕉 Mantras</button>
+        <button class="nav-btn" data-view="weekly">Weekly</button>
+        <button class="nav-btn" data-view="sessions">Sessions</button>
+        <button class="nav-btn" data-view="settings">Settings</button>
+      </nav>
+      <button id="menuToggle">☰</button>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <main id="viewHome" class="view active">
+    <section class="hero">
+      <p class="hero-eyebrow">Daily Practice</p>
+      <h1 class="hero-title">Begin Your<br/><em>Healing Journey</em></h1>
+      <p class="hero-sub">Hold your crystals · Breathe · Set your intention</p>
+    </section>
+    <div class="ambient-bar">
+      <div class="ambient-top">
+        <span class="ambient-label">🎵 Ambient Sound</span>
+        <div class="vol-wrap"><span>🔈</span><input type="range" id="volSlider" min="0" max="1" step="0.05" value="0.4"/></div>
+      </div>
+      <div class="ambient-row" id="ambientSounds">
+        <button class="sound-chip active" data-sound="none">Silence</button>
+        <button class="sound-chip" data-sound="bowls">🎵 Singing Bowls</button>
+        <button class="sound-chip" data-sound="rain">🌧 Rain</button>
+        <button class="sound-chip" data-sound="forest">🌿 Forest</button>
+        <button class="sound-chip" data-sound="ocean">🌊 Ocean</button>
+        <button class="sound-chip" data-sound="om">🕉 OM Drone</button>
+        <button class="sound-chip" data-sound="tibetan">🪘 Tibetan</button>
+        <button class="sound-chip" data-sound="creek">💧 Creek</button>
+        <button class="sound-chip" data-sound="night">🦗 Night</button>
+        <button class="sound-chip" data-sound="thunder">⛈ Thunder</button>
+        <button class="sound-chip" data-sound="wind">🔔 Wind Chimes</button>
+        <button class="sound-chip" data-sound="binaural">🧠 Binaural 432Hz</button>
+      </div>
+    </div>
+    <section class="sessions-grid" id="dailySessions"></section>
+    <section class="commute-section">
+      <div class="commute-card">
+        <div class="commute-header">
+          <span class="commute-icon">🚆</span>
+          <div><h3>Office &amp; Train Commute Kit</h3><p>Carry your pouch · 5 slow breaths</p></div>
+          <button class="edit-btn">✏️</button>
+        </div>
+        <div class="commute-crystals" id="commuteCrystals"></div>
+        <div class="commute-affirmations" id="commuteAffirmations"></div>
+        <button class="start-btn commute-start" id="startCommute"><span>Begin Commute Practice</span><span class="btn-arrow">→</span></button>
+      </div>
+    </section>
+  </main>
+
+  <!-- MANTRAS -->
+  <main id="viewMantras" class="view">
+    <section class="page-hero">
+      <h2>Sacred <em>Mantras</em></h2>
+      <p>Real authentic audio recordings — press ▶ to play &amp; chant along</p>
+    </section>
+    <div class="mantra-grid" id="mantraGrid"></div>
+  </main>
+
+  <!-- WEEKLY -->
+  <main id="viewWeekly" class="view">
+    <section class="page-hero"><h2>Weekly <em>Crystal Focus</em></h2><p>Each day carries its own intention</p></section>
+    <div class="weekly-grid" id="weeklyGrid"></div>
+  </main>
+
+  <!-- SESSIONS -->
+  <main id="viewSessions" class="view">
+    <section class="page-hero"><h2>Manage <em>Sessions</em></h2><p>Edit, reorder, or add your own healing sessions</p></section>
+    <div class="manage-list" id="manageList"></div>
+    <button class="add-session-btn" id="addSessionBtn">+ Add New Session</button>
+  </main>
+
+  <!-- SETTINGS -->
+  <main id="viewSettings" class="view">
+    <section class="page-hero"><h2>Settings &amp; <em>Voice</em></h2></section>
+    <div class="settings-card">
+      <h3>Affirmation Voice (TTS)</h3>
+      <p class="settings-hint">Used for affirmations in healing sessions. Mantras use real audio recordings — no TTS needed for mantras.</p>
+      <label>Voice
+        <div style="display:flex;gap:.5rem">
+          <select id="voiceSelect" style="flex:1"></select>
+          <button class="test-btn" id="refreshVoices" style="margin-top:0;white-space:nowrap">↻ Refresh</button>
+        </div>
+      </label>
+      <label>Speed<input type="range" id="speechRate" min="0.5" max="1.5" step="0.05" value="0.8"/><span id="speechRateVal">0.8×</span></label>
+      <label>Pitch<input type="range" id="speechPitch" min="0.5" max="1.5" step="0.1" value="1.0"/><span id="speechPitchVal">1.0</span></label>
+      <label>Pause between affirmations<input type="range" id="affirmPause" min="1" max="8" step="0.5" value="2"/><span id="affirmPauseVal">2s</span></label>
+      <button class="test-btn" id="testVoice">▶ Test Voice</button>
+    </div>
+    <div class="settings-card">
+      <h3>Display</h3>
+      <label class="toggle-label"><span>Dark Mode</span><input type="checkbox" id="darkModeToggle" checked/><span class="toggle-track"></span></label>
+      <label class="toggle-label"><span>Auto-advance sessions</span><input type="checkbox" id="autoAdvance"/><span class="toggle-track"></span></label>
+    </div>
+    <div class="settings-card">
+      <h3>Data</h3>
+      <button class="outline-btn" id="exportData">⬇ Export JSON</button>
+      <button class="outline-btn" id="importDataBtn">⬆ Import JSON</button>
+      <input type="file" id="importDataFile" accept=".json" style="display:none"/>
+      <button class="outline-btn danger" id="resetData">↺ Reset Defaults</button>
+    </div>
+  </main>
+</div>
+
+<!-- PLAYER MODAL -->
+<div id="playerModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-panel">
+    <button class="modal-close" id="closePlayer">✕</button>
+    <div class="player-crystal-row" id="playerCrystals"></div>
+    <h2 class="player-title" id="playerTitle"></h2>
+    <p class="player-subtitle" id="playerSubtitle"></p>
+    <div class="timer-ring-wrap">
+      <svg class="timer-ring" viewBox="0 0 200 200">
+        <circle class="ring-track" cx="100" cy="100" r="88"/>
+        <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="88"/>
+      </svg>
+      <div class="timer-center">
+        <span class="timer-display" id="timerDisplay">00:00</span>
+        <span class="timer-label" id="timerLabel">remaining</span>
+      </div>
+    </div>
+    <div class="affirmation-box">
+      <p class="affirmation-count" id="affirmCount"></p>
+      <p class="affirmation-text" id="affirmText"></p>
+    </div>
+    <div class="visualize-box" id="visualizeBox"></div>
+    <div class="player-controls">
+      <button class="ctrl-btn" id="prevAffirm">◀</button>
+      <button class="ctrl-btn primary" id="playPause">▶</button>
+      <button class="ctrl-btn" id="nextAffirm">▶▶</button>
+      <button class="ctrl-btn active" id="repeatToggle" title="Voice on/off">🔊</button>
+    </div>
+    <div class="player-progress">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <p class="progress-label" id="progressLabel"></p>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-panel edit-panel">
+    <button class="modal-close" id="closeEdit">✕</button>
+    <h2 class="edit-title">Edit Session</h2>
+    <label>Session Name<input type="text" id="editName" placeholder="e.g. Morning Ritual"/></label>
+    <label>Emoji Icon<input type="text" id="editEmoji" placeholder="🌞" maxlength="4"/></label>
+    <label>Duration (minutes)<input type="number" id="editDuration" min="1" max="60" placeholder="10"/></label>
+    <label>Purpose / Subtitle<input type="text" id="editPurpose" placeholder="Digestion · Energy · Focus"/></label>
+    <label>Crystals (one per line)<textarea id="editCrystals" rows="4"></textarea></label>
+    <label>Visualize<input type="text" id="editVisualize" placeholder="A warm golden light…"/></label>
+    <label>Affirmations (one per line)<textarea id="editAffirmations" rows="8"></textarea></label>
+    <label>Ambient Sound
+      <select id="editSound">
+        <option value="none">Silence</option>
+        <option value="bowls">Singing Bowls</option>
+        <option value="rain">Rain</option>
+        <option value="forest">Forest</option>
+        <option value="ocean">Ocean</option>
+        <option value="om">OM Drone</option>
+        <option value="tibetan">Tibetan</option>
+        <option value="creek">Creek</option>
+        <option value="night">Night</option>
+        <option value="thunder">Thunder</option>
+        <option value="wind">Wind Chimes</option>
+        <option value="binaural">Binaural 432Hz</option>
+      </select>
+    </label>
+    <div class="edit-actions">
+      <button class="outline-btn danger" id="deleteSession">Delete</button>
+      <button class="save-btn" id="saveSession">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div id="confirmModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-panel confirm-panel">
+    <p id="confirmMsg">Are you sure?</p>
+    <div class="confirm-actions">
+      <button class="outline-btn" id="confirmNo">Cancel</button>
+      <button class="save-btn danger" id="confirmYes">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ════════════════════════════════════
+   MANTRA DATA — Real archive.org audio
+════════════════════════════════════ */
+const MANTRAS = [
+  {
+    id:'om', icon:'🕉', color:'#9b72d0',
+    name:'OM / AUM',
+    benefit:'Universal Healing · Chakra Activation · Peace',
+    sanskrit:'ॐ\nOm — The primordial sound',
+    meaning:'The sacred sound of the universe. Chanting OM cleanses the mind, raises vibration, and connects you to universal consciousness. The vibration of 136.1 Hz resonates with the Earth\'s frequency.',
+    // archive.org — public domain
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Om%20Mantra%20Chanting.mp3'
+  },
+  {
+    id:'gayatri', icon:'☀️', color:'#c9a84c',
+    name:'Gayatri Mantra',
+    benefit:'Wisdom · Intelligence · Spiritual Awakening',
+    sanskrit:'ॐ भूर्भुवः स्वः\nतत्सवितुर्वरेण्यं\nभर्गो देवस्य धीमहि\nधियो यो नः प्रचोदयात्',
+    meaning:'We meditate on the divine light of the Sun God. May that sacred light illuminate our intellect and guide our thoughts toward righteousness.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Gayatri%20Mantra.mp3'
+  },
+  {
+    id:'mahamrityunjaya', icon:'🔱', color:'#4caf85',
+    name:'Mahamrityunjaya',
+    benefit:'Healing · Protection · Longevity · Fear Removal',
+    sanskrit:'ॐ त्र्यम्बकं यजामहे\nसुगन्धिं पुष्टिवर्धनम्\nउर्वारुकमिव बन्धनान्\nमृत्योर्मुक्षीय माऽमृतात्',
+    meaning:'We worship Lord Shiva, the three-eyed one, who nourishes all. May He liberate us from death as a ripe cucumber is freed from its vine, granting immortality.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Maha%20Mrityunjay%20Mantra%20108.mp3'
+  },
+  {
+    id:'om_namah_shivaya', icon:'🌙', color:'#c4a0f0',
+    name:'Om Namah Shivaya',
+    benefit:'Inner Peace · Transformation · Self-Realisation',
+    sanskrit:'ॐ नमः शिवाय\nOm Namah Shivaya',
+    meaning:'I bow to Shiva — the inner self, the true nature of reality. This Panchakshara mantra of five syllables represents the five elements and dissolves the ego.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Om%20Namah%20Shivaya.mp3'
+  },
+  {
+    id:'om_mani', icon:'💎', color:'#4c82c9',
+    name:'Om Mani Padme Hum',
+    benefit:'Compassion · Healing · Purification · Merit',
+    sanskrit:'ॐ मणि पद्मे हूँ\nOm Mani Padme Hum',
+    meaning:'Hail the jewel in the lotus. The six-syllable mantra of Avalokiteshvara, the bodhisattva of compassion. Each syllable purifies one of the six realms of existence.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Om%20Mani%20Padme%20Hum.mp3'
+  },
+  {
+    id:'ganesh', icon:'🐘', color:'#c94c6a',
+    name:'Om Gam Ganapataye',
+    benefit:'Remove Obstacles · New Beginnings · Success',
+    sanskrit:'ॐ गं गणपतये नमः\nOm Gam Ganapataye Namaha',
+    meaning:'Salutations to Lord Ganesha, the remover of obstacles. Chanted before any new beginning — work, travel, study — to invoke blessings, clear the path and ensure success.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Ganesh%20Mantra.mp3'
+  },
+  {
+    id:'lakshmi', icon:'🪷', color:'#d07899',
+    name:'Om Shreem Mahalakshmiyei',
+    benefit:'Abundance · Prosperity · Well-Being · Grace',
+    sanskrit:'ॐ श्रीं महालक्ष्म्यै नमः\nOm Shreem Mahalakshmiyei Namaha',
+    meaning:'Salutations to Goddess Lakshmi. This mantra invokes divine abundance, prosperity, beauty and grace into all areas of life — wealth, health, relationships and spiritual growth.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Mahalakshmi%20Mantra.mp3'
+  },
+  {
+    id:'hare_krishna', icon:'🦚', color:'#4caf85',
+    name:'Hare Krishna Maha Mantra',
+    benefit:'Joy · Purification · Divine Love · Liberation',
+    sanskrit:'हरे कृष्ण हरे कृष्ण\nकृष्ण कृष्ण हरे हरे\nहरे राम हरे राम\nराम राम हरे हरे',
+    meaning:'The great mantra of liberation. Calling on Krishna and Rama, the Hare Krishna Maha Mantra purifies the heart, removes material suffering and awakens pure love for the Divine.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Hare%20Krishna.mp3'
+  },
+  {
+    id:'om_shanti', icon:'☮️', color:'#9b72d0',
+    name:'Om Shanti Shanti Shanti',
+    benefit:'Deep Peace · Anxiety Relief · Harmony',
+    sanskrit:'ॐ शान्तिः शान्तिः शान्तिः\nOm Shanti Shanti Shanti',
+    meaning:'Peace in body, peace in mind, peace in spirit. Three-fold peace mantra chanted to bring harmony on all levels — physical, mental and spiritual existence.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Om%20Mantra.mp3'
+  },
+  {
+    id:'kubera', icon:'💰', color:'#c9a84c',
+    name:'Kubera Mantra',
+    benefit:'Wealth · Financial Abundance · Prosperity',
+    sanskrit:'ॐ यक्षाय कुबेराय वैश्रवणाय\nधन धान्याधिपतये\nधन धान्य समृद्धि मे\nदेहि दापय स्वाहा',
+    meaning:'O Kubera, Lord of Wealth and Treasurer of the Gods, bestow upon me abundance in wealth and grain. Grant prosperity and financial well-being in my life.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Kubera%20Money%20Mantra.mp3'
+  },
+  {
+    id:'hanuman', icon:'🐒', color:'#c94c6a',
+    name:'Hanuman Chalisa',
+    benefit:'Strength · Protection · Courage · Devotion',
+    sanskrit:'जय हनुमान ज्ञान गुण सागर\nजय कपीस तिहुँ लोक उजागर',
+    meaning:'Victory to Hanuman, ocean of wisdom and virtue. The 40-verse devotional hymn to Lord Hanuman. Reciting it grants strength, removes fear and evil, and protects from all harm.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Hanuman%20Chalisa.mp3'
+  },
+  {
+    id:'soham', icon:'🌬️', color:'#4c82c9',
+    name:'So\'Ham — Breath Mantra',
+    benefit:'Breathwork · Self-Awareness · Stress Relief · Oneness',
+    sanskrit:'सोऽहम्\nSo... (inhale) Ham... (exhale)',
+    meaning:'I am That — I am the infinite, the universe itself. The natural sound of the breath: So on the in-breath, Ham on the out-breath. 21,600 times every day you are already chanting this.',
+    audioUrl:'https://archive.org/download/HinduSlokasAndMantras/Om%20Mantra%20Chanting.mp3'
+  }
+];
+
+/* ════════════════════════════════════
+   DATA / DB
+════════════════════════════════════ */
+const DEFAULT_SESSIONS=[{id:'morning',emoji:'🌞',name:'Morning Ritual',purpose:'Digestion · Nutrient Absorption · Energy · Healthy Weight Gain',durationMins:10,sound:'bowls',color:'#c9a84c',crystals:['🔹 Clear Quartz — 8 chips (Left Hand)','🟡 Citrine — 7 chips (Right Hand)'],visualize:'A warm golden light filling your stomach and abdomen, nourishing every cell.',affirmations:['My digestive system works in perfect harmony.','My body absorbs every nutrient with ease.','My appetite improves naturally.','My healthy weight returns steadily.','Every cell in my body becomes stronger.','My energy grows every day.','I am healthy, strong, and full of vitality.'],repeatCount:21},{id:'strength',emoji:'💪',name:'Strength & Muscle Recovery',purpose:'Physical Strength · Muscle Rebuilding · Stamina',durationMins:7,sound:'forest',color:'#c94c6a',crystals:['🟥 Bloodstone — 1 cube','🟠 Red Carnelian — 7 chips','🟤 Tiger Eye — 7 chips'],visualize:'Red and golden light filling every muscle, rebuilding and strengthening.',affirmations:['My muscles rebuild every day.','My body gains healthy muscle naturally.','My strength increases.','My stamina improves.','My body recovers quickly.','I feel powerful and energetic.'],repeatCount:21},{id:'healing',emoji:'💚',name:'Neck, Back & Chest Healing',purpose:'Physical Relief · Posture · Relaxation',durationMins:5,sound:'rain',color:'#4caf85',crystals:['🟢 Green Jade — 7 chips','🟣 Amethyst — 7 chips'],visualize:'A green healing light flowing through your chest, neck, shoulders, and upper back.',affirmations:['My neck is relaxed.','My shoulders are comfortable.','My upper back feels free.','My chest is open and relaxed.','My posture improves naturally.','My body feels light and comfortable.'],repeatCount:21},{id:'evening',emoji:'🌙',name:'Evening Grounding & Recovery',purpose:'Stress Release · Deep Sleep · Organ Restoration',durationMins:8,sound:'ocean',color:'#4c82c9',crystals:['⚫ Black Tourmaline — 7 chips','⚫ Hematite — 1 cube','🔹 Clear Quartz — 8 chips'],visualize:'Stress flowing out through your feet deep into the nourishing earth.',affirmations:['I release all stress.','My body heals while I sleep.','Every organ restores itself.','I wake refreshed.','My energy grows stronger every day.'],repeatCount:21}];
+const DEFAULT_WEEKLY=[{day:'Monday',crystals:['🌈 Rainbow Moonstone — 7 chips','🔹 Clear Quartz — 8 chips'],focus:'Emotional balance and intuition.'},{day:'Tuesday',crystals:['🟥 Bloodstone — 1 cube','🟠 Red Carnelian — 7 chips'],focus:'Strength and recovery.'},{day:'Wednesday',crystals:['🟦 Fluorite — 7 chips','🟤 Tiger Eye — 7 chips'],focus:'Mental clarity and focus.'},{day:'Thursday',crystals:['🟡 Citrine — 7 chips','🟢 Green Jade — 7 chips'],focus:'Digestion and wellbeing.'},{day:'Friday',crystals:['🌸 Rose Quartz — 7 chips','🟩 Green Aventurine — 7 chips'],focus:'Emotional renewal and healing.'},{day:'Saturday',crystals:['⚫ Hematite — 1 cube','⚫ Black Tourmaline — 7 chips'],focus:'Grounding and stability.'},{day:'Sunday',crystals:['🔹 Clear Quartz — 8 chips','🟣 Amethyst — 7 chips'],focus:'Rest, reflection, and relaxation.'}];
+const DEFAULT_COMMUTE={crystals:['🟤 Tiger Eye — 3 chips','🟥 Bloodstone — 1 cube','⚫ Black Tourmaline — 3 chips','🔹 Clear Quartz — 3 chips'],affirmations:['I am calm.','I am strong.','My body has the energy it needs.','I remain grounded throughout the day.']};
+const DB={
+  getSessions(){try{const r=localStorage.getItem('cm_sessions_v2');return r?JSON.parse(r):JSON.parse(JSON.stringify(DEFAULT_SESSIONS));}catch{return JSON.parse(JSON.stringify(DEFAULT_SESSIONS));}},
+  saveSessions(s){localStorage.setItem('cm_sessions_v2',JSON.stringify(s));},
+  getWeekly(){try{const r=localStorage.getItem('cm_weekly_v2');return r?JSON.parse(r):JSON.parse(JSON.stringify(DEFAULT_WEEKLY));}catch{return JSON.parse(JSON.stringify(DEFAULT_WEEKLY));}},
+  saveWeekly(w){localStorage.setItem('cm_weekly_v2',JSON.stringify(w));},
+  getCommute(){try{const r=localStorage.getItem('cm_commute_v2');return r?JSON.parse(r):JSON.parse(JSON.stringify(DEFAULT_COMMUTE));}catch{return JSON.parse(JSON.stringify(DEFAULT_COMMUTE));}},
+  saveCommute(d){localStorage.setItem('cm_commute_v2',JSON.stringify(d));},
+  getSettings(){const def={rate:.8,pitch:1.0,voiceIdx:0,darkMode:true,autoAdvance:false,volume:.4,ambientSound:'none',affirmPause:2};try{const r=localStorage.getItem('cm_settings_v3');return r?{...def,...JSON.parse(r)}:def;}catch{return def;}},
+  saveSettings(s){localStorage.setItem('cm_settings_v3',JSON.stringify(s));},
+  reset(){['cm_sessions_v2','cm_weekly_v2','cm_commute_v2'].forEach(k=>localStorage.removeItem(k));},
+  export(){return JSON.stringify({sessions:this.getSessions(),weekly:this.getWeekly(),commute:this.getCommute()},null,2);},
+  import(j){const d=JSON.parse(j);if(d.sessions)this.saveSessions(d.sessions);if(d.weekly)this.saveWeekly(d.weekly);if(d.commute)this.saveCommute(d.commute);}
+};
+
+/* ════════════════════════════════════
+   AUDIO ENGINE
+════════════════════════════════════ */
+const AudioEngine=(()=>{
+  let ctx=null,masterGain=null,currentNodes=[],currentSound='none',volume=.4;
+  function initCtx(){if(ctx)return;ctx=new(window.AudioContext||window.webkitAudioContext)();masterGain=ctx.createGain();masterGain.gain.setValueAtTime(volume,ctx.currentTime);masterGain.connect(ctx.destination);}
+  function resumeCtx(){if(ctx&&ctx.state==='suspended')ctx.resume();}
+  function stopAll(){currentNodes.forEach(n=>{try{n.stop();}catch{}});currentNodes=[];}
+  function addGain(a){const g=ctx.createGain();g.gain.setValueAtTime(a,ctx.currentTime);g.connect(masterGain);return g;}
+  function noise(type){const L=ctx.sampleRate*4,buf=ctx.createBuffer(1,L,ctx.sampleRate),d=buf.getChannelData(0);
+    if(type==='white'){for(let i=0;i<L;i++)d[i]=Math.random()*2-1;}
+    else if(type==='brown'){let l=0;for(let i=0;i<L;i++){const w=Math.random()*2-1;d[i]=(l+.02*w)/1.02;l=d[i];d[i]*=3.5;}}
+    else if(type==='pink'){let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0;for(let i=0;i<L;i++){const w=Math.random()*2-1;b0=.99886*b0+w*.0555179;b1=.99332*b1+w*.0750759;b2=.969*b2+w*.153852;b3=.8665*b3+w*.3104856;b4=.55*b4+w*.5329522;b5=-.7616*b5-w*.016898;d[i]=(b0+b1+b2+b3+b4+b5+w*.5362)/7;}}
+    const s=ctx.createBufferSource();s.buffer=buf;s.loop=true;return s;}
+  function osc(f,t='sine'){const o=ctx.createOscillator();o.type=t;o.frequency.setValueAtTime(f,ctx.currentTime);return o;}
+  function flt(t,f,q){const x=ctx.createBiquadFilter();x.type=t;x.frequency.setValueAtTime(f,ctx.currentTime);if(q)x.Q.setValueAtTime(q,ctx.currentTime);return x;}
+  function lfo(p,r,d,b){const l=osc(r),g=ctx.createGain();g.gain.setValueAtTime(d,ctx.currentTime);l.connect(g);g.connect(p);p.setValueAtTime(b,ctx.currentTime);l.start();currentNodes.push(l);}
+  const G={
+    none:()=>{},
+    bowls:()=>{[136.1,272.2,408.3,544.4,680.5].forEach((f,i)=>{const g=addGain(.05/(i+1)),o=osc(f);o.connect(g);o.start();currentNodes.push(o);g.gain.setValueAtTime(0,ctx.currentTime);g.gain.linearRampToValueAtTime(.05/(i+1),ctx.currentTime+2+i);lfo(o.frequency,.05+i*.02,f*.002,f);});const n=noise('pink'),ng=addGain(.008),f=flt('lowpass',700);n.connect(f);f.connect(ng);n.start();currentNodes.push(n);},
+    rain:()=>{const r=noise('brown'),rg=addGain(.2),rf=flt('bandpass',1100,.3);r.connect(rf);rf.connect(rg);r.start();currentNodes.push(r);const d=noise('white'),dg=addGain(.05),df=flt('highpass',3500);d.connect(df);df.connect(dg);d.start();currentNodes.push(d);},
+    forest:()=>{const w=noise('brown'),wg=addGain(.07),wf=flt('lowpass',500);w.connect(wf);wf.connect(wg);w.start();currentNodes.push(w);lfo(wg.gain,.07,.04,.07);[2800,3200,3700,2500].forEach((f,i)=>{setTimeout(()=>{if(!ctx)return;const bg=addGain(0),bo=osc(f);bo.connect(bg);bo.start();currentNodes.push(bo);function c(){bg.gain.setValueAtTime(0,ctx.currentTime);bg.gain.linearRampToValueAtTime(.025,ctx.currentTime+.05);bg.gain.linearRampToValueAtTime(0,ctx.currentTime+.2);setTimeout(c,3000+Math.random()*9000);}c();},(i*2.5+Math.random()*4)*1000);});},
+    ocean:()=>{const w=noise('brown'),wg=addGain(.14),wf=flt('lowpass',350);w.connect(wf);wf.connect(wg);w.start();currentNodes.push(w);const sl=osc(.1),sg=ctx.createGain();sl.connect(sg);sg.connect(wg.gain);sl.start();currentNodes.push(sl);sg.gain.setValueAtTime(.09,ctx.currentTime);wg.gain.setValueAtTime(.14,ctx.currentTime);const s=noise('pink'),sg2=addGain(.06),sf=flt('highpass',1600);s.connect(sf);sf.connect(sg2);s.start();currentNodes.push(s);},
+    om:()=>{[136.1,204.15,272.2,340.25,408.3,544.4].forEach((f,i)=>{const g=addGain(.055/(i+1)),o=osc(f,i<2?'sine':'triangle');o.connect(g);o.start();currentNodes.push(o);lfo(g.gain,.035,.012/(i+1),.055/(i+1));});const b=noise('pink'),bg=addGain(.025),bf=flt('bandpass',280,2.5);b.connect(bf);bf.connect(bg);b.start();currentNodes.push(b);},
+    tibetan:()=>{[174,285,396,417,528,639,741,852].forEach((f,i)=>{const g=addGain(.04/(i*.4+1)),o=osc(f);o.connect(g);o.start();currentNodes.push(o);lfo(o.frequency,.03+i*.01,f*.0015,f);g.gain.setValueAtTime(0,ctx.currentTime);g.gain.linearRampToValueAtTime(.04/(i*.4+1),ctx.currentTime+3+i*1.5);});const n=noise('pink'),ng=addGain(.012),nf=flt('lowpass',600);n.connect(nf);nf.connect(ng);n.start();currentNodes.push(n);},
+    creek:()=>{const w1=noise('white'),g1=addGain(.1),f1=flt('bandpass',800,1.2);w1.connect(f1);f1.connect(g1);w1.start();currentNodes.push(w1);const w2=noise('pink'),g2=addGain(.08),f2=flt('bandpass',1400,.8);w2.connect(f2);f2.connect(g2);w2.start();currentNodes.push(w2);lfo(g1.gain,.15,.05,.1);lfo(g2.gain,.22,.04,.08);},
+    night:()=>{[4200,4350,4180,4400].forEach((f,i)=>{const g=addGain(.015),o=osc(f,'square'),lf=flt('bandpass',f,15);o.connect(lf);lf.connect(g);o.start();currentNodes.push(o);lfo(g.gain,8+i*1.5,.012,.015);});const b=noise('brown'),bg=addGain(.03),bf=flt('lowpass',200);b.connect(bf);bf.connect(bg);b.start();currentNodes.push(b);function frog(){if(!ctx)return;const fg=addGain(0),fo=osc(280+Math.random()*60);fo.connect(fg);fo.start();currentNodes.push(fo);fg.gain.setValueAtTime(0,ctx.currentTime);fg.gain.linearRampToValueAtTime(.04,ctx.currentTime+.05);fg.gain.linearRampToValueAtTime(0,ctx.currentTime+.3);setTimeout(frog,5000+Math.random()*15000);}setTimeout(frog,3000);},
+    thunder:()=>{const r=noise('brown'),rg=addGain(.18),rf=flt('bandpass',1000,.4);r.connect(rf);rf.connect(rg);r.start();currentNodes.push(r);const d=noise('white'),dg=addGain(.04),df=flt('highpass',3000);d.connect(df);df.connect(dg);d.start();currentNodes.push(d);function thunder(){if(!ctx)return;const L=ctx.sampleRate*3,tb=ctx.createBuffer(1,L,ctx.sampleRate),td=tb.getChannelData(0);let last=0;for(let i=0;i<L;i++){const w=Math.random()*2-1;td[i]=(last+.02*w)/1.02;last=td[i];td[i]*=3.5;}const ts=ctx.createBufferSource(),tg=addGain(0),tf=flt('lowpass',120);ts.buffer=tb;ts.connect(tf);tf.connect(tg);ts.start();currentNodes.push(ts);tg.gain.setValueAtTime(0,ctx.currentTime);tg.gain.linearRampToValueAtTime(.3,ctx.currentTime+.1);tg.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+2.5);setTimeout(thunder,8000+Math.random()*20000);}setTimeout(thunder,4000);},
+    wind:()=>{const b=noise('pink'),bg=addGain(.06),bf=flt('bandpass',400,.5);b.connect(bf);bf.connect(bg);b.start();currentNodes.push(b);lfo(bg.gain,.12,.04,.06);const cf=[523,659,784,1047,1319,1568];function chime(){if(!ctx)return;const f=cf[Math.floor(Math.random()*cf.length)],g=addGain(0),o=osc(f);o.connect(g);o.start();currentNodes.push(o);g.gain.setValueAtTime(0,ctx.currentTime);g.gain.linearRampToValueAtTime(.06,ctx.currentTime+.02);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+2.5);setTimeout(chime,500+Math.random()*3000);}chime();},
+    binaural:()=>{const oL=osc(432),gL=ctx.createGain(),pL=ctx.createStereoPanner();oL.connect(gL);gL.connect(pL);pL.connect(masterGain);pL.pan.setValueAtTime(-1,ctx.currentTime);gL.gain.setValueAtTime(.12,ctx.currentTime);oL.start();currentNodes.push(oL);const oR=osc(438),gR=ctx.createGain(),pR=ctx.createStereoPanner();oR.connect(gR);gR.connect(pR);pR.connect(masterGain);pR.pan.setValueAtTime(1,ctx.currentTime);gR.gain.setValueAtTime(.12,ctx.currentTime);oR.start();currentNodes.push(oR);const p=noise('pink'),pg=addGain(.012),pf=flt('lowpass',400);p.connect(pf);pf.connect(pg);p.start();currentNodes.push(p);}
+  };
+  let voices=[],ttsSettings={rate:.8,pitch:1.0,voiceIdx:0},affirmPauseMs=2000;
+  if(window.speechSynthesis){window.speechSynthesis.onvoiceschanged=()=>{voices=window.speechSynthesis.getVoices();};}
+  setTimeout(()=>{voices=window.speechSynthesis?.getVoices()||[];},500);
+  setTimeout(()=>{voices=window.speechSynthesis?.getVoices()||[];},2500);
+  function speak(text,onEnd){
+    if(!window.speechSynthesis){if(onEnd)onEnd();return;}
+    window.speechSynthesis.cancel();
+    const fresh=window.speechSynthesis.getVoices();if(fresh.length)voices=fresh;
+    const u=new SpeechSynthesisUtterance(text);
+    u.rate=ttsSettings.rate;u.pitch=ttsSettings.pitch;
+    if(voices[ttsSettings.voiceIdx])u.voice=voices[ttsSettings.voiceIdx];
+    u.onend=()=>{if(onEnd)onEnd();};u.onerror=()=>{if(onEnd)onEnd();};
+    setTimeout(()=>window.speechSynthesis.speak(u),80);
+  }
+  function stopSpeech(){window.speechSynthesis?.cancel();}
+  return{
+    init(){initCtx();},resumeCtx,
+    setVolume(v){volume=v;if(masterGain)masterGain.gain.setValueAtTime(v,ctx.currentTime);},
+    playAmbient(n){initCtx();resumeCtx();stopAll();currentSound=n;if(G[n])G[n]();},
+    stopAmbient(){stopAll();},
+    get currentSound(){return currentSound;},
+    setTTS(s){ttsSettings={...ttsSettings,...s};},
+    setAffirmPause(ms){affirmPauseMs=ms;},
+    get affirmPause(){return affirmPauseMs;},
+    get voices(){return window.speechSynthesis?.getVoices()||[];},
+    speak,stopSpeech
+  };
+})();
+
+/* ════════════════════════════════════
+   MANTRA AUDIO PLAYER — fixed stop bug
+════════════════════════════════════ */
+const MantraAudio = (() => {
+  let currentAudio = null;
+  let currentCard  = null;
+  let progressInterval = null;
+  let stopped = false; // flag: true = user explicitly stopped
+
+  function resetCard(card) {
+    if (!card) return;
+    card.classList.remove('playing-card');
+    const btn    = card.querySelector('.mc-play');
+    const status = card.querySelector('.mc-status');
+    const fill   = card.querySelector('.mc-progress-fill');
+    if (btn)    { btn.textContent = '▶'; btn.disabled = false; }
+    if (status) status.textContent = '';
+    if (fill)   fill.style.width = '0%';
+  }
+
+  function stopCurrent() {
+    stopped = true;                        // ← tell ended/play handlers to not restart
+    clearInterval(progressInterval);
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.src = '';             // detach src so no buffered data replays
+      currentAudio.load();               // reset internal state
+      currentAudio = null;
+    }
+    resetCard(currentCard);
+    currentCard = null;
+  }
+
+  function fmt(s) {
+    if (!s || !isFinite(s)) return '0:00';
+    return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+  }
+
+  function play(mantra, card) {
+    // Same card & audio is loaded → toggle pause/resume
+    if (currentCard === card && currentAudio) {
+      if (currentAudio.paused) {
+        stopped = false;
+        currentAudio.play().catch(()=>{});
+      } else {
+        // pause only — do NOT stop/null the audio
+        currentAudio.pause();
+      }
+      return;
+    }
+
+    // Different card — fully stop current first
+    stopCurrent();
+    stopped = false;
+
+    currentCard = card;
+    card.classList.add('playing-card');
+
+    const btn    = card.querySelector('.mc-play');
+    const fill   = card.querySelector('.mc-progress-fill');
+    const status = card.querySelector('.mc-status');
+    const timeEl = card.querySelector('.mc-time');
+
+    btn.textContent = '⏳';
+    btn.disabled = true;
+    if (status) { status.textContent = 'Loading audio…'; status.className = 'mc-status mc-loading'; }
+
+    const audio = new Audio();
+    audio.crossOrigin = 'anonymous';
+    audio.preload = 'auto';
+    currentAudio = audio;
+
+    function startProgress() {
+      clearInterval(progressInterval);
+      progressInterval = setInterval(() => {
+        if (!audio.duration || audio !== currentAudio) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        if (fill) fill.style.width = pct + '%';
+        if (timeEl) {
+          if (timeEl.children[0]) timeEl.children[0].textContent = fmt(audio.currentTime);
+          if (timeEl.children[1]) timeEl.children[1].textContent = fmt(audio.duration);
+        }
+      }, 500);
+    }
+
+    audio.addEventListener('canplay', () => {
+      if (audio !== currentAudio) return; // stale — another was started
+      btn.textContent = '⏸';
+      btn.disabled = false;
+      if (status) { status.textContent = '▶ Playing authentic recording'; status.className = 'mc-status'; }
+      audio.play().catch(() => {
+        if (status) { status.textContent = '⚠ Tap ▶ to play'; status.className = 'mc-status'; }
+        btn.textContent = '▶';
+      });
+      startProgress();
+    }, { once: true });
+
+    audio.addEventListener('error', () => {
+      if (audio !== currentAudio) return;
+      btn.textContent = '▶'; btn.disabled = false;
+      if (status) { status.textContent = '⚠ Unavailable — check connection'; status.className = 'mc-error'; }
+      card.classList.remove('playing-card');
+      currentAudio = null; currentCard = null;
+    });
+
+    // Loop — but only if not explicitly stopped
+    audio.addEventListener('ended', () => {
+      if (stopped || audio !== currentAudio) return; // user stopped → don't loop
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    });
+
+    audio.addEventListener('pause', () => {
+      if (audio !== currentAudio) return;
+      if (btn) btn.textContent = '▶';
+      if (status && !stopped) status.textContent = '⏸ Paused — tap ▶ to resume';
+    });
+
+    audio.addEventListener('play', () => {
+      if (audio !== currentAudio) return;
+      if (btn) btn.textContent = '⏸';
+      if (status) { status.textContent = '▶ Playing authentic recording'; status.className = 'mc-status'; }
+    });
+
+    audio.src = mantra.audioUrl;
+    audio.load();
+  }
+
+  return { play, stopAll: stopCurrent };
+})();
+
+/* ════════════════════════════════════
+   PLAYER (Affirmations)
+════════════════════════════════════ */
+const Player=(()=>{
+  const modal=document.getElementById('playerModal');
+  const E={
+    close:document.getElementById('closePlayer'),title:document.getElementById('playerTitle'),
+    subtitle:document.getElementById('playerSubtitle'),crystals:document.getElementById('playerCrystals'),
+    timerDisp:document.getElementById('timerDisplay'),timerLabel:document.getElementById('timerLabel'),
+    ringFill:document.getElementById('ringFill'),affCount:document.getElementById('affirmCount'),
+    affText:document.getElementById('affirmText'),vizBox:document.getElementById('visualizeBox'),
+    playPause:document.getElementById('playPause'),prev:document.getElementById('prevAffirm'),
+    next:document.getElementById('nextAffirm'),repeat:document.getElementById('repeatToggle'),
+    progressFill:document.getElementById('progressFill'),progressLabel:document.getElementById('progressLabel')
+  };
+  let session=null,totalSecs=0,remainSecs=0,timerInterval=null,isPlaying=false,
+    affIdx=0,repeatCount=0,repeatMax=21,autoSpeak=true,speakTimeout=null;
+  const CIRC=2*Math.PI*88;
+  function setRing(f){E.ringFill.style.strokeDashoffset=CIRC*(1-f);E.ringFill.style.stroke=f<.25?'#c9a84c':f<.5?'#c4a0f0':'#9b72d0';}
+  function fmt(s){return`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
+  function open(sess){
+    session=sess;totalSecs=sess.durationMins*60;remainSecs=totalSecs;affIdx=0;repeatCount=0;repeatMax=sess.repeatCount||21;isPlaying=false;
+    E.title.textContent=`${sess.emoji} ${sess.name}`;E.subtitle.textContent=sess.purpose||'';
+    E.crystals.innerHTML=(sess.crystals||[]).map(c=>`<span class="player-crystal">${c}</span>`).join('');
+    E.vizBox.textContent=sess.visualize?`✨ ${sess.visualize}`:'';
+    renderAff();updateTimer();setRing(1);updateProg();
+    if(sess.sound&&sess.sound!=='none')AudioEngine.playAmbient(sess.sound);
+    modal.classList.remove('hidden');document.body.style.overflow='hidden';
+  }
+  function renderAff(){
+    if(!session?.affirmations?.length)return;
+    const affs=session.affirmations,cur=affs[affIdx%affs.length];
+    E.affText.textContent=`"${cur}"`;
+    E.affCount.textContent=`${repeatCount+1} / ${repeatMax} · #${(affIdx%affs.length)+1}/${affs.length}`;
+    E.affText.style.animation='none';void E.affText.offsetWidth;E.affText.style.animation='fadeText .5s ease';
+  }
+  function speakCurrent(){
+    if(!session||!autoSpeak)return;
+    AudioEngine.speak(session.affirmations[affIdx%session.affirmations.length],()=>{
+      if(!isPlaying)return;
+      clearTimeout(speakTimeout);speakTimeout=setTimeout(()=>{if(isPlaying)advanceAff();},AudioEngine.affirmPause);
+    });
+  }
+  function advanceAff(){
+    if(!session)return;repeatCount++;affIdx=(affIdx+1)%session.affirmations.length;
+    if(repeatCount>=repeatMax){complete();return;}
+    renderAff();speakCurrent();updateProg();
+  }
+  function startTimer(){clearInterval(timerInterval);timerInterval=setInterval(()=>{if(!isPlaying)return;if(remainSecs<=0){complete();return;}remainSecs--;updateTimer();setRing(remainSecs/totalSecs);},1000);}
+  function updateTimer(){E.timerDisp.textContent=fmt(remainSecs);E.timerLabel.textContent=remainSecs>0?'remaining':'complete';}
+  function updateProg(){const p=session?(repeatCount/repeatMax)*100:0;E.progressFill.style.width=`${p}%`;E.progressLabel.textContent=`${repeatCount} of ${repeatMax} affirmations`;}
+  function togglePlay(){AudioEngine.resumeCtx();isPlaying=!isPlaying;E.playPause.textContent=isPlaying?'⏸':'▶';if(isPlaying){startTimer();speakCurrent();}else{clearTimeout(speakTimeout);AudioEngine.stopSpeech();}}
+  function complete(){isPlaying=false;clearInterval(timerInterval);clearTimeout(speakTimeout);E.playPause.textContent='▶';E.timerLabel.textContent='complete ✦';E.affText.textContent='"The practice is complete. Rest in stillness."';E.affCount.textContent='✦ Session Complete ✦';setRing(0);E.progressFill.style.width='100%';AudioEngine.speak('The practice is complete. Rest in stillness.');showToast('Session complete ✦');}
+  function close(){isPlaying=false;clearInterval(timerInterval);clearTimeout(speakTimeout);AudioEngine.stopSpeech();modal.classList.add('hidden');document.body.style.overflow='';}
+  E.close.addEventListener('click',close);modal.querySelector('.modal-backdrop').addEventListener('click',close);
+  E.playPause.addEventListener('click',togglePlay);
+  E.next.addEventListener('click',()=>{AudioEngine.stopSpeech();clearTimeout(speakTimeout);if(repeatCount<repeatMax-1){repeatCount++;affIdx=(affIdx+1)%(session?.affirmations.length||1);renderAff();updateProg();if(isPlaying)speakCurrent();}});
+  E.prev.addEventListener('click',()=>{AudioEngine.stopSpeech();clearTimeout(speakTimeout);if(repeatCount>0){repeatCount--;affIdx=(affIdx-1+(session?.affirmations.length||1))%(session?.affirmations.length||1);renderAff();updateProg();if(isPlaying)speakCurrent();}});
+  E.repeat.addEventListener('click',()=>{autoSpeak=!autoSpeak;E.repeat.textContent=autoSpeak?'🔊':'🔇';E.repeat.classList.toggle('active',autoSpeak);showToast(autoSpeak?'Voice on':'Voice off');});
+  return{open,close};
+})();
+
+/* ════════════════════════════════════
+   EDITOR
+════════════════════════════════════ */
+const Editor=(()=>{
+  const modal=document.getElementById('editModal'),closeBtn=document.getElementById('closeEdit'),
+    saveBtn=document.getElementById('saveSession'),deleteBtn=document.getElementById('deleteSession'),backdrop=modal.querySelector('.modal-backdrop'),
+    fName=document.getElementById('editName'),fEmoji=document.getElementById('editEmoji'),fDuration=document.getElementById('editDuration'),
+    fPurpose=document.getElementById('editPurpose'),fCrystals=document.getElementById('editCrystals'),fVisualize=document.getElementById('editVisualize'),
+    fAffirm=document.getElementById('editAffirmations'),fSound=document.getElementById('editSound');
+  let currentId=null,currentType='session',weeklyIdx=null,onSaved=null;
+  function openSession(id,cb){currentType='session';currentId=id;onSaved=cb;weeklyIdx=null;const ss=DB.getSessions(),isNew=!id;document.querySelector('.edit-title').textContent=isNew?'New Session':'Edit Session';deleteBtn.style.display=isNew?'none':'inline-block';if(isNew){fName.value='';fEmoji.value='✨';fDuration.value='10';fPurpose.value='';fCrystals.value='';fVisualize.value='';fAffirm.value='';fSound.value='bowls';}else{const s=ss.find(s=>s.id===id);if(!s)return;fName.value=s.name||'';fEmoji.value=s.emoji||'✨';fDuration.value=s.durationMins||10;fPurpose.value=s.purpose||'';fCrystals.value=(s.crystals||[]).join('\n');fVisualize.value=s.visualize||'';fAffirm.value=(s.affirmations||[]).join('\n');fSound.value=s.sound||'none';}show();}
+  function openWeekly(idx,cb){currentType='weekly';currentId=null;weeklyIdx=idx;onSaved=cb;const day=DB.getWeekly()[idx];document.querySelector('.edit-title').textContent=`Edit ${day.day}`;deleteBtn.style.display='none';fName.value=day.day;fEmoji.value='📅';fDuration.value='';fPurpose.value=day.focus||'';fCrystals.value=(day.crystals||[]).join('\n');fVisualize.value='';fAffirm.value='';fSound.value='none';show();}
+  function openCommute(cb){currentType='commute';currentId=null;weeklyIdx=null;onSaved=cb;const c=DB.getCommute();document.querySelector('.edit-title').textContent='Edit Commute Kit';deleteBtn.style.display='none';fName.value='Commute Kit';fEmoji.value='🚆';fDuration.value='';fPurpose.value='';fCrystals.value=(c.crystals||[]).join('\n');fVisualize.value='';fAffirm.value=(c.affirmations||[]).join('\n');fSound.value='none';show();}
+  function show(){[fDuration,fPurpose,fVisualize,fAffirm,fSound].forEach(f=>f.closest('label').style.display='');if(currentType==='weekly'){[fDuration,fVisualize,fAffirm,fSound].forEach(f=>f.closest('label').style.display='none');}else if(currentType==='commute'){[fDuration,fPurpose,fVisualize,fSound].forEach(f=>f.closest('label').style.display='none');}modal.classList.remove('hidden');document.body.style.overflow='hidden';fName.focus();}
+  function hide(){modal.classList.add('hidden');document.body.style.overflow='';}
+  function save(){
+    if(currentType==='session'){const ss=DB.getSessions(),cr=fCrystals.value.trim().split('\n').filter(Boolean),af=fAffirm.value.trim().split('\n').filter(Boolean);if(!fName.value.trim()){showToast('Enter a name.');return;}const d={id:currentId||`custom_${Date.now()}`,name:fName.value.trim(),emoji:fEmoji.value.trim()||'✨',durationMins:parseInt(fDuration.value)||10,purpose:fPurpose.value.trim(),crystals:cr,visualize:fVisualize.value.trim(),affirmations:af,sound:fSound.value,repeatCount:21,color:'#9b72d0'};if(currentId){const idx=ss.findIndex(s=>s.id===currentId);if(idx>=0)ss[idx]=d;}else ss.push(d);DB.saveSessions(ss);hide();showToast('Session saved ✦');if(onSaved)onSaved();}
+    else if(currentType==='weekly'){const w=DB.getWeekly();w[weeklyIdx]={...w[weeklyIdx],crystals:fCrystals.value.trim().split('\n').filter(Boolean),focus:fPurpose.value.trim()};DB.saveWeekly(w);hide();showToast('Saved ✦');if(onSaved)onSaved();}
+    else{DB.saveCommute({crystals:fCrystals.value.trim().split('\n').filter(Boolean),affirmations:fAffirm.value.trim().split('\n').filter(Boolean)});hide();showToast('Saved ✦');if(onSaved)onSaved();}
+  }
+  closeBtn.addEventListener('click',hide);backdrop.addEventListener('click',hide);saveBtn.addEventListener('click',save);
+  deleteBtn.addEventListener('click',()=>{if(!currentId)return;Confirm.show(`Delete "${fName.value}"?`,()=>{DB.saveSessions(DB.getSessions().filter(s=>s.id!==currentId));hide();showToast('Deleted');if(onSaved)onSaved();});});
+  return{openSession,openWeekly,openCommute};
+})();
+
+const Confirm=(()=>{
+  const modal=document.getElementById('confirmModal'),msg=document.getElementById('confirmMsg'),yes=document.getElementById('confirmYes'),no=document.getElementById('confirmNo'),bd=modal.querySelector('.modal-backdrop');
+  let cb=null;
+  function show(m,c){msg.textContent=m;cb=c;modal.classList.remove('hidden');}
+  function hide(){modal.classList.add('hidden');cb=null;}
+  yes.addEventListener('click',()=>{hide();if(cb)cb();});no.addEventListener('click',hide);bd.addEventListener('click',hide);
+  return{show};
+})();
+
+function showToast(msg,dur=2500){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur);}
+
+/* ════════════════════════════════════
+   RENDER MANTRAS
+════════════════════════════════════ */
+function renderMantras() {
+  const grid = document.getElementById('mantraGrid');
+  grid.innerHTML = '';
+  MANTRAS.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'mantra-card';
+    card.style.setProperty('--mc', m.color);
+    card.innerHTML = `
+      <div class="mc-top">
+        <div class="mc-icon">${m.icon}</div>
+        <div class="mc-info">
+          <div class="mc-name">${m.name}</div>
+          <div class="mc-benefit">${m.benefit}</div>
+        </div>
+      </div>
+      <div class="mc-sanskrit">${m.sanskrit}</div>
+      <div class="mc-meaning">${m.meaning}</div>
+      <div class="mc-audio-bar">
+        <button class="mc-play" title="Play / Pause">▶</button>
+        <button class="mc-stop" title="Stop" style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;background:rgba(201,76,106,.15);border:1px solid rgba(201,76,106,.3);color:#c94c6a;flex-shrink:0;transition:all .2s">■</button>
+        <div class="mc-progress-wrap">
+          <div class="mc-audio-label">🎵 Authentic Recording — tap ▶ to stream</div>
+          <div class="mc-progress"><div class="mc-progress-fill"></div></div>
+          <div class="mc-time"><span>0:00</span><span>--:--</span></div>
+        </div>
+      </div>
+      <div class="mc-status"></div>`;
+
+    const playBtn = card.querySelector('.mc-play');
+    playBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      MantraAudio.play(m, card);
+    });
+
+    const stopBtn = card.querySelector('.mc-stop');
+    stopBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      MantraAudio.stopAll();
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+/* ════════════════════════════════════
+   RENDER HOME / WEEKLY / MANAGE
+════════════════════════════════════ */
+function renderHome(){
+  const ss=DB.getSessions(),grid=document.getElementById('dailySessions');grid.innerHTML='';
+  ss.forEach(sess=>{
+    const card=document.createElement('div');card.className='session-card';card.style.setProperty('--card-color',sess.color||'#9b72d0');
+    card.innerHTML=`<div class="card-header"><span class="card-emoji">${sess.emoji}</span><div class="card-meta"><div class="card-title">${sess.name}</div><div class="card-purpose">${sess.purpose||''}</div></div><button class="card-edit">✏️</button></div><div class="card-duration">${sess.durationMins} min</div><div class="card-crystals">${(sess.crystals||[]).slice(0,3).map(c=>`<span class="crystal-tag">${c.split('—')[0].trim()}</span>`).join('')}${(sess.crystals?.length||0)>3?`<span class="crystal-tag">+${sess.crystals.length-3}</span>`:''}</div><button class="start-btn"><span>Begin Practice</span><span class="btn-arrow">→</span></button>`;
+    card.querySelector('.start-btn').addEventListener('click',()=>{AudioEngine.resumeCtx();Player.open(sess);});
+    card.querySelector('.card-edit').addEventListener('click',e=>{e.stopPropagation();Editor.openSession(sess.id,()=>{renderHome();renderManage();});});
+    grid.appendChild(card);
+  });
+  renderCommute();
+}
+function renderCommute(){
+  const c=DB.getCommute();
+  document.getElementById('commuteCrystals').innerHTML=c.crystals.map(x=>`<span class="crystal-tag">${x}</span>`).join('');
+  document.getElementById('commuteAffirmations').innerHTML=c.affirmations.map(a=>`<p>${a}</p>`).join('');
+  document.getElementById('startCommute').onclick=()=>{AudioEngine.resumeCtx();Player.open({id:'commute',emoji:'🚆',name:'Office & Train Commute',purpose:'Carry your pouch · 5 slow breaths',durationMins:5,sound:'none',crystals:c.crystals,visualize:'',affirmations:c.affirmations,repeatCount:10});};
+  document.querySelector('.commute-header .edit-btn').onclick=()=>Editor.openCommute(renderHome);
+}
+function renderWeekly(){
+  const w=DB.getWeekly(),today=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()],grid=document.getElementById('weeklyGrid');grid.innerHTML='';
+  w.forEach((day,idx)=>{
+    const card=document.createElement('div');card.className='weekly-card';
+    card.innerHTML=`<div class="weekly-day ${day.day===today?'today':''}">${day.day}</div><div class="weekly-title">${(day.crystals||[]).join(' · ').split('—')[0].trim()}</div><div class="weekly-focus">${day.focus||''}</div><div class="card-crystals" style="margin-bottom:.75rem">${(day.crystals||[]).map(c=>`<span class="crystal-tag">${c.split('—')[0].trim()}</span>`).join('')}</div><div style="display:flex;gap:.5rem"><button class="weekly-start">Begin</button><button class="weekly-edit">✏️</button></div>`;
+    card.querySelector('.weekly-start').addEventListener('click',()=>{AudioEngine.resumeCtx();Player.open({id:`w_${day.day}`,emoji:'📅',name:`${day.day} Practice`,purpose:day.focus||'',durationMins:10,sound:'bowls',crystals:day.crystals,visualize:'A calming light surrounding your entire being.',affirmations:['I am in harmony with this day.','My crystals support and guide me.',`I embrace the energy of ${day.day}.`,'I am grounded and present.','Light flows through every part of me.','I am peaceful and strong.'],repeatCount:7});});
+    card.querySelector('.weekly-edit').addEventListener('click',()=>Editor.openWeekly(idx,renderWeekly));
+    grid.appendChild(card);
+  });
+}
+function renderManage(){
+  const ss=DB.getSessions(),list=document.getElementById('manageList');list.innerHTML='';
+  ss.forEach(sess=>{
+    const item=document.createElement('div');item.className='manage-item';
+    item.innerHTML=`<span class="mi-emoji">${sess.emoji}</span><span class="mi-name">${sess.name}</span><span class="mi-dur">${sess.durationMins}m</span><button class="mi-edit">✏️ Edit</button>`;
+    item.querySelector('.mi-edit').addEventListener('click',()=>Editor.openSession(sess.id,()=>{renderHome();renderManage();}));
+    list.appendChild(item);
+  });
+}
+document.getElementById('addSessionBtn').addEventListener('click',()=>Editor.openSession(null,()=>{renderHome();renderManage();}));
+
+/* ════════════════════════════════════
+   SETTINGS
+════════════════════════════════════ */
+function initSettings(){
+  const s=DB.getSettings();
+  const vSel=document.getElementById('voiceSelect'),
+    sRate=document.getElementById('speechRate'),sRateV=document.getElementById('speechRateVal'),
+    sPitch=document.getElementById('speechPitch'),sPitchV=document.getElementById('speechPitchVal'),
+    aPause=document.getElementById('affirmPause'),aPauseV=document.getElementById('affirmPauseVal');
+  function popVoices(){const v=window.speechSynthesis?.getVoices()||[];if(!v.length)return;vSel.innerHTML=v.map((x,i)=>`<option value="${i}" ${i===s.voiceIdx?'selected':''}>${x.name} (${x.lang})</option>`).join('');}
+  popVoices();[500,1500,3000,5000].forEach(t=>setTimeout(popVoices,t));
+  if(window.speechSynthesis)window.speechSynthesis.onvoiceschanged=popVoices;
+  document.getElementById('refreshVoices').addEventListener('click',()=>{popVoices();showToast(`${window.speechSynthesis?.getVoices()?.length||0} voices loaded`);});
+  sRate.value=s.rate;sRateV.textContent=`${s.rate}×`;sPitch.value=s.pitch;sPitchV.textContent=s.pitch;aPause.value=s.affirmPause||2;aPauseV.textContent=`${s.affirmPause||2}s`;
+  AudioEngine.setAffirmPause((s.affirmPause||2)*1000);
+  function save(){const u={rate:parseFloat(sRate.value),pitch:parseFloat(sPitch.value),voiceIdx:parseInt(vSel.value)||0,darkMode:document.getElementById('darkModeToggle').checked,autoAdvance:document.getElementById('autoAdvance').checked,volume:parseFloat(document.getElementById('volSlider').value),ambientSound:AudioEngine.currentSound,affirmPause:parseFloat(aPause.value)};DB.saveSettings(u);AudioEngine.setTTS({rate:u.rate,pitch:u.pitch,voiceIdx:u.voiceIdx});AudioEngine.setAffirmPause(u.affirmPause*1000);}
+  sRate.addEventListener('input',()=>{sRateV.textContent=`${sRate.value}×`;save();});
+  sPitch.addEventListener('input',()=>{sPitchV.textContent=sPitch.value;save();});
+  aPause.addEventListener('input',()=>{aPauseV.textContent=`${aPause.value}s`;save();});
+  vSel.addEventListener('change',save);
+  document.getElementById('testVoice').addEventListener('click',()=>{AudioEngine.resumeCtx();AudioEngine.speak('My body is healing. I am strong and full of vitality.');});
+  const dark=document.getElementById('darkModeToggle');dark.checked=s.darkMode!==false;applyDark(dark.checked);dark.addEventListener('change',()=>{applyDark(dark.checked);save();});
+  document.getElementById('autoAdvance').checked=s.autoAdvance||false;document.getElementById('autoAdvance').addEventListener('change',save);
+  const vol=document.getElementById('volSlider');vol.value=s.volume??0.4;AudioEngine.setVolume(parseFloat(vol.value));vol.addEventListener('input',()=>{AudioEngine.setVolume(parseFloat(vol.value));save();});
+  AudioEngine.setTTS({rate:s.rate,pitch:s.pitch,voiceIdx:s.voiceIdx});
+  document.getElementById('exportData').addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([DB.export()],{type:'application/json'}));a.download='crystal-healing.json';a.click();});
+  document.getElementById('importDataBtn').addEventListener('click',()=>document.getElementById('importDataFile').click());
+  document.getElementById('importDataFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{DB.import(ev.target.result);renderAll();showToast('Imported ✦');}catch{showToast('Import failed');}};r.readAsText(f);});
+  document.getElementById('resetData').addEventListener('click',()=>Confirm.show('Reset all sessions to defaults?',()=>{DB.reset();renderAll();showToast('Reset ✦');}));
+}
+function applyDark(on){document.body.classList.toggle('light',!on);}
+
+function initAmbientBar(){
+  const s=DB.getSettings(),chips=document.querySelectorAll('.sound-chip');
+  chips.forEach(c=>c.classList.toggle('active',c.dataset.sound===(s.ambientSound||'none')));
+  chips.forEach(c=>c.addEventListener('click',()=>{AudioEngine.resumeCtx();chips.forEach(x=>x.classList.remove('active'));c.classList.add('active');AudioEngine.playAmbient(c.dataset.sound);const sv=DB.getSettings();sv.ambientSound=c.dataset.sound;DB.saveSettings(sv);}));
+  document.getElementById('volSlider').addEventListener('input',e=>AudioEngine.setVolume(parseFloat(e.target.value)));
+}
+
+function initParticles(){
+  const canvas=document.getElementById('particleCanvas'),ctx=canvas.getContext('2d');let W,H;
+  const C=['#9b72d0','#c9a84c','#4caf85','#d07899','#c4a0f0','#c94c6a','#4c82c9'];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  window.addEventListener('resize',resize);resize();
+  class P{constructor(){this.reset();}reset(){this.x=Math.random()*W;this.y=H+10;this.r=.3+Math.random()*1.8;this.a=.04+Math.random()*.25;this.vx=(Math.random()-.5)*.3;this.vy=-.12-Math.random()*.4;this.color=C[Math.floor(Math.random()*C.length)];this.life=0;this.max=150+Math.random()*350;}update(){this.x+=this.vx;this.y+=this.vy;this.life++;if(this.life>this.max||this.y<-10){this.x=Math.random()*W;this.y=H+10;this.life=0;}}draw(){const p=this.life/this.max,a=this.a*(p<.15?p/.15:p>.85?(1-p)/.15:1);ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.color;ctx.globalAlpha=a;ctx.fill();}}
+  const ps=Array.from({length:100},()=>new P());
+  function animate(){ctx.clearRect(0,0,W,H);ctx.globalAlpha=1;ps.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
+  animate();
+}
+
+/* ════════════════════════════════════
+   NAV + INIT
+════════════════════════════════════ */
+const views={home:document.getElementById('viewHome'),mantras:document.getElementById('viewMantras'),weekly:document.getElementById('viewWeekly'),sessions:document.getElementById('viewSessions'),settings:document.getElementById('viewSettings')};
+function showView(n){Object.values(views).forEach(v=>v.classList.remove('active'));views[n]?.classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===n));document.querySelector('.header-nav').classList.remove('open');}
+document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+document.getElementById('menuToggle').addEventListener('click',()=>document.querySelector('.header-nav').classList.toggle('open'));
+
+function renderAll(){renderHome();renderWeekly();renderManage();renderMantras();}
+
+(function init(){
+  AudioEngine.init();
+  initParticles();
+  initSettings();
+  initAmbientBar();
+  renderAll();
+  showView('home');
+  document.addEventListener('touchstart',()=>AudioEngine.resumeCtx(),{once:true});
+  document.addEventListener('click',()=>AudioEngine.resumeCtx(),{once:true});
+})();
+</script>
+</body>
+</html>
