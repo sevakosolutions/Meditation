@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<title>Crystal Healing Meditation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0d0e1a;--bg2:#13152b;--bg3:#1a1d35;--surface:#1f2240;--surface2:#272a4a;--border:rgba(140,120,220,.15);--border2:rgba(140,120,220,.28);--gold:#c9a84c;--amethyst:#9b72d0;--amethyst-lt:#c4a0f0;--jade:#4caf85;--ruby:#c94c6a;--text:#e8e4f8;--text-2:#a09cc0;--text-3:#6a6880;--radius:16px;--radius-sm:10px;--shadow:0 4px 32px rgba(0,0,0,.5);}
+body.light{--bg:#f5f3ff;--bg2:#ede9fe;--bg3:#e5e0ff;--surface:#fff;--surface2:#f0ecff;--border:rgba(100,80,180,.15);--border2:rgba(100,80,180,.3);--text:#1a1535;--text-2:#4a3f80;--text-3:#8a80b0;}
+body.theme-forest{--bg:#0a140a;--bg2:#0f1f0f;--bg3:#152815;--surface:#1a2f1a;--surface2:#1f381f;--border:rgba(76,175,85,.15);--border2:rgba(76,175,85,.28);--amethyst:#4caf85;--amethyst-lt:#80d4a0;--gold:#a8c84c;}
+body.theme-sunset{--bg:#1a0d05;--bg2:#2b1408;--bg3:#3a1f0d;--surface:#4a2a10;--surface2:#5a3518;--border:rgba(201,120,76,.18);--border2:rgba(201,120,76,.35);--amethyst:#c97c4c;--amethyst-lt:#f0aa80;--gold:#e8c96a;}
+body.theme-ocean{--bg:#04101a;--bg2:#071828;--bg3:#0a2035;--surface:#0e2840;--surface2:#133050;--border:rgba(76,130,201,.18);--border2:rgba(76,130,201,.32);--amethyst:#4c82c9;--amethyst-lt:#80b4f0;--gold:#4ccfd0;}
+body.theme-rose{--bg:#1a0910;--bg2:#280e18;--bg3:#351420;--surface:#42192a;--surface2:#501f34;--border:rgba(201,76,130,.18);--border2:rgba(201,76,130,.32);--amethyst:#c94c82;--amethyst-lt:#f080b4;--gold:#e8c96a;}
+body.theme-gold{--bg:#140f00;--bg2:#201800;--bg3:#2e2200;--surface:#3a2c00;--surface2:#483800;--border:rgba(201,168,76,.2);--border2:rgba(201,168,76,.38);--amethyst:#c9a84c;--amethyst-lt:#e8c96a;--gold:#ffdf80;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;color:inherit;}
+input,textarea,select{font-family:inherit;font-size:.9rem;color:var(--text);background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:.6rem .85rem;width:100%;outline:none;transition:border .2s;}
+input:focus,textarea:focus,select:focus{border-color:var(--amethyst);}
+select option{background:var(--bg2);}
+textarea{resize:vertical;}
+#particleCanvas{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.55;}
+#app{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 1rem 6rem;}
+#appHeader{position:sticky;top:0;z-index:100;background:rgba(13,14,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+body.light #appHeader{background:rgba(245,243,255,.92);}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:.75rem;padding:.85rem 1.25rem;}
+.logo{display:flex;align-items:center;gap:.5rem;}
+.logo-gem{font-size:1.4rem;color:var(--gold);animation:gemPulse 3s ease-in-out infinite;}
+@keyframes gemPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.12)}}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;}
+.header-nav{display:flex;gap:.2rem;margin-left:auto;flex-wrap:wrap;}
+.nav-btn{padding:.35rem .7rem;border-radius:999px;font-size:.74rem;color:var(--text-2);transition:all .2s;}
+.nav-btn:hover{color:var(--text);background:var(--surface2);}
+.nav-btn.active{color:#fff;background:var(--amethyst);}
+#menuToggle{display:none;font-size:1.4rem;color:var(--text-2);margin-left:auto;padding:.3rem;}
+.view{display:none;padding-top:2rem;}
+.view.active{display:block;}
+.hero{text-align:center;padding:3rem 1rem 2rem;}
+.hero-eyebrow{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,7vw,4.5rem);font-weight:300;line-height:1.1;margin-bottom:1rem;}
+.hero-title em{color:var(--amethyst-lt);font-style:italic;}
+.hero-sub{font-size:.9rem;color:var(--text-2);letter-spacing:.06em;}
+.ambient-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.85rem 1.1rem;margin-bottom:2rem;}
+.ambient-top{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;}
+.ambient-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--text-3);white-space:nowrap;}
+.vol-wrap{display:flex;align-items:center;gap:.4rem;color:var(--text-3);font-size:.85rem;margin-left:auto;}
+.vol-wrap input[type=range]{width:70px;padding:0;border:none;background:transparent;accent-color:var(--amethyst);}
+.ambient-row{display:flex;gap:.4rem;flex-wrap:wrap;}
+.sound-chip{padding:.28rem .65rem;border-radius:999px;font-size:.72rem;border:1px solid var(--border2);color:var(--text-2);transition:all .2s;}
+.sound-chip:hover{border-color:var(--amethyst);color:var(--text);}
+.sound-chip.active{background:var(--amethyst);border-color:var(--amethyst);color:#fff;}
+.sessions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-bottom:2.5rem;}
+.session-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;position:relative;transition:transform .25s,box-shadow .25s;overflow:hidden;}
+.session-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--card-color,#9b72d0) 0%,transparent 60%);opacity:.07;pointer-events:none;}
+.session-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+.card-header{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:.85rem;}
+.card-emoji{font-size:1.8rem;line-height:1;}
+.card-meta{flex:1;}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;}
+.card-purpose{font-size:.72rem;color:var(--text-2);margin-top:.2rem;}
+.card-edit{color:var(--text-3);font-size:.8rem;padding:.25rem .5rem;border-radius:6px;transition:all .2s;}
+.card-edit:hover{color:var(--amethyst-lt);background:var(--surface2);}
+.card-duration{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--gold);margin-bottom:.85rem;}
+.card-duration::before{content:'◷';}
+.card-crystals{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem;}
+.crystal-tag{font-size:.72rem;padding:.25rem .6rem;border-radius:999px;background:var(--surface2);border:1px solid var(--border);color:var(--text-2);}
+.start-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:.75rem 1rem;background:linear-gradient(135deg,var(--amethyst),#6a42b0);border-radius:var(--radius-sm);color:#fff;font-size:.85rem;font-weight:500;transition:opacity .2s;}
+.start-btn:hover{opacity:.88;}
+.commute-section{margin-bottom:3rem;}
+.commute-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;}
+.commute-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;}
+.commute-icon{font-size:2rem;}
+.commute-header h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;}
+.commute-header p{font-size:.75rem;color:var(--text-2);margin-top:.15rem;}
+.commute-header .edit-btn{margin-left:auto;color:var(--text-3);font-size:.85rem;padding:.3rem .6rem;border-radius:8px;transition:all .2s;}
+.commute-header .edit-btn:hover{background:var(--surface2);color:var(--amethyst-lt);}
+.commute-crystals{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;}
+.commute-affirmations{margin-bottom:1.25rem;}
+.commute-affirmations p{font-size:.82rem;color:var(--text-2);padding:.3rem 0;border-bottom:1px solid var(--border);}
+.commute-affirmations p:last-child{border:none;}
+.commute-start{background:linear-gradient(135deg,var(--jade),#2d8a60);}
+.page-hero{padding:2rem 0 1.5rem;}
+.page-hero h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;}
+.page-hero h2 em{color:var(--amethyst-lt);font-style:italic;}
+.page-hero p{font-size:.85rem;color:var(--text-2);margin-top:.4rem;}
+/* ── MANTRA / AARTI CARDS ── */
+.mantra-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.4rem;padding-bottom:3rem;}
+.mantra-card{background:linear-gradient(155deg,var(--surface),var(--surface2));border:1px solid var(--border);border-radius:20px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s,border-color .28s;}
+.mantra-card::before{content:'';position:absolute;top:-30px;right:-30px;width:110px;height:110px;border-radius:50%;background:var(--mc,#c9a84c);opacity:.08;pointer-events:none;}
+.mantra-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--mc,#c9a84c),transparent);opacity:.4;}
+.mantra-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,.45);border-color:var(--mc,#c9a84c);}
+.mantra-card.playing-card{border-color:var(--mc,#c9a84c);box-shadow:0 0 0 2px var(--mc,#c9a84c),0 12px 40px rgba(0,0,0,.4);}
+.mc-top{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;}
+.mc-icon-wrap{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.85rem;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,.25);}
+.mc-info{flex:1;min-width:0;}
+.mc-name{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:500;margin-bottom:.25rem;line-height:1.25;}
+.mc-benefit{font-size:.68rem;color:var(--text-3);letter-spacing:.03em;line-height:1.5;}
+.mc-badge{display:inline-block;margin-top:.35rem;font-size:.6rem;color:var(--mc,#c9a84c);background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:999px;padding:.15rem .55rem;letter-spacing:.06em;}
+.mc-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:.85rem 0;}
+.mc-sanskrit{font-size:.82rem;color:var(--amethyst-lt);font-style:italic;line-height:1.7;margin-bottom:.85rem;padding:.65rem .8rem;background:rgba(155,114,208,.06);border-radius:10px;border-left:3px solid var(--mc,#c9a84c);}
+.mc-meaning{font-size:.76rem;color:var(--text-2);line-height:1.65;margin-bottom:1.1rem;}
+.mc-audio-bar{display:flex;align-items:center;gap:.55rem;}
+.mc-play{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;background:linear-gradient(135deg,var(--mc,#c9a84c),rgba(0,0,0,.1));color:#1a1000;flex-shrink:0;transition:transform .18s,box-shadow .18s;box-shadow:0 4px 14px rgba(0,0,0,.3);font-weight:600;}
+.mc-play:hover{transform:scale(1.12);box-shadow:0 8px 24px rgba(0,0,0,.4);}
+.mc-play:disabled{opacity:.45;}
+.mc-stop-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;background:rgba(201,76,106,.1);border:1px solid rgba(201,76,106,.28);color:#c94c6a;flex-shrink:0;transition:all .2s;}
+.mc-stop-btn:hover{background:rgba(201,76,106,.22);transform:scale(1.05);}
+.mc-lyrics-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.82rem;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.28);color:#c9a84c;flex-shrink:0;transition:all .2s;letter-spacing:0;font-family:inherit;}
+.mc-lyrics-btn:hover{background:rgba(201,168,76,.2);transform:scale(1.05);}
+.mc-progress-wrap{flex:1;min-width:0;}
+.mc-prog-label{font-size:.62rem;color:var(--text-3);margin-bottom:.3rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mc-progress{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;}
+.mc-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--mc,#c9a84c),var(--amethyst-lt));border-radius:2px;transition:width .5s;}
+.mc-time{font-size:.62rem;color:var(--text-3);margin-top:.3rem;display:flex;justify-content:space-between;}
+.mc-status{font-size:.7rem;color:var(--text-3);min-height:1.2em;margin-top:.35rem;}
+.mc-loading{animation:mcpulse 1.2s ease-in-out infinite;}
+@keyframes mcpulse{0%,100%{opacity:.4}50%{opacity:1}}
+.mc-error{color:#c94c6a;}
+.mc-pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--mc,#c9a84c);display:inline-block;margin-left:.45rem;opacity:0;vertical-align:middle;flex-shrink:0;}
+.mc-pulse-dot.pulsing{animation:pulseDot 1.4s ease-in-out infinite;}
+@keyframes pulseDot{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.4)}}
+/* ── WEEKLY ── */
+.weekly-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;padding-bottom:3rem;}
+.weekly-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;position:relative;overflow:hidden;transition:transform .2s;}
+.weekly-card:hover{transform:translateY(-2px);}
+.weekly-day{font-size:.65rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.5rem;}
+.weekly-day.today{color:var(--jade);}
+.weekly-title{font-family:'Cormorant Garamond',serif;font-size:1rem;margin-bottom:.6rem;}
+.weekly-focus{font-size:.75rem;color:var(--text-2);margin-bottom:.75rem;font-style:italic;}
+.weekly-edit{position:absolute;top:.75rem;right:.75rem;font-size:.75rem;color:var(--text-3);padding:.2rem .4rem;border-radius:6px;transition:all .2s;}
+.weekly-edit:hover{background:var(--surface2);color:var(--amethyst-lt);}
+.weekly-start{font-size:.75rem;padding:.45rem .85rem;background:var(--amethyst);border-radius:8px;color:#fff;transition:opacity .2s;}
+.weekly-start:hover{opacity:.85;}
+.manage-list{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem;}
+.manage-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;}
+.manage-item .mi-emoji{font-size:1.4rem;}
+.manage-item .mi-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;flex:1;}
+.manage-item .mi-dur{font-size:.75rem;color:var(--text-2);}
+.manage-item .mi-edit{padding:.35rem .75rem;border:1px solid var(--border2);border-radius:8px;font-size:.8rem;color:var(--text-2);transition:all .2s;}
+.manage-item .mi-edit:hover{border-color:var(--amethyst);color:var(--amethyst-lt);}
+.add-session-btn{display:block;width:100%;padding:1rem;border:2px dashed var(--border2);border-radius:var(--radius);text-align:center;color:var(--text-2);font-size:.9rem;transition:all .2s;}
+.add-session-btn:hover{border-color:var(--amethyst);color:var(--amethyst-lt);background:var(--surface);}
+.settings-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;margin-bottom:1.25rem;}
+.settings-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:1rem;}
+.settings-card label{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.85rem;font-size:.8rem;color:var(--text-2);}
+.settings-card label:last-child{margin-bottom:0;}
+.settings-hint{font-size:.78rem;color:var(--text-3);margin-bottom:.75rem;line-height:1.55;}
+.toggle-label{flex-direction:row!important;align-items:center!important;gap:.75rem!important;}
+.toggle-label input[type=checkbox]{display:none;}
+.toggle-track{width:40px;height:22px;border-radius:999px;background:var(--surface2);border:1px solid var(--border2);position:relative;cursor:pointer;transition:background .25s;}
+.toggle-track::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--text-3);transition:transform .25s,background .25s;}
+input[type=checkbox]:checked+.toggle-track{background:var(--amethyst);border-color:var(--amethyst);}
+input[type=checkbox]:checked+.toggle-track::after{transform:translateX(18px);background:#fff;}
+.outline-btn{display:inline-block;padding:.5rem 1rem;border:1px solid var(--border2);border-radius:var(--radius-sm);font-size:.82rem;color:var(--text-2);transition:all .2s;margin-right:.5rem;margin-top:.4rem;cursor:pointer;}
+.outline-btn:hover{border-color:var(--amethyst);color:var(--amethyst-lt);}
+.outline-btn.danger{border-color:rgba(201,76,106,.4);color:var(--ruby);}
+.outline-btn.danger:hover{background:var(--ruby);color:#fff;border-color:var(--ruby);}
+.test-btn{display:inline-block;padding:.5rem 1.1rem;border:1px solid var(--amethyst);border-radius:var(--radius-sm);font-size:.82rem;color:var(--amethyst-lt);transition:all .2s;margin-top:.5rem;cursor:pointer;}
+.test-btn:hover{background:var(--amethyst);color:#fff;}
+.theme-chip{padding:.35rem .9rem;border-radius:999px;font-size:.75rem;border:1px solid var(--border2);color:var(--text-2);cursor:pointer;transition:all .2s;white-space:nowrap;}
+.theme-chip:hover,.theme-chip.active{background:var(--amethyst);border-color:var(--amethyst);color:#fff;}
+.modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;}
+.modal.hidden{display:none;}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);}
+.modal-panel{position:relative;z-index:1;background:var(--bg2);border:1px solid var(--border2);border-radius:24px;padding:2.5rem 2rem;width:min(520px,92vw);max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.8);animation:slideUp .3s ease-out;}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:1rem;right:1rem;width:34px;height:34px;border-radius:50%;background:var(--surface2);color:var(--text-2);font-size:.85rem;transition:all .2s;display:flex;align-items:center;justify-content:center;}
+.modal-close:hover{background:var(--ruby);color:#fff;}
+#playerModal .modal-panel{text-align:center;padding:2rem 1.75rem;}
+.player-crystal-row{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem;}
+.player-crystal{font-size:.78rem;padding:.35rem .75rem;border-radius:999px;background:var(--surface2);border:1px solid var(--border2);color:var(--text-2);}
+.player-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;margin-bottom:.3rem;}
+.player-subtitle{font-size:.78rem;color:var(--text-2);letter-spacing:.08em;margin-bottom:1.5rem;}
+.timer-ring-wrap{position:relative;width:200px;height:200px;margin:0 auto 1.5rem;}
+.timer-ring{width:100%;height:100%;transform:rotate(-90deg);}
+.ring-track{fill:none;stroke:var(--surface2);stroke-width:8;}
+.ring-fill{fill:none;stroke:var(--amethyst-lt);stroke-width:8;stroke-linecap:round;stroke-dasharray:553;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .5s;}
+.timer-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.timer-display{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;line-height:1;}
+.timer-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--text-3);margin-top:.2rem;}
+.affirmation-box{min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:1rem;}
+.affirmation-count{font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:.4rem;}
+.affirmation-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--amethyst-lt);line-height:1.6;padding:0 .5rem;}
+@keyframes fadeText{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.visualize-box{font-size:.8rem;color:var(--text-3);font-style:italic;margin-bottom:1.25rem;min-height:1.5em;}
+.player-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;}
+.ctrl-btn{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--surface2);border:1px solid var(--border2);color:var(--text-2);font-size:.9rem;transition:all .2s;}
+.ctrl-btn:hover{border-color:var(--amethyst);color:var(--amethyst-lt);}
+.ctrl-btn.primary{width:58px;height:58px;font-size:1.3rem;background:var(--amethyst);border-color:var(--amethyst);color:#fff;}
+.ctrl-btn.active{background:var(--amethyst);border-color:var(--amethyst);color:#fff;}
+.player-progress{margin-top:.5rem;}
+.progress-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin-bottom:.5rem;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--amethyst),var(--gold));border-radius:2px;transition:width .4s;width:0%;}
+.progress-label{font-size:.72rem;color:var(--text-3);}
+.edit-panel label{display:flex;flex-direction:column;gap:.4rem;font-size:.8rem;color:var(--text-2);margin-bottom:.85rem;}
+.edit-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:1.25rem;}
+.edit-actions{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:1rem;}
+.save-btn{padding:.65rem 1.5rem;background:var(--amethyst);color:#fff;border-radius:var(--radius-sm);font-size:.9rem;font-weight:500;transition:all .2s;cursor:pointer;}
+.save-btn:hover{background:var(--amethyst-lt);}
+.save-btn.danger{background:var(--ruby);}
+.confirm-panel{text-align:center;max-width:340px;}
+.confirm-panel p{font-size:1rem;margin-bottom:1.5rem;line-height:1.5;}
+.confirm-actions{display:flex;justify-content:center;gap:1rem;}
+#toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--surface2);border:1px solid var(--border2);border-radius:999px;padding:.65rem 1.5rem;font-size:.85rem;color:var(--text-2);box-shadow:var(--shadow);z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+#toast.show{opacity:1;}
+/* ── LYRICS OVERLAY ── */
+#lyricsOverlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.88);backdrop-filter:blur(20px);display:none;flex-direction:column;align-items:center;justify-content:center;padding:1rem;}
+#lyricsOverlay.open{display:flex;}
+#lyricsPanel{background:linear-gradient(170deg,#1c1500,#0d0e1a 60%);border:1px solid rgba(201,168,76,.3);border-radius:24px;width:min(540px,96vw);max-height:92vh;display:flex;flex-direction:column;box-shadow:0 0 80px rgba(201,168,76,.12);position:relative;overflow:hidden;}
+.lyrics-panel-head{padding:1.4rem 1.5rem 1rem;border-bottom:1px solid rgba(201,168,76,.15);flex-shrink:0;}
+.lyrics-panel-title{font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:#c9a84c;margin-bottom:.25rem;}
+.lyrics-panel-sub{font-size:.72rem;color:#6a6880;}
+.lyrics-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);border:none;color:#a09cc0;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.lyrics-close:hover{background:var(--ruby);color:#fff;}
+/* PAGES */
+.lyrics-pages-wrap{flex:1;overflow:hidden;position:relative;}
+.lyrics-page{display:none;flex-direction:column;gap:.65rem;padding:1rem 1.5rem;overflow-y:auto;height:100%;max-height:55vh;}
+.lyrics-page.active-page{display:flex;}
+.lyrics-line-card{padding:.75rem 1rem;border-radius:12px;border:1px solid rgba(201,168,76,.12);background:rgba(255,255,255,.03);animation:lineFadeIn .35s ease both;}
+@keyframes lineFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.llc-verse{font-size:.62rem;color:#c9a84c;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem;opacity:.7;}
+.llc-s{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#e8e4f8;line-height:1.4;margin-bottom:.25rem;}
+.llc-t{font-size:.8rem;color:#c4a0f0;margin-bottom:.2rem;letter-spacing:.03em;}
+.llc-m{font-size:.72rem;color:#6a6880;font-style:italic;line-height:1.5;}
+/* PAGINATION NAV */
+.lyrics-nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;border-top:1px solid rgba(201,168,76,.12);flex-shrink:0;gap:.5rem;}
+.lyrics-page-info{font-size:.75rem;color:#a09cc0;text-align:center;flex:1;}
+.lnav-btn{padding:.45rem 1.1rem;border-radius:999px;border:1px solid rgba(201,168,76,.3);color:#c9a84c;font-size:.78rem;cursor:pointer;background:none;transition:all .2s;}
+.lnav-btn:hover:not(:disabled){background:rgba(201,168,76,.12);}
+.lnav-btn:disabled{opacity:.3;cursor:default;}
+.lnav-dots{display:flex;gap:.35rem;align-items:center;}
+.lnav-dot{width:7px;height:7px;border-radius:50%;background:rgba(201,168,76,.25);border:none;cursor:pointer;transition:all .2s;padding:0;}
+.lnav-dot.active{background:#c9a84c;transform:scale(1.2);}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+@media(max-width:640px){
+  .header-nav{display:none;}
+  #menuToggle{display:flex;}
+  .header-nav.open{display:flex;flex-direction:column;position:fixed;top:58px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem;gap:.5rem;z-index:99;}
+  .header-nav.open .nav-btn{text-align:left;border-radius:var(--radius-sm);padding:.65rem 1rem;}
+  .sessions-grid,.mantra-grid{grid-template-columns:1fr;}
+  .weekly-grid{grid-template-columns:1fr 1fr;}
+  .timer-ring-wrap{width:160px;height:160px;}
+  .timer-display{font-size:2rem;}
+  .player-title{font-size:1.4rem;}
+  .modal-panel{padding:1.5rem 1.1rem;}
+  #appHeader .logo-text{display:none;}
+  .lyrics-page{max-height:48vh;}
+}
+@media(max-width:380px){.weekly-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<canvas id="particleCanvas"></canvas>
+<div id="app">
+  <header id="appHeader">
+    <div class="header-inner">
+      <div class="logo"><span class="logo-gem">&#10022;</span><span class="logo-text">Crystal Healing</span></div>
+      <nav class="header-nav">
+        <button class="nav-btn active" data-view="home">Home</button>
+        <button class="nav-btn" data-view="mantras">Mantras</button>
+        <button class="nav-btn" data-view="aartis">Aarti</button>
+        <button class="nav-btn" data-view="weekly">Weekly</button>
+        <button class="nav-btn" data-view="sessions">Sessions</button>
+        <button class="nav-btn" data-view="settings">Settings</button>
+      </nav>
+      <button id="menuToggle">&#9776;</button>
+    </div>
+  </header>
+
+  <main id="viewHome" class="view active">
+    <section class="hero">
+      <p class="hero-eyebrow">Daily Practice</p>
+      <h1 class="hero-title">Begin Your<br/><em>Healing Journey</em></h1>
+      <p class="hero-sub">Hold your crystals &middot; Breathe &middot; Set your intention</p>
+    </section>
+    <div class="ambient-bar">
+      <div class="ambient-top">
+        <span class="ambient-label">Ambient Sound</span>
+        <div class="vol-wrap"><span>&#128264;</span><input type="range" id="volSlider" min="0" max="1" step="0.05" value="0.4"/></div>
+      </div>
+      <div class="ambient-row" id="ambientSounds">
+        <button class="sound-chip active" data-sound="none">Silence</button>
+        <button class="sound-chip" data-sound="bowls">Bowls</button>
+        <button class="sound-chip" data-sound="rain">Rain</button>
+        <button class="sound-chip" data-sound="forest">Forest</button>
+        <button class="sound-chip" data-sound="ocean">Ocean</button>
+        <button class="sound-chip" data-sound="om">OM</button>
+        <button class="sound-chip" data-sound="tibetan">Tibetan</button>
+        <button class="sound-chip" data-sound="creek">Creek</button>
+        <button class="sound-chip" data-sound="night">Night</button>
+        <button class="sound-chip" data-sound="thunder">Thunder</button>
+        <button class="sound-chip" data-sound="wind">Wind Chimes</button>
+        <button class="sound-chip" data-sound="binaural">Binaural</button>
+      </div>
+    </div>
+    <section class="sessions-grid" id="dailySessions"></section>
+    <section class="commute-section">
+      <div class="commute-card">
+        <div class="commute-header">
+          <span class="commute-icon">&#128646;</span>
+          <div><h3>Office &amp; Train Commute Kit</h3><p>Carry your pouch &middot; 5 slow breaths</p></div>
+          <button class="edit-btn">Edit</button>
+        </div>
+        <div class="commute-crystals" id="commuteCrystals"></div>
+        <div class="commute-affirmations" id="commuteAffirmations"></div>
+        <button class="start-btn commute-start" id="startCommute"><span>Begin Commute Practice</span><span>&rarr;</span></button>
+      </div>
+    </section>
+  </main>
+
+  <main id="viewMantras" class="view">
+    <section class="page-hero"><h2>Sacred <em>Mantras</em></h2><p>Authentic recordings &middot; tap Play &middot; tap Lyrics to read full text</p></section>
+    <div class="mantra-grid" id="mantraGrid"></div>
+  </main>
+
+  <main id="viewAartis" class="view">
+    <section class="page-hero"><h2>Sacred <em>Aarti</em></h2><p>Complete devotional songs &middot; tap Play &middot; tap Lyrics for full text with page navigation</p></section>
+    <div class="mantra-grid" id="aartiGrid"></div>
+  </main>
+
+  <main id="viewWeekly" class="view">
+    <section class="page-hero"><h2>Weekly <em>Crystal Focus</em></h2><p>Each day carries its own intention</p></section>
+    <div class="weekly-grid" id="weeklyGrid"></div>
+  </main>
+
+  <main id="viewSessions" class="view">
+    <section class="page-hero"><h2>Manage <em>Sessions</em></h2><p>Edit, reorder, or add your own healing sessions</p></section>
+    <div class="manage-list" id="manageList"></div>
+    <button class="add-session-btn" id="addSessionBtn">+ Add New Session</button>
+  </main>
+
+  <main id="viewSettings" class="view">
+    <section class="page-hero"><h2>Settings &amp; <em>Voice</em></h2></section>
+    <div class="settings-card">
+      <h3>Colour Theme</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+        <button class="theme-chip active" data-theme="">Cosmic</button>
+        <button class="theme-chip" data-theme="theme-forest">Forest</button>
+        <button class="theme-chip" data-theme="theme-sunset">Sunset</button>
+        <button class="theme-chip" data-theme="theme-ocean">Ocean</button>
+        <button class="theme-chip" data-theme="theme-rose">Rose</button>
+        <button class="theme-chip" data-theme="theme-gold">Gold</button>
+      </div>
+    </div>
+    <div class="settings-card">
+      <h3>Affirmation Voice</h3>
+      <p class="settings-hint">Used for healing sessions. Mantras and Aarti use real audio recordings.</p>
+      <label>Voice
+        <div style="display:flex;gap:.5rem"><select id="voiceSelect" style="flex:1"></select><button class="test-btn" id="refreshVoices" style="margin-top:0;white-space:nowrap">Refresh</button></div>
+      </label>
+      <label>Speed<input type="range" id="speechRate" min="0.5" max="1.5" step="0.05" value="0.8"/><span id="speechRateVal">0.8x</span></label>
+      <label>Pitch<input type="range" id="speechPitch" min="0.5" max="1.5" step="0.1" value="1.0"/><span id="speechPitchVal">1.0</span></label>
+      <label>Pause between affirmations<input type="range" id="affirmPause" min="1" max="8" step="0.5" value="2"/><span id="affirmPauseVal">2s</span></label>
+      <button class="test-btn" id="testVoice">Test Voice</button>
+    </div>
+    <div class="settings-card">
+      <h3>Display</h3>
+      <label class="toggle-label"><span>Dark Mode</span><input type="checkbox" id="darkModeToggle" checked/><span class="toggle-track"></span></label>
+      <label class="toggle-label"><span>Auto-advance sessions</span><input type="checkbox" id="autoAdvance"/><span class="toggle-track"></span></label>
+    </div>
+    <div class="settings-card">
+      <h3>Data</h3>
+      <button class="outline-btn" id="exportData">Export JSON</button>
+      <button class="outline-btn" id="importDataBtn">Import JSON</button>
+      <input type="file" id="importDataFile" accept=".json" style="display:none"/>
+      <button class="outline-btn danger" id="resetData">Reset Defaults</button>
+    </div>
+  </main>
+</div>
+
+<!-- LYRICS OVERLAY with pages -->
+<div id="lyricsOverlay">
+  <div id="lyricsPanel">
+    <button class="lyrics-close" id="lyricsClose">&#10005;</button>
+    <div class="lyrics-panel-head">
+      <div class="lyrics-panel-title" id="lyricsTitle"></div>
+      <div class="lyrics-panel-sub" id="lyricsSub">Tap a line to read meaning</div>
+    </div>
+    <div class="lyrics-pages-wrap" id="lyricsPagesWrap"></div>
+    <div class="lyrics-nav">
+      <button class="lnav-btn" id="lyricsPrevPage">&#9664; Prev</button>
+      <div class="lnav-dots" id="lnavDots"></div>
+      <button class="lnav-btn" id="lyricsNextPage">Next &#9654;</button>
+    </div>
+  </div>
+</div>
+
+<!-- PLAYER MODAL -->
+<div id="playerModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-panel">
+    <button class="modal-close" id="closePlayer">&#10005;</button>
+    <div class="player-crystal-row" id="playerCrystals"></div>
+    <h2 class="player-title" id="playerTitle"></h2>
+    <p class="player-subtitle" id="playerSubtitle"></p>
+    <div class="timer-ring-wrap">
+      <svg class="timer-ring" viewBox="0 0 200 200">
+        <circle class="ring-track" cx="100" cy="100" r="88"/>
+        <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="88"/>
+      </svg>
+      <div class="timer-center">
+        <span class="timer-display" id="timerDisplay">00:00</span>
+        <span class="timer-label" id="timerLabel">remaining</span>
+      </div>
+    </div>
+    <div class="affirmation-box">
+      <p class="affirmation-count" id="affirmCount"></p>
+      <p class="affirmation-text" id="affirmText"></p>
+    </div>
+    <div class="visualize-box" id="visualizeBox"></div>
+    <div class="player-controls">
+      <button class="ctrl-btn" id="prevAffirm">&#9664;</button>
+      <button class="ctrl-btn primary" id="playPause">&#9654;</button>
+      <button class="ctrl-btn" id="nextAffirm">&#9654;&#9654;</button>
+      <button class="ctrl-btn active" id="repeatToggle">&#128266;</button>
+    </div>
+    <div class="player-progress">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <p class="progress-label" id="progressLabel"></p>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-panel edit-panel">
+    <button class="modal-close" id="closeEdit">&#10005;</button>
+    <h2 class="edit-title">Edit Session</h2>
+    <label>Session Name<input type="text" id="editName" placeholder="Morning Ritual"/></label>
+    <label>Emoji<input type="text" id="editEmoji" maxlength="4"/></label>
+    <label>Duration (mins)<input type="number" id="editDuration" min="1" max="60" placeholder="10"/></label>
+    <label>Purpose<input type="text" id="editPurpose"/></label>
+    <label>Crystals (one per line)<textarea id="editCrystals" rows="4"></textarea></label>
+    <label>Visualize<input type="text" id="editVisualize"/></label>
+    <label>Affirmations (one per line)<textarea id="editAffirmations" rows="8"></textarea></label>
+    <label>Ambient Sound
+      <select id="editSound">
+        <option value="none">Silence</option><option value="bowls">Singing Bowls</option>
+        <option value="rain">Rain</option><option value="forest">Forest</option>
+        <option value="ocean">Ocean</option><option value="om">OM Drone</option>
+        <option value="tibetan">Tibetan</option><option value="creek">Creek</option>
+        <option value="night">Night</option><option value="thunder">Thunder</option>
+        <option value="wind">Wind Chimes</option><option value="binaural">Binaural 432Hz</option>
+      </select>
+    </label>
+    <div class="edit-actions">
+      <button class="outline-btn danger" id="deleteSession">Delete</button>
+      <button class="save-btn" id="saveSession">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div id="confirmModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-panel confirm-panel">
+    <p id="confirmMsg">Are you sure?</p>
+    <div class="confirm-actions">
+      <button class="outline-btn" id="confirmNo">Cancel</button>
+      <button class="save-btn danger" id="confirmYes">Confirm</button>
+    </div>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+var MANTRAS = [
+  { id:"om", icon:"\uD83D\uDD49", color:"#9b72d0", name:"OM / AUM", benefit:"Universal Healing - Chakra Activation - Peace",
+    sanskrit:"Om - The primordial sound",
+    meaning:"The sacred sound of the universe. Chanting OM cleanses the mind, raises vibration, and connects you to universal consciousness.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Om%20Mantra%20Chanting.mp3",
+    lines:[
+      {s:"OM", t:"Om", m:"The primordial sound of the universe"},
+      {s:"A sound", t:"Aaaa", m:"Creation - the beginning, Brahma"},
+      {s:"U sound", t:"Uuuu", m:"Sustaining force, Vishnu"},
+      {s:"M sound", t:"Mmmm", m:"Dissolution, Shiva"},
+      {s:"Silence", t:"Om (silence)", m:"The silence after OM is the infinite"}
+    ]
+  },
+  { id:"gayatri", icon:"\u2600\uFE0F", color:"#c9a84c", name:"Gayatri Mantra", benefit:"Wisdom - Intelligence - Spiritual Awakening",
+    sanskrit:"Om Bhur Bhuvah Svah, Tat Savitur Varenyam, Bhargo Devasya Dhimahi, Dhiyo Yo Nah Prachodayat",
+    meaning:"We meditate on the divine light of the Sun God. May that sacred light illuminate our intellect and guide our thoughts.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Gayatri%20Mantra.mp3",
+    lines:[
+      {s:"Om Bhur Bhuvah Svah", t:"Om Bhur Bhuvah Svah", m:"Om - Earth, Atmosphere, Heaven"},
+      {s:"Tat Savitur Varenyam", t:"Tat Savitur Varenyam", m:"That divine Sun, most adorable"},
+      {s:"Bhargo Devasya Dhimahi", t:"Bhargo Devasya Dhimahi", m:"We meditate on the radiance of God"},
+      {s:"Dhiyo Yo Nah Prachodayat", t:"Dhiyo Yo Nah Prachodayat", m:"May He inspire and guide our intellect"}
+    ]
+  },
+  { id:"mahamrityunjaya", icon:"\uD83D\uDD31", color:"#4caf85", name:"Mahamrityunjaya", benefit:"Healing - Protection - Longevity - Fear Removal",
+    sanskrit:"Om Tryambakam Yajamahe, Sugandhim Pushti Vardhanam, Urvarukamiva Bandhanat, Mrityor Mukshiya Maamritat",
+    meaning:"We worship the three-eyed Lord Shiva who nourishes all. May He liberate us from death and grant immortality.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Maha%20Mrityunjay%20Mantra%20108.mp3",
+    lines:[
+      {s:"Om Tryambakam Yajamahe", t:"Om Tryambakam Yajamahe", m:"We worship the three-eyed Lord Shiva"},
+      {s:"Sugandhim Pushti Vardhanam", t:"Sugandhim Pushti Vardhanam", m:"Fragrant and nourishing all beings"},
+      {s:"Urvarukamiva Bandhanat", t:"Urvarukamiva Bandhanat", m:"Like a ripe cucumber freed from its vine"},
+      {s:"Mrityor Mukshiya Maamritat", t:"Mrityor Mukshiya Maamritat", m:"Liberate us from death - grant immortality"}
+    ]
+  },
+  { id:"om_namah_shivaya", icon:"\uD83C\uDF19", color:"#c4a0f0", name:"Om Namah Shivaya", benefit:"Inner Peace - Transformation - Self-Realisation",
+    sanskrit:"Om Namah Shivaya",
+    meaning:"I bow to Shiva - the inner self, the true nature of reality. Dissolves ego and connects to pure consciousness.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Om%20Namah%20Shivaya.mp3",
+    lines:[
+      {s:"Om", t:"Om", m:"The universal sound, the infinite"},
+      {s:"Namah", t:"Namah", m:"I bow, I surrender with reverence"},
+      {s:"Shi", t:"Shi", m:"The auspicious, divine grace"},
+      {s:"Va", t:"Va", m:"The revealing grace of Shiva"},
+      {s:"Ya", t:"Ya", m:"The Self, the eternal soul"},
+      {s:"Om Namah Shivaya", t:"Om Namah Shivaya", m:"I bow to the divine within me"}
+    ]
+  },
+  { id:"om_mani", icon:"\uD83D\uDC8E", color:"#4c82c9", name:"Om Mani Padme Hum", benefit:"Compassion - Healing - Purification - Merit",
+    sanskrit:"Om Mani Padme Hum",
+    meaning:"Hail the jewel in the lotus. The mantra of compassion, invoking the blessings of Avalokiteshvara.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Om%20Mani%20Padme%20Hum.mp3",
+    lines:[
+      {s:"Om", t:"Om", m:"Body, speech and mind - purified"},
+      {s:"Mani", t:"Mani", m:"The jewel - love and compassion"},
+      {s:"Padme", t:"Padme", m:"The lotus - wisdom and purity"},
+      {s:"Hum", t:"Hum", m:"Union of wisdom and compassion"},
+      {s:"Om Mani Padme Hum", t:"Om Mani Padme Hum", m:"The jewel is in the lotus of my heart"}
+    ]
+  },
+  { id:"ganesh", icon:"\uD83D\uDC18", color:"#c94c6a", name:"Om Gan Ganpataye", benefit:"Remove Obstacles - New Beginnings - Success",
+    sanskrit:"Om Gan Ganpataye Namo Namah",
+    meaning:"Salutations to Lord Ganesha, remover of obstacles. Chanted before any new beginning.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Om%20Gan%20Ganpataye%20Namo%20Namah.mp3",
+    lines:[
+      {s:"Om", t:"Om", m:"The primordial sound, all existence"},
+      {s:"Gan", t:"Gan", m:"The seed syllable of Ganesha"},
+      {s:"Ganpataye", t:"Ganpataye", m:"Lord Ganesha, leader of the ganas"},
+      {s:"Namo Namah", t:"Namo Namah", m:"I offer my salutations and surrender"},
+      {s:"Om Gan Ganpataye Namo Namah", t:"Om Gan Ganpataye Namo Namah", m:"Remove all obstacles from my path"}
+    ]
+  },
+  { id:"lakshmi", icon:"\uD83E\uDE77", color:"#d07899", name:"Mahalakshmi Mantra", benefit:"Abundance - Prosperity - Well-Being - Grace",
+    sanskrit:"Om Shreem Mahalakshmiyei Namaha",
+    meaning:"Salutations to Goddess Lakshmi. Invokes divine abundance, prosperity, beauty and grace.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Mahalakshmi%20Mantra.mp3",
+    lines:[
+      {s:"Om", t:"Om", m:"The universal vibration of all existence"},
+      {s:"Shreem", t:"Shreem", m:"Bija mantra of Lakshmi - magnetic abundance"},
+      {s:"Mahalakshmiyei", t:"Mahalakshmiyei", m:"To the great Goddess Lakshmi"},
+      {s:"Namaha", t:"Namaha", m:"I bow with devotion and gratitude"},
+      {s:"Om Shreem Mahalakshmiyei Namaha", t:"Om Shreem Mahalakshmiyei Namaha", m:"Bless me with abundance and grace"}
+    ]
+  },
+  { id:"hare_krishna", icon:"\uD83E\uDD9A", color:"#4caf85", name:"Hare Krishna Maha Mantra", benefit:"Joy - Purification - Divine Love - Liberation",
+    sanskrit:"Hare Krishna Hare Krishna, Krishna Krishna Hare Hare, Hare Rama Hare Rama, Rama Rama Hare Hare",
+    meaning:"The great mantra of liberation. Purifies the heart and awakens pure love for the Divine.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Hare%20Krishna%20Maha%20Mantra.mp3",
+    lines:[
+      {s:"Hare Krishna Hare Krishna", t:"Hare Krishna Hare Krishna", m:"O Krishna! O divine energy of Krishna!"},
+      {s:"Krishna Krishna Hare Hare", t:"Krishna Krishna Hare Hare", m:"O Krishna! O Hara! Please engage my mind"},
+      {s:"Hare Rama Hare Rama", t:"Hare Rama Hare Rama", m:"O Rama! O divine energy of Rama!"},
+      {s:"Rama Rama Hare Hare", t:"Rama Rama Hare Hare", m:"O Rama! O Hara! Free me from illusion"}
+    ]
+  },
+  { id:"om_shanti", icon:"\u262E\uFE0F", color:"#9b72d0", name:"Om Shanti Mantra", benefit:"Deep Peace - Anxiety Relief - Harmony",
+    sanskrit:"Om Shanti Shanti Shanti",
+    meaning:"Peace in body, peace in mind, peace in spirit. Three-fold peace mantra for total harmony.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Om%20Mantra.mp3",
+    lines:[
+      {s:"Om", t:"Om", m:"The infinite, the absolute reality"},
+      {s:"Shanti", t:"Shanti (1)", m:"Peace in the physical body"},
+      {s:"Shanti", t:"Shanti (2)", m:"Peace in the mind"},
+      {s:"Shanti", t:"Shanti (3)", m:"Peace in the spirit"},
+      {s:"Om Shanti Shanti Shanti", t:"Om Shanti Shanti Shanti", m:"May peace pervade all three levels of existence"}
+    ]
+  },
+  { id:"kubera", icon:"\uD83D\uDCB0", color:"#c9a84c", name:"Kubera Money Mantra", benefit:"Wealth - Financial Abundance - Prosperity",
+    sanskrit:"Om Yakshaya Kuberaya Vaishravanaya Dhana Dhanyadhipataye",
+    meaning:"O Kubera, Lord of Wealth and Treasurer of the Gods, bestow upon me abundance in wealth and grain.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Kubera%20Money%20Mantra.mp3",
+    lines:[
+      {s:"Om Yakshaya Kuberaya", t:"Om Yakshaya Kuberaya", m:"O Kubera, Lord of Yakshas"},
+      {s:"Vaishravanaya", t:"Vaishravanaya", m:"Son of Vishrava, the wealthy one"},
+      {s:"Dhana Dhanyadhipataye", t:"Dhana Dhanyadhipataye", m:"Lord of wealth and grain"},
+      {s:"Dehi Me Daapaya Swaha", t:"Dehi Me Daapaya Swaha", m:"Bestow and grant - so be it"}
+    ]
+  },
+  { id:"soham", icon:"\uD83C\uDF2C\uFE0F", color:"#4c82c9", name:"So Ham - Breath Mantra", benefit:"Breathwork - Self-Awareness - Stress Relief - Oneness",
+    sanskrit:"So (inhale) Ham (exhale)",
+    meaning:"I am That - the infinite universe itself. The natural sound of the breath. So on the inhale, Ham on the exhale.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Om%20Mantra%20Chanting.mp3",
+    lines:[
+      {s:"So...", t:"So... (inhale)", m:"Inhale - I am..."},
+      {s:"...Ham", t:"...Ham (exhale)", m:"Exhale - ...That (the universe)"},
+      {s:"So = That", t:"So = That", m:"That - pointing to the infinite reality"},
+      {s:"Aham = I am", t:"Aham = I am", m:"I am - the eternal witness consciousness"},
+      {s:"So Ham", t:"So Ham", m:"I am That - I am one with all existence"}
+    ]
+  }
+];
+
+var AARTIS = [
+  { id:"hanuman_chalisa", icon:"\uD83D\uDC12", color:"#c9a84c", name:"Hanuman Chalisa", benefit:"Strength - Protection - Courage - Removing Fear",
+    sanskrit:"Jai Hanuman Gyan Gun Sagar, Jai Kapis Tihu Lok Ujagar",
+    meaning:"The complete 40-verse devotional hymn to Lord Hanuman composed by Tulsidas. Reciting it daily grants strength, removes fear and evil, and protects from all harm.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Hanuman%20Chalisa.mp3",
+    lines:[
+      {s:"Doha", t:"Shri Guru Charan Saroj Raj, Nij Manu Mukuru Sudhari", m:"Cleansing the mirror of my mind with the dust of my Guru's lotus feet"},
+      {s:"Doha", t:"Barnau Raghuvar Bimal Jasu, Jo Dayaku Phal Chari", m:"I describe the pure glory of Lord Rama, bestower of the four fruits of life"},
+      {s:"1", t:"Buddhi Heen Tanu Janike, Sumirow Pavan Kumar", m:"Knowing my body to be devoid of wisdom, I remember the son of the Wind God"},
+      {s:"2", t:"Bal Buddhi Vidya Dehu Mohi, Harahu Kalesh Vikar", m:"Grant me strength, wisdom and knowledge, and remove my afflictions and impurities"},
+      {s:"3", t:"Jai Hanuman Gyan Gun Sagar", m:"Victory to Hanuman, ocean of wisdom and virtue"},
+      {s:"4", t:"Jai Kapis Tihu Lok Ujagar", m:"Victory to the Lord of monkeys, illuminating all three worlds"},
+      {s:"5", t:"Ram Doot Atulit Bal Dhama", m:"Messenger of Rama, abode of incomparable strength"},
+      {s:"6", t:"Anjani Putra Pavan Sut Nama", m:"Son of Anjani, known as the son of the Wind God"},
+      {s:"7", t:"Mahabir Bikram Bajrangi", m:"Great hero, mighty and bold as a thunderbolt"},
+      {s:"8", t:"Kumati Nivar Sumati Ke Sangi", m:"Destroyer of bad intellect, companion of good wisdom"},
+      {s:"9", t:"Kanchan Baran Biraj Subesa", m:"Golden-hued, adorned with beautiful garments"},
+      {s:"10", t:"Kanan Kundal Kunchit Kesa", m:"Earrings in your ears, curly locks of hair"},
+      {s:"11", t:"Hath Bajra Aur Dhwaja Biraje", m:"In your hands shine the mace and the flag"},
+      {s:"12", t:"Kandhe Moonj Janeu Saje", m:"A sacred thread of munja grass adorns your shoulder"},
+      {s:"13", t:"Sankar Suvan Kesari Nandan", m:"Incarnation of Shiva, son of Kesari"},
+      {s:"14", t:"Tej Pratap Maha Jag Vandan", m:"Of great glory and power, worshipped by the whole world"},
+      {s:"15", t:"Vidyavan Guni Ati Chatur", m:"Learned, virtuous, and exceedingly clever"},
+      {s:"16", t:"Ram Kaj Karibe Ko Atur", m:"Ever eager to perform the work of Lord Rama"},
+      {s:"17", t:"Prabhu Charitra Sunibe Ko Rasiya", m:"Delighted to hear the deeds of the Lord"},
+      {s:"18", t:"Ram Lakhan Sita Man Basiya", m:"Rama, Lakshman and Sita reside in your heart"},
+      {s:"19", t:"Sukshma Roop Dhari Siyahin Dikhava", m:"You took a tiny form to appear before Sita"},
+      {s:"20", t:"Vikat Roop Dhari Lank Jarava", m:"You took a fearsome form and burned Lanka"},
+      {s:"21", t:"Bhima Roop Dhari Asur Sanhare", m:"You took a giant form and destroyed the demons"},
+      {s:"22", t:"Ramachandra Ke Kaj Sanvare", m:"You accomplished all the tasks of Lord Ramachandra"},
+      {s:"23", t:"Laye Sajivan Lakhan Jiyaye", m:"You brought the Sanjeevani herb and revived Lakshman"},
+      {s:"24", t:"Shri Raghubir Harashi Ur Laye", m:"Lord Rama joyfully embraced you"},
+      {s:"25", t:"Raghupati Kinhi Bahut Badai", m:"Lord Rama praised you greatly"},
+      {s:"26", t:"Tum Mama Priya Bharat Hi Sam Bhai", m:"You are as dear to me as my brother Bharat"},
+      {s:"27", t:"Sahas Badan Tumharo Jas Gaave", m:"The thousand-headed serpent sings your glory"},
+      {s:"28", t:"As Kahi Shripati Kanth Lagave", m:"So saying, Lord Rama embraced you to his heart"},
+      {s:"29", t:"Sanakadik Brahmadi Muneesa", m:"Sanaka and other sages, Brahma and great seers"},
+      {s:"30", t:"Narad Sarad Sahit Aheesa", m:"Narada, Saraswati, and the king of serpents"},
+      {s:"31", t:"Jam Kuber Digpal Jahan Te", m:"Yama, Kubera, and the guardians of directions"},
+      {s:"32", t:"Kabi Kobid Kahi Sake Kahan Te", m:"Even great poets cannot fully describe your glory"},
+      {s:"33", t:"Tum Upkar Sugrivahin Kinha", m:"You did a great favour to Sugriva"},
+      {s:"34", t:"Ram Milaye Raj Pad Dinha", m:"By uniting him with Rama, you gave him his kingdom"},
+      {s:"35", t:"Tumharo Mantra Vibhishan Mana", m:"Vibhishan heeded your counsel"},
+      {s:"36", t:"Lankeshwar Bhaye Sab Jag Jana", m:"And became the Lord of Lanka, known to all the world"},
+      {s:"37", t:"Jug Sahasra Jojan Par Bhanu", m:"The sun, thousands of yojanas away"},
+      {s:"38", t:"Leelyo Tahi Madhur Phal Janu", m:"You swallowed it thinking it a sweet fruit"},
+      {s:"39", t:"Prabhu Mudrika Meli Mukh Mahin", m:"Holding the Lord's ring in your mouth"},
+      {s:"40", t:"Jaladhi Langhi Gaye Achraj Nahin", m:"You leapt across the ocean - no wonder at all"},
+      {s:"41", t:"Durgam Kaj Jagat Ke Jete", m:"All the difficult tasks in this world"},
+      {s:"42", t:"Sugam Anugraha Tumhre Tete", m:"Become easy by your grace"},
+      {s:"43", t:"Ram Duare Tum Rakhware", m:"You are the guardian at Rama's door"},
+      {s:"44", t:"Hot Na Agya Binu Paisare", m:"None can enter without your permission"},
+      {s:"45", t:"Sab Sukh Lahe Tumhari Sarna", m:"All happiness is found in your refuge"},
+      {s:"46", t:"Tum Rakshak Kahu Ko Darna", m:"With you as protector, there is nothing to fear"},
+      {s:"47", t:"Apan Tej Samharo Aapai", m:"You alone can withstand your own splendour"},
+      {s:"48", t:"Teenon Lok Hank Te Kanpai", m:"At your roar, the three worlds tremble"},
+      {s:"49", t:"Bhoot Pisach Nikat Nahin Aavai", m:"Ghosts and evil spirits dare not come near"},
+      {s:"50", t:"Mahabir Jab Naam Sunavai", m:"When the name of the great hero is uttered"},
+      {s:"51", t:"Nase Rog Hare Sab Pira", m:"Disease flees and all pain is removed"},
+      {s:"52", t:"Japat Nirantar Hanumat Bira", m:"By continuously chanting brave Hanuman's name"},
+      {s:"53", t:"Sankat Te Hanuman Chhudavai", m:"Hanuman frees one from all troubles"},
+      {s:"54", t:"Man Kram Bachan Dhyan Jo Lavai", m:"For those who remember him in thought, deed and word"},
+      {s:"55", t:"Sab Par Ram Tapasvi Raja", m:"Rama, the ascetic king, reigns over all"},
+      {s:"56", t:"Tin Ke Kaj Sakal Tum Saja", m:"You accomplish all his works"},
+      {s:"57", t:"Aur Manorath Jo Koi Lavai", m:"Whoever brings any other desire"},
+      {s:"58", t:"Sohi Amit Jivan Phal Pavai", m:"Receives the fruit of an endless life"},
+      {s:"59", t:"Charon Jug Partap Tumhara", m:"Your glory spans all four ages"},
+      {s:"60", t:"Hai Persiddh Jagat Ujiyara", m:"It is renowned, lighting up the whole world"},
+      {s:"61", t:"Sadhu Sant Ke Tum Rakhware", m:"You are the protector of saints and sages"},
+      {s:"62", t:"Asur Nikandan Ram Dulare", m:"Destroyer of demons, beloved of Rama"},
+      {s:"63", t:"Ashta Sidhi Nav Nidhi Ke Data", m:"Bestower of the eight powers and nine treasures"},
+      {s:"64", t:"As Bar Din Janki Mata", m:"As granted to you by Mother Janaki (Sita)"},
+      {s:"65", t:"Ram Rasayan Tumhare Pasa", m:"You possess the elixir of devotion to Rama"},
+      {s:"66", t:"Sada Raho Raghupati Ke Dasa", m:"May you remain forever the servant of Lord Rama"},
+      {s:"67", t:"Tumhare Bhajan Ram Ko Pavai", m:"By singing your praise, one attains Rama"},
+      {s:"68", t:"Janam Janam Ke Dukh Bisravai", m:"And forgets the sorrows of countless lifetimes"},
+      {s:"69", t:"Anth Kal Raghubar Pur Jai", m:"At the end of life, one goes to Rama's abode"},
+      {s:"70", t:"Jahan Janam Hari Bhakt Kahai", m:"And is forever known as a devotee of Hari"},
+      {s:"71", t:"Aur Devta Chitt Na Dharai", m:"No need to worship any other deity"},
+      {s:"72", t:"Hanumat Sei Sarab Sukh Karai", m:"Serving Hanuman alone grants all happiness"},
+      {s:"73", t:"Sankat Kate Mite Sab Pira", m:"All troubles are cut away, all pain removed"},
+      {s:"74", t:"Jo Sumirai Hanumat Balbira", m:"For those who remember the mighty hero Hanuman"},
+      {s:"75", t:"Jai Jai Jai Hanuman Gosain", m:"Victory, victory, victory to Lord Hanuman"},
+      {s:"76", t:"Kripa Karahu Gurudev Ki Nain", m:"Bestow your grace as a true spiritual guide"},
+      {s:"77", t:"Jo Sat Bar Path Kar Koi", m:"Whoever recites this a hundred times"},
+      {s:"78", t:"Chhutahi Bandi Maha Sukh Hoi", m:"Is freed from bondage and attains great joy"},
+      {s:"79", t:"Jo Yeh Padhe Hanuman Chalisa", m:"Whoever reads this Hanuman Chalisa"},
+      {s:"80", t:"Hoy Siddhi Sakhi Gaurisa", m:"Attains success, as witnessed by Lord Shiva"},
+      {s:"Doha", t:"Pavan Tanay Sankat Haran, Mangal Murti Roop", m:"O son of the Wind, remover of troubles, embodiment of auspiciousness"},
+      {s:"Doha", t:"Ram Lakhan Sita Sahit, Hridaya Basahu Sur Bhoop", m:"O King of gods, dwell in my heart with Rama, Lakshman and Sita"}
+    ]
+  },
+  { id:"hanuman_prayer", icon:"\uD83D\uDE4F", color:"#c94c6a", name:"Hanuman Prayer (Shri Anjaneya Stuti)", benefit:"Devotion - Courage - Protection",
+    sanskrit:"Manojavam Maruta Tulya Vegam, Jitendriyam Buddhimatam Varishtham",
+    meaning:"A devotional prayer praising Hanuman as swift as the mind, fast as the wind, master of his senses, and foremost among the wise.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Hanuman%20Prayer.mp3",
+    lines:[
+      {s:"1", t:"Manojavam Maruta Tulya Vegam", m:"Swift as the mind, equal in speed to the wind"},
+      {s:"2", t:"Jitendriyam Buddhimatam Varishtham", m:"Master of the senses, foremost among the wise"},
+      {s:"3", t:"Vatatmajam Vanara Yuth Mukhyam", m:"Son of the Wind God, chief among the army of monkeys"},
+      {s:"4", t:"Shri Ram Dutam Sharanam Prapadye", m:"I take refuge in the messenger of Lord Rama"},
+      {s:"5", t:"Om Shri Hanumate Namaha", m:"Salutations to the mighty Hanuman"},
+      {s:"6", t:"Anjaneya Mahaveerya", m:"Son of Anjani, of great valour"},
+      {s:"7", t:"Ramaduta Namostute", m:"Messenger of Rama, we bow to you"},
+      {s:"8", t:"Buddhi Bal Vidya Dehi Mohe", m:"Grant me wisdom, strength and knowledge"},
+      {s:"9", t:"Karahu Kripa He Pavan Kumara", m:"Bestow your grace, O son of the Wind"}
+    ]
+  },
+  { id:"shree_hanuman_chalisa", icon:"\uD83D\uDD49", color:"#4c82c9", name:"Shree Hanuman Chalisa (Full Version)", benefit:"Strength - Fearlessness - Devotion",
+    sanskrit:"Buddhi Heen Tanu Janike, Sumirow Pavan Kumar",
+    meaning:"A second complete rendition of the sacred Hanuman Chalisa - all 40 verses with the opening and closing dohas, in a different musical style.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Shree%20Hanuman%20Chalisa.mp3",
+    lines:[
+      {s:"Doha", t:"Shri Guru Charan Saroj Raj, Nij Manu Mukuru Sudhari", m:"Cleansing the mirror of my mind with the dust of my Guru's lotus feet"},
+      {s:"Doha", t:"Barnau Raghuvar Bimal Jasu, Jo Dayaku Phal Chari", m:"I describe the pure glory of Rama, bestower of the four fruits of life"},
+      {s:"1", t:"Buddhi Heen Tanu Janike, Sumirow Pavan Kumar", m:"Knowing my body devoid of wisdom, I remember the son of the Wind"},
+      {s:"2", t:"Bal Buddhi Vidya Dehu Mohi, Harahu Kalesh Vikar", m:"Grant me strength, wisdom and knowledge, remove my impurities"},
+      {s:"3-4", t:"Jai Hanuman Gyan Gun Sagar, Jai Kapis Tihu Lok Ujagar", m:"Victory to Hanuman, ocean of wisdom, lord of monkeys lighting three worlds"},
+      {s:"5-6", t:"Ram Doot Atulit Bal Dhama, Anjani Putra Pavan Sut Nama", m:"Messenger of Rama, abode of strength, son of Anjani and the Wind"},
+      {s:"7-8", t:"Mahabir Bikram Bajrangi, Kumati Nivar Sumati Ke Sangi", m:"Mighty hero strong as a thunderbolt, companion of good wisdom"},
+      {s:"9-10", t:"Kanchan Baran Biraj Subesa, Kanan Kundal Kunchit Kesa", m:"Golden-hued, finely dressed, with earrings and curly hair"},
+      {s:"11-12", t:"Hath Bajra Aur Dhwaja Biraje, Kandhe Moonj Janeu Saje", m:"Mace and flag in hand, sacred thread on shoulder"},
+      {s:"13-14", t:"Sankar Suvan Kesari Nandan, Tej Pratap Maha Jag Vandan", m:"Incarnation of Shiva, son of Kesari, glorious and worshipped"},
+      {s:"15-16", t:"Vidyavan Guni Ati Chatur, Ram Kaj Karibe Ko Atur", m:"Learned, virtuous, clever, eager to serve Rama"},
+      {s:"17-18", t:"Prabhu Charitra Sunibe Ko Rasiya, Ram Lakhan Sita Man Basiya", m:"Delights in the Lord's stories, holds Rama Lakshman Sita in heart"},
+      {s:"19-20", t:"Sukshma Roop Dhari Siyahin Dikhava, Vikat Roop Dhari Lank Jarava", m:"Took a tiny form to meet Sita, a fearsome form to burn Lanka"},
+      {s:"21-22", t:"Bhima Roop Dhari Asur Sanhare, Ramachandra Ke Kaj Sanvare", m:"Took a giant form to slay demons, accomplished Rama's tasks"},
+      {s:"23-24", t:"Laye Sajivan Lakhan Jiyaye, Shri Raghubir Harashi Ur Laye", m:"Brought the Sanjeevani herb, was embraced joyfully by Rama"},
+      {s:"25-26", t:"Raghupati Kinhi Bahut Badai, Tum Mama Priya Bharat Hi Sam Bhai", m:"Rama praised him greatly, called him dear as brother Bharat"},
+      {s:"27-28", t:"Sahas Badan Tumharo Jas Gaave, As Kahi Shripati Kanth Lagave", m:"The thousand-headed serpent sings his glory; Rama embraced him"},
+      {s:"29-30", t:"Sanakadik Brahmadi Muneesa, Narad Sarad Sahit Aheesa", m:"Sages Sanaka, Brahma, Narada, Saraswati and serpent king all praise him"},
+      {s:"31-32", t:"Jam Kuber Digpal Jahan Te, Kabi Kobid Kahi Sake Kahan Te", m:"Yama, Kubera and directional guardians - none can fully describe his glory"},
+      {s:"33-34", t:"Tum Upkar Sugrivahin Kinha, Ram Milaye Raj Pad Dinha", m:"He helped Sugriva, united him with Rama, restored his kingdom"},
+      {s:"35-36", t:"Tumharo Mantra Vibhishan Mana, Lankeshwar Bhaye Sab Jag Jana", m:"Vibhishan heeded his counsel and became known as Lord of Lanka"},
+      {s:"37-38", t:"Jug Sahasra Jojan Par Bhanu, Leelyo Tahi Madhur Phal Janu", m:"He swallowed the distant sun, mistaking it for a sweet fruit"},
+      {s:"39-40", t:"Prabhu Mudrika Meli Mukh Mahin, Jaladhi Langhi Gaye Achraj Nahin", m:"Carried Rama's ring in his mouth, leapt across the ocean - no wonder"},
+      {s:"41-42", t:"Durgam Kaj Jagat Ke Jete, Sugam Anugraha Tumhre Tete", m:"All difficult tasks in this world become easy by his grace"},
+      {s:"43-44", t:"Ram Duare Tum Rakhware, Hot Na Agya Binu Paisare", m:"Guardian at Rama's door, none may enter without his leave"},
+      {s:"45-46", t:"Sab Sukh Lahe Tumhari Sarna, Tum Rakshak Kahu Ko Darna", m:"All happiness in his refuge, with him as guardian, nothing to fear"},
+      {s:"47-48", t:"Apan Tej Samharo Aapai, Teenon Lok Hank Te Kanpai", m:"Only he can contain his own splendour; at his roar, three worlds tremble"},
+      {s:"49-50", t:"Bhoot Pisach Nikat Nahin Aavai, Mahabir Jab Naam Sunavai", m:"Evil spirits flee at the mere mention of the great hero's name"},
+      {s:"51-52", t:"Nase Rog Hare Sab Pira, Japat Nirantar Hanumat Bira", m:"Disease and pain vanish by continuous chanting of brave Hanuman"},
+      {s:"53-54", t:"Sankat Te Hanuman Chhudavai, Man Kram Bachan Dhyan Jo Lavai", m:"Hanuman frees from troubles those who remember him sincerely"},
+      {s:"55-56", t:"Sab Par Ram Tapasvi Raja, Tin Ke Kaj Sakal Tum Saja", m:"Rama the ascetic king reigns over all; Hanuman fulfills his tasks"},
+      {s:"57-58", t:"Aur Manorath Jo Koi Lavai, Sohi Amit Jivan Phal Pavai", m:"Whoever else brings a wish receives the fruit of an endless life"},
+      {s:"59-60", t:"Charon Jug Partap Tumhara, Hai Persiddh Jagat Ujiyara", m:"His glory spans the four ages, renowned and illuminating the world"},
+      {s:"61-62", t:"Sadhu Sant Ke Tum Rakhware, Asur Nikandan Ram Dulare", m:"Protector of saints, destroyer of demons, beloved of Rama"},
+      {s:"63-64", t:"Ashta Sidhi Nav Nidhi Ke Data, As Bar Din Janki Mata", m:"Bestower of eight powers and nine treasures, as granted by Mother Sita"},
+      {s:"65-66", t:"Ram Rasayan Tumhare Pasa, Sada Raho Raghupati Ke Dasa", m:"He possesses the elixir of devotion, ever a servant of Lord Rama"},
+      {s:"67-68", t:"Tumhare Bhajan Ram Ko Pavai, Janam Janam Ke Dukh Bisravai", m:"By his praise, one attains Rama and forgets lifetimes of sorrow"},
+      {s:"69-70", t:"Anth Kal Raghubar Pur Jai, Jahan Janam Hari Bhakt Kahai", m:"At death's end goes to Rama's abode, forever known as Hari's devotee"},
+      {s:"71-72", t:"Aur Devta Chitt Na Dharai, Hanumat Sei Sarab Sukh Karai", m:"No need to worship another deity; serving Hanuman grants all joy"},
+      {s:"73-74", t:"Sankat Kate Mite Sab Pira, Jo Sumirai Hanumat Balbira", m:"All troubles and pains vanish for those remembering mighty Hanuman"},
+      {s:"75-76", t:"Jai Jai Jai Hanuman Gosain, Kripa Karahu Gurudev Ki Nain", m:"Victory victory victory to Hanuman; bestow grace as a true guide"},
+      {s:"77-78", t:"Jo Sat Bar Path Kar Koi, Chhutahi Bandi Maha Sukh Hoi", m:"Whoever recites this a hundred times is freed from bondage with great joy"},
+      {s:"79-80", t:"Jo Yeh Padhe Hanuman Chalisa, Hoy Siddhi Sakhi Gaurisa", m:"Whoever reads this Chalisa attains success, witnessed by Lord Shiva"},
+      {s:"Doha", t:"Pavan Tanay Sankat Haran, Mangal Murti Roop", m:"O son of the Wind, remover of troubles, embodiment of auspiciousness"},
+      {s:"Doha", t:"Ram Lakhan Sita Sahit, Hridaya Basahu Sur Bhoop", m:"O King of gods, dwell in my heart with Rama, Lakshman and Sita"}
+    ]
+  },
+  { id:"sankat_mochan", icon:"\uD83D\uDD31", color:"#9b72d0", name:"Sankat Mochan Naam Tiharo", benefit:"Removing Troubles - Protection - Peace",
+    sanskrit:"Sankat Mochan Naam Tiharo, Jo Aave Sharan Tiharo",
+    meaning:"Your name itself is the remover of troubles. A heartfelt devotional song to Lord Hanuman seeking relief from life's difficulties and steady refuge.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Sankat%20Mochan%20Naam%20Tiharo.mp3",
+    lines:[
+      {s:"1", t:"Sankat Mochan Naam Tiharo", m:"Your very name removes all troubles"},
+      {s:"2", t:"Jo Aave Sharan Tiharo", m:"Whoever comes to your refuge"},
+      {s:"3", t:"So Banhi Jaye Tiharo", m:"Is forever protected by you"},
+      {s:"4", t:"Bigde Kaam Banao Mere", m:"Set right my unfinished tasks"},
+      {s:"5", t:"Tum Ho Sankat Mochan Hare", m:"You are the remover of troubles, O Hari's devotee"},
+      {s:"6", t:"Bal Buddhi Vidya De Mohe", m:"Grant me strength, wisdom, and knowledge"},
+      {s:"7", t:"Sankat Door Karo Tum Mere", m:"Remove all troubles from my path"},
+      {s:"8", t:"Jai Hanuman Bajrangbali", m:"Victory to mighty Hanuman, strong as a thunderbolt"}
+    ]
+  },
+  { id:"shiva_panchakshari", icon:"\u2728", color:"#4caf85", name:"Shiva Panchakshari Stotram", benefit:"Inner Peace - Devotion - Transformation",
+    sanskrit:"Nagendraharaya Trilochanaya, Bhasmanga Ragaya Maheshvaraya",
+    meaning:"A complete five-verse hymn glorifying Lord Shiva through each syllable of the Panchakshara mantra Na-Ma-Shi-Va-Ya, sung for peace and spiritual upliftment.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Shiva%20Panchakshari%20Stotram.mp3",
+    lines:[
+      {s:"Verse 1 (Na)", t:"Nagendraharaya Trilochanaya, Bhasmanga Ragaya Maheshvaraya", m:"To the three-eyed Lord wearing a serpent garland, adorned with sacred ash"},
+      {s:"", t:"Nityaya Shuddhaya Digambaraya, Tasmai Nakaraya Namah Shivaya", m:"Eternal, pure, clad in the directions - salutations to Shiva, of syllable Na"},
+      {s:"Verse 2 (Ma)", t:"Mandakini Salila Chandana Charchitaya", m:"Anointed with the sandal-scented waters of the Ganges"},
+      {s:"", t:"Nandishwara Pramatha Nadha Mahesvaraya", m:"Lord of Nandi and the ghostly hosts, the great Lord"},
+      {s:"", t:"Mandara Pushpa Bahupushpa Supujitaya", m:"Worshipped with abundant Mandara and other flowers"},
+      {s:"", t:"Tasmai Makaraya Namah Shivaya", m:"Salutations to Shiva, of syllable Ma"},
+      {s:"Verse 3 (Shi)", t:"Shivaya Gauri Vadanabja Vrinda", m:"To Shiva, beloved of the lotus-faced Gauri"},
+      {s:"", t:"Suryaya Daksha Dhvara Nashakaya", m:"Destroyer of Daksha's sacrifice"},
+      {s:"", t:"Shri Neelakanthaya Vrishabhadhvajaya", m:"The blue-throated one, bearer of the bull banner"},
+      {s:"", t:"Tasmai Shikaraya Namah Shivaya", m:"Salutations to Shiva, of syllable Shi"},
+      {s:"Verse 4 (Va)", t:"Vasishtha Kumbhodbhava Gautamadi", m:"Worshipped by sages Vasishtha, Agastya, Gautama and others"},
+      {s:"", t:"Munindra Devarchita Shekharaya", m:"Crowned and adored by the chief of sages and gods"},
+      {s:"", t:"Chandrarka Vaishvanara Lochanaya", m:"With the moon, sun and fire as his three eyes"},
+      {s:"", t:"Tasmai Vakaraya Namah Shivaya", m:"Salutations to Shiva, of syllable Va"},
+      {s:"Verse 5 (Ya)", t:"Yaksha Swarupaya Jatadharaya", m:"In the form of a Yaksha, wearing matted locks"},
+      {s:"", t:"Pinaka Hastaya Sanatanaya", m:"Holder of the Pinaka bow, the eternal one"},
+      {s:"", t:"Divyaya Devaya Digambaraya", m:"Divine and radiant, clad in the directions"},
+      {s:"", t:"Tasmai Yakaraya Namah Shivaya", m:"Salutations to Shiva, of syllable Ya"},
+      {s:"Phala Shruti", t:"Panchaksharam Idam Punyam Yah Pathet Shiva Sannidhau", m:"Whoever recites this sacred five-syllable hymn in Shiva's presence"},
+      {s:"", t:"Shivaloka Mavapnoti Shivena Saha Modate", m:"Attains Shiva's abode and rejoices together with Lord Shiva"}
+    ]
+  },
+  { id:"shreeman_narayan", icon:"\uD83C\uDF38", color:"#d07899", name:"Shreeman Narayan Narayan Hari Hari", benefit:"Devotion - Divine Remembrance - Peace",
+    sanskrit:"Shreeman Narayan Narayan Hari Hari, Vasudeva Hari Hari",
+    meaning:"A simple, repetitive devotional chant invoking Lord Vishnu, the preserver of the universe, sung continuously to calm the mind and invoke a deep sense of divine presence.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Shreeman%20Narayan%20Narayan%20Hari%20Hari.mp3",
+    lines:[
+      {s:"1", t:"Shreeman Narayan Narayan Hari Hari", m:"Glorious Lord Narayan, the remover of sins"},
+      {s:"2", t:"Satyam Janardan Janardan Hari Hari", m:"True Lord Janardan, mover of hearts, remover of sins"},
+      {s:"3", t:"Vasudeva Hari Govinda Hari Hari", m:"Son of Vasudev, protector of cows, remover of sins"},
+      {s:"4", t:"Vaikuntha Hari Shreedhara Hari Hari", m:"Lord of Vaikuntha, bearer of Lakshmi, remover of sins"},
+      {s:"5", t:"Madhava Hari Madhusudana Hari Hari", m:"Lord of Lakshmi, slayer of demon Madhu, remover of sins"},
+      {s:"6", t:"Shreeman Narayan Narayan Hari Hari", m:"Repeated with deepening devotion and surrender"}
+    ]
+  },
+  { id:"ganesh_pancharatna", icon:"\uD83D\uDC18", color:"#c9a84c", name:"Sri Ganesh Pancharatna Maalika", benefit:"Blessings - New Beginnings - Wisdom",
+    sanskrit:"Muda Karatta Modakam, Sada Vimukti Sadhakam",
+    meaning:"The complete five-jewel hymn in praise of Lord Ganesha, composed by Adi Shankaracharya, invoking his blessings for wisdom, success and removal of obstacles.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Sri%20Ganesh%20Pancharatna%20Maalika.mp3",
+    lines:[
+      {s:"Verse 1", t:"Muda Karatta Modakam Sada Vimukti Sadhakam", m:"Holding a sweet modak in his joyful hand, always the bestower of liberation"},
+      {s:"", t:"Kaladi Bhuta Kevalam Tameka Dantam Aashraye", m:"Beyond time, the absolute one - I take refuge in the single-tusked Lord"},
+      {s:"Verse 2", t:"Natetaratibhi Bhavam Navam Bhavaim Bhavatvaham", m:"In every new state of existence, may my devotion to him be renewed"},
+      {s:"", t:"Namami Vighna Naashanam Vinaayakam Vighnasya Raajam", m:"I bow to the destroyer of obstacles, the king of obstacles, Vinayaka"},
+      {s:"Verse 3", t:"Akinchanarti Marjanam Chirantanokti Bhajanam", m:"Cleanser of poverty and suffering, worthy of ancient praise"},
+      {s:"", t:"Puraari Poorva Nandanam Surari Garva Charvanam", m:"Beloved first son of the destroyer of Tripura, who crushes the pride of demon foes"},
+      {s:"Verse 4", t:"Prapancha Naasha Bheeshajam Anandhakara Bhaaskaram", m:"The medicine for destruction of worldly suffering, the sun dispelling darkness"},
+      {s:"", t:"Suraadi Vrunda Vandhitham Tameka Dantam Aashraye", m:"Worshipped by the hosts of gods - I take refuge in the single-tusked Lord"},
+      {s:"Verse 5", t:"Acheentya Roopa Mantam Hi Sthoolasthoola Mathadbhu", m:"Of inconceivable form, both subtle and gross, and wondrous"},
+      {s:"", t:"Gajananam Bhajeham Tam Vighna Raajam Sumangalam", m:"I worship Ganesha, the elephant-faced King of obstacles, the most auspicious"},
+      {s:"Phala Shruti", t:"Maha Ganesha Pancharatnam Adareyna Yo Anvaham", m:"Whoever recites this five-jewel hymn to the great Ganesha daily with devotion"},
+      {s:"", t:"Pathet Su Sa Mahaa Buddhi, Yuthim Aanandam Aapnuyaat", m:"Attains great intelligence and reaches a state of eternal bliss"}
+    ]
+  },
+  { id:"sivashtakam", icon:"\uD83D\uDD31", color:"#4c82c9", name:"Sivashtakam", benefit:"Devotion - Protection - Inner Strength",
+    sanskrit:"Prabhum Pranatarti Haram, Pranatha Vibhum Vibhum",
+    meaning:"A complete eight-verse devotional hymn dedicated to Lord Shiva, praising his divine qualities, his cosmic form, and seeking his eternal grace and protection.",
+    audioUrl:"https://archive.org/download/HinduSlokasAndMantras/Sivashtakam.mp3",
+    lines:[
+      {s:"Verse 1", t:"Prabhum Pranatarti Haram Prananatha Vibhum Vibhum", m:"The Lord who removes the suffering of devotees, master of life, all-pervading"},
+      {s:"", t:"Jagajjanma Stithyantakaram Bhavantakam", m:"Creator, sustainer and dissolver of the universe, ender of worldly bondage"},
+      {s:"Verse 2", t:"Bhavam Bhavani Sahitam Namami", m:"I bow to Shiva, accompanied by Goddess Bhavani"},
+      {s:"", t:"Skanda Sheelam Gajavakra Yutham", m:"Father of Skanda, accompanied by the elephant-faced Ganesha"},
+      {s:"Verse 3", t:"Saheb Nandi Mahakaala Ganaadi", m:"Surrounded by Nandi, Mahakala and the hosts of attendants"},
+      {s:"", t:"Sarveshvaram Sarvamaye Vandhe", m:"I worship the Lord of all, who pervades everything"},
+      {s:"Verse 4", t:"Chandrarka Vaishvanara Lochanaya", m:"With the moon, sun and fire as his three eyes"},
+      {s:"", t:"Nilakantha Shashishekhara Roopa", m:"Blue-throated, crowned with the crescent moon"},
+      {s:"Verse 5", t:"Kailasa Vasaya Mahesvaraya", m:"Dweller of Mount Kailasa, the great Lord"},
+      {s:"", t:"Trilochanaya Vrishabhadhvajaya", m:"The three-eyed one, bearer of the bull banner"},
+      {s:"Verse 6", t:"Sarvaaya Sarveshvaraya Shivaaya", m:"To the all-pervading, supreme Lord of all, the auspicious one"},
+      {s:"", t:"Sadaashivaaya Pranatosmi Tasmai", m:"To the eternal Shiva, I offer my humble salutations"},
+      {s:"Verse 7", t:"Sarvopadrava Naashakam Pashupathim", m:"Destroyer of all calamities, protector of all beings"},
+      {s:"", t:"Pranamy Bhakthya Janaaha", m:"Whoever bows with devotion to him"},
+      {s:"Verse 8", t:"Sarvaan Kaamaan Avaapnuvanti Vimalaan", m:"Attains all pure desires fulfilled"},
+      {s:"", t:"Jnanam Cha Mokshapradam", m:"And gains wisdom that bestows liberation"}
+    ]
+  }
+];
+</script>
+
+<script>
+var DEFAULT_SESSIONS=[
+  {id:"morning",emoji:"\uD83C\uDF1E",name:"Morning Ritual",purpose:"Digestion - Nutrient Absorption - Energy - Healthy Weight Gain",durationMins:10,sound:"bowls",color:"#c9a84c",crystals:["Clear Quartz - 8 chips (Left Hand)","Citrine - 7 chips (Right Hand)"],visualize:"A warm golden light filling your stomach and abdomen, nourishing every cell.",affirmations:["My digestive system works in perfect harmony.","My body absorbs every nutrient with ease.","My appetite improves naturally.","My healthy weight returns steadily.","Every cell in my body becomes stronger.","My energy grows every day.","I am healthy, strong, and full of vitality."],repeatCount:21},
+  {id:"strength",emoji:"\uD83D\uDCAA",name:"Strength and Muscle Recovery",purpose:"Physical Strength - Muscle Rebuilding - Stamina",durationMins:7,sound:"forest",color:"#c94c6a",crystals:["Bloodstone - 1 cube","Red Carnelian - 7 chips","Tiger Eye - 7 chips"],visualize:"Red and golden light filling every muscle, rebuilding and strengthening.",affirmations:["My muscles rebuild every day.","My body gains healthy muscle naturally.","My strength increases.","My stamina improves.","My body recovers quickly.","I feel powerful and energetic."],repeatCount:21},
+  {id:"healing",emoji:"\uD83D\uDC9A",name:"Neck, Back and Chest Healing",purpose:"Physical Relief - Posture - Relaxation",durationMins:5,sound:"rain",color:"#4caf85",crystals:["Green Jade - 7 chips","Amethyst - 7 chips"],visualize:"A green healing light flowing through your chest, neck, shoulders, and upper back.",affirmations:["My neck is relaxed.","My shoulders are comfortable.","My upper back feels free.","My chest is open and relaxed.","My posture improves naturally.","My body feels light and comfortable."],repeatCount:21},
+  {id:"evening",emoji:"\uD83C\uDF19",name:"Evening Grounding and Recovery",purpose:"Stress Release - Deep Sleep - Organ Restoration",durationMins:8,sound:"ocean",color:"#4c82c9",crystals:["Black Tourmaline - 7 chips","Hematite - 1 cube","Clear Quartz - 8 chips"],visualize:"Stress flowing out through your feet deep into the nourishing earth.",affirmations:["I release all stress.","My body heals while I sleep.","Every organ restores itself.","I wake refreshed.","My energy grows stronger every day."],repeatCount:21}
+];
+var DEFAULT_WEEKLY=[
+  {day:"Monday",crystals:["Rainbow Moonstone - 7 chips","Clear Quartz - 8 chips"],focus:"Emotional balance and intuition."},
+  {day:"Tuesday",crystals:["Bloodstone - 1 cube","Red Carnelian - 7 chips"],focus:"Strength and recovery."},
+  {day:"Wednesday",crystals:["Fluorite - 7 chips","Tiger Eye - 7 chips"],focus:"Mental clarity and focus."},
+  {day:"Thursday",crystals:["Citrine - 7 chips","Green Jade - 7 chips"],focus:"Digestion and wellbeing."},
+  {day:"Friday",crystals:["Rose Quartz - 7 chips","Green Aventurine - 7 chips"],focus:"Emotional renewal and healing."},
+  {day:"Saturday",crystals:["Hematite - 1 cube","Black Tourmaline - 7 chips"],focus:"Grounding and stability."},
+  {day:"Sunday",crystals:["Clear Quartz - 8 chips","Amethyst - 7 chips"],focus:"Rest, reflection, and relaxation."}
+];
+var DEFAULT_COMMUTE={crystals:["Tiger Eye - 3 chips","Bloodstone - 1 cube","Black Tourmaline - 3 chips","Clear Quartz - 3 chips"],affirmations:["I am calm.","I am strong.","My body has the energy it needs.","I remain grounded throughout the day."]};
+
+var DB={
+  getSessions:function(){try{var r=localStorage.getItem("cm_sessions_v2");return r?JSON.parse(r):JSON.parse(JSON.stringify(DEFAULT_SESSIONS));}catch(e){return JSON.parse(JSON.stringify(DEFAULT_SESSIONS));}},
+  saveSessions:function(s){localStorage.setItem("cm_sessions_v2",JSON.stringify(s));},
+  getWeekly:function(){try{var r=localStorage.getItem("cm_weekly_v2");return r?JSON.parse(r):JSON.parse(JSON.stringify(DEFAULT_WEEKLY));}catch(e){return JSON.parse(JSON.stringify(DEFAULT_WEEKLY));}},
+  saveWeekly:function(w){localStorage.setItem("cm_weekly_v2",JSON.stringify(w));},
+  getCommute:function(){try{var r=localStorage.getItem("cm_commute_v2");return r?JSON.parse(r):JSON.parse(JSON.stringify(DEFAULT_COMMUTE));}catch(e){return JSON.parse(JSON.stringify(DEFAULT_COMMUTE));}},
+  saveCommute:function(d){localStorage.setItem("cm_commute_v2",JSON.stringify(d));},
+  getSettings:function(){var def={rate:.8,pitch:1.0,voiceIdx:0,darkMode:true,autoAdvance:false,volume:.4,ambientSound:"none",affirmPause:2};try{var r=localStorage.getItem("cm_settings_v3");return r?Object.assign({},def,JSON.parse(r)):def;}catch(e){return def;}},
+  saveSettings:function(s){localStorage.setItem("cm_settings_v3",JSON.stringify(s));},
+  reset:function(){["cm_sessions_v2","cm_weekly_v2","cm_commute_v2"].forEach(function(k){localStorage.removeItem(k);});},
+  exportData:function(){return JSON.stringify({sessions:this.getSessions(),weekly:this.getWeekly(),commute:this.getCommute()},null,2);},
+  importData:function(json){var d=JSON.parse(json);if(d.sessions)this.saveSessions(d.sessions);if(d.weekly)this.saveWeekly(d.weekly);if(d.commute)this.saveCommute(d.commute);}
+};
+
+var AudioEngine=(function(){
+  var ctx=null,masterGain=null,currentNodes=[],currentSound="none",volume=.4;
+  function initCtx(){if(ctx)return;ctx=new(window.AudioContext||window.webkitAudioContext)();masterGain=ctx.createGain();masterGain.gain.setValueAtTime(volume,ctx.currentTime);masterGain.connect(ctx.destination);}
+  function resumeCtx(){if(ctx&&ctx.state==="suspended")ctx.resume();}
+  function stopAll(){currentNodes.forEach(function(n){try{n.stop();}catch(e){}});currentNodes=[];}
+  function addGain(a){var g=ctx.createGain();g.gain.setValueAtTime(a,ctx.currentTime);g.connect(masterGain);return g;}
+  function mkNoise(type){var L=ctx.sampleRate*4,buf=ctx.createBuffer(1,L,ctx.sampleRate),d=buf.getChannelData(0),i,w,last,b0,b1,b2,b3,b4,b5;
+    if(type==="white"){for(i=0;i<L;i++)d[i]=Math.random()*2-1;}
+    else if(type==="brown"){last=0;for(i=0;i<L;i++){w=Math.random()*2-1;d[i]=(last+.02*w)/1.02;last=d[i];d[i]*=3.5;}}
+    else if(type==="pink"){b0=0;b1=0;b2=0;b3=0;b4=0;b5=0;for(i=0;i<L;i++){w=Math.random()*2-1;b0=.99886*b0+w*.0555179;b1=.99332*b1+w*.0750759;b2=.969*b2+w*.153852;b3=.8665*b3+w*.3104856;b4=.55*b4+w*.5329522;b5=-.7616*b5-w*.016898;d[i]=(b0+b1+b2+b3+b4+b5+w*.5362)/7;}}
+    var s=ctx.createBufferSource();s.buffer=buf;s.loop=true;return s;}
+  function mkOsc(f,t){var o=ctx.createOscillator();o.type=t||"sine";o.frequency.setValueAtTime(f,ctx.currentTime);return o;}
+  function mkFlt(t,f,q){var x=ctx.createBiquadFilter();x.type=t;x.frequency.setValueAtTime(f,ctx.currentTime);if(q)x.Q.setValueAtTime(q,ctx.currentTime);return x;}
+  function lfo(p,r,d,b){var l=mkOsc(r),g=ctx.createGain();g.gain.setValueAtTime(d,ctx.currentTime);l.connect(g);g.connect(p);p.setValueAtTime(b,ctx.currentTime);l.start();currentNodes.push(l);}
+  var G={
+    none:function(){},
+    bowls:function(){
+      [136.1,272.2,408.3,544.4,680.5].forEach(function(f,i){var g=addGain(.05/(i+1)),o=mkOsc(f);o.connect(g);o.start();currentNodes.push(o);g.gain.setValueAtTime(0,ctx.currentTime);g.gain.linearRampToValueAtTime(.05/(i+1),ctx.currentTime+2+i);lfo(o.frequency,.05+i*.02,f*.002,f);});
+      var n=mkNoise("pink"),ng=addGain(.008),fl=mkFlt("lowpass",700);n.connect(fl);fl.connect(ng);n.start();currentNodes.push(n);
+    },
+    rain:function(){
+      var r=mkNoise("brown"),rg=addGain(.2),rf=mkFlt("bandpass",1100,.3);r.connect(rf);rf.connect(rg);r.start();currentNodes.push(r);
+      var d=mkNoise("white"),dg=addGain(.05),df=mkFlt("highpass",3500);d.connect(df);df.connect(dg);d.start();currentNodes.push(d);
+    },
+    forest:function(){
+      var w=mkNoise("brown"),wg=addGain(.07),wf=mkFlt("lowpass",500);w.connect(wf);wf.connect(wg);w.start();currentNodes.push(w);lfo(wg.gain,.07,.04,.07);
+      [2800,3200,3700,2500].forEach(function(f,i){
+        setTimeout(function(){
+          if(!ctx)return;
+          var bg=addGain(0),bo=mkOsc(f);bo.connect(bg);bo.start();currentNodes.push(bo);
+          function c(){bg.gain.setValueAtTime(0,ctx.currentTime);bg.gain.linearRampToValueAtTime(.025,ctx.currentTime+.05);bg.gain.linearRampToValueAtTime(0,ctx.currentTime+.2);setTimeout(c,3000+Math.random()*9000);}
+          c();
+        },(i*2.5+Math.random()*4)*1000);
+      });
+    },
+    ocean:function(){
+      var w=mkNoise("brown"),wg=addGain(.14),wf=mkFlt("lowpass",350);w.connect(wf);wf.connect(wg);w.start();currentNodes.push(w);
+      var sl=mkOsc(.1),sg=ctx.createGain();sl.connect(sg);sg.connect(wg.gain);sl.start();currentNodes.push(sl);sg.gain.setValueAtTime(.09,ctx.currentTime);wg.gain.setValueAtTime(.14,ctx.currentTime);
+      var s=mkNoise("pink"),sg2=addGain(.06),sf=mkFlt("highpass",1600);s.connect(sf);sf.connect(sg2);s.start();currentNodes.push(s);
+    },
+    om:function(){
+      [136.1,204.15,272.2,340.25,408.3,544.4].forEach(function(f,i){var g=addGain(.055/(i+1)),o=mkOsc(f,i<2?"sine":"triangle");o.connect(g);o.start();currentNodes.push(o);lfo(g.gain,.035,.012/(i+1),.055/(i+1));});
+      var b=mkNoise("pink"),bg=addGain(.025),bf=mkFlt("bandpass",280,2.5);b.connect(bf);bf.connect(bg);b.start();currentNodes.push(b);
+    },
+    tibetan:function(){
+      [174,285,396,417,528,639,741,852].forEach(function(f,i){var g=addGain(.04/(i*.4+1)),o=mkOsc(f);o.connect(g);o.start();currentNodes.push(o);lfo(o.frequency,.03+i*.01,f*.0015,f);g.gain.setValueAtTime(0,ctx.currentTime);g.gain.linearRampToValueAtTime(.04/(i*.4+1),ctx.currentTime+3+i*1.5);});
+      var n=mkNoise("pink"),ng=addGain(.012),nf=mkFlt("lowpass",600);n.connect(nf);nf.connect(ng);n.start();currentNodes.push(n);
+    },
+    creek:function(){
+      var w1=mkNoise("white"),g1=addGain(.1),f1=mkFlt("bandpass",800,1.2);w1.connect(f1);f1.connect(g1);w1.start();currentNodes.push(w1);
+      var w2=mkNoise("pink"),g2=addGain(.08),f2=mkFlt("bandpass",1400,.8);w2.connect(f2);f2.connect(g2);w2.start();currentNodes.push(w2);
+      lfo(g1.gain,.15,.05,.1);lfo(g2.gain,.22,.04,.08);
+    },
+    night:function(){
+      [4200,4350,4180,4400].forEach(function(f,i){var g=addGain(.015),o=mkOsc(f,"square"),lf=mkFlt("bandpass",f,15);o.connect(lf);lf.connect(g);o.start();currentNodes.push(o);lfo(g.gain,8+i*1.5,.012,.015);});
+      var b=mkNoise("brown"),bg=addGain(.03),bf=mkFlt("lowpass",200);b.connect(bf);bf.connect(bg);b.start();currentNodes.push(b);
+      function frog(){if(!ctx)return;var fg=addGain(0),fo=mkOsc(280+Math.random()*60);fo.connect(fg);fo.start();currentNodes.push(fo);fg.gain.setValueAtTime(0,ctx.currentTime);fg.gain.linearRampToValueAtTime(.04,ctx.currentTime+.05);fg.gain.linearRampToValueAtTime(0,ctx.currentTime+.3);setTimeout(frog,5000+Math.random()*15000);}
+      setTimeout(frog,3000);
+    },
+    thunder:function(){
+      var r=mkNoise("brown"),rg=addGain(.18),rf=mkFlt("bandpass",1000,.4);r.connect(rf);rf.connect(rg);r.start();currentNodes.push(r);
+      var d=mkNoise("white"),dg=addGain(.04),df=mkFlt("highpass",3000);d.connect(df);df.connect(dg);d.start();currentNodes.push(d);
+      function thunder(){
+        if(!ctx)return;
+        var L=ctx.sampleRate*3,tb=ctx.createBuffer(1,L,ctx.sampleRate),td=tb.getChannelData(0),last=0,i,w;
+        for(i=0;i<L;i++){w=Math.random()*2-1;td[i]=(last+.02*w)/1.02;last=td[i];td[i]*=3.5;}
+        var ts=ctx.createBufferSource(),tg=addGain(0),tf=mkFlt("lowpass",120);ts.buffer=tb;ts.connect(tf);tf.connect(tg);ts.start();currentNodes.push(ts);
+        tg.gain.setValueAtTime(0,ctx.currentTime);tg.gain.linearRampToValueAtTime(.3,ctx.currentTime+.1);tg.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+2.5);
+        setTimeout(thunder,8000+Math.random()*20000);
+      }
+      setTimeout(thunder,4000);
+    },
+    wind:function(){
+      var b=mkNoise("pink"),bg=addGain(.06),bf=mkFlt("bandpass",400,.5);b.connect(bf);bf.connect(bg);b.start();currentNodes.push(b);lfo(bg.gain,.12,.04,.06);
+      var cf=[523,659,784,1047,1319,1568];
+      function chime(){if(!ctx)return;var f=cf[Math.floor(Math.random()*cf.length)],g=addGain(0),o=mkOsc(f);o.connect(g);o.start();currentNodes.push(o);g.gain.setValueAtTime(0,ctx.currentTime);g.gain.linearRampToValueAtTime(.06,ctx.currentTime+.02);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+2.5);setTimeout(chime,500+Math.random()*3000);}
+      chime();
+    },
+    binaural:function(){
+      var oL=mkOsc(432),gL=ctx.createGain(),pL=ctx.createStereoPanner();oL.connect(gL);gL.connect(pL);pL.connect(masterGain);pL.pan.setValueAtTime(-1,ctx.currentTime);gL.gain.setValueAtTime(.12,ctx.currentTime);oL.start();currentNodes.push(oL);
+      var oR=mkOsc(438),gR=ctx.createGain(),pR=ctx.createStereoPanner();oR.connect(gR);gR.connect(pR);pR.connect(masterGain);pR.pan.setValueAtTime(1,ctx.currentTime);gR.gain.setValueAtTime(.12,ctx.currentTime);oR.start();currentNodes.push(oR);
+      var p=mkNoise("pink"),pg=addGain(.012),pf=mkFlt("lowpass",400);p.connect(pf);pf.connect(pg);p.start();currentNodes.push(p);
+    }
+  };
+  var voices=[],ttsSettings={rate:.8,pitch:1.0,voiceIdx:0},affirmPauseMs=2000;
+  if(window.speechSynthesis){window.speechSynthesis.onvoiceschanged=function(){voices=window.speechSynthesis.getVoices();};}
+  setTimeout(function(){if(window.speechSynthesis)voices=window.speechSynthesis.getVoices();},500);
+  setTimeout(function(){if(window.speechSynthesis)voices=window.speechSynthesis.getVoices();},2500);
+  function speak(text,onEnd){
+    if(!window.speechSynthesis){if(onEnd)onEnd();return;}
+    window.speechSynthesis.cancel();
+    var fresh=window.speechSynthesis.getVoices();if(fresh.length)voices=fresh;
+    var u=new SpeechSynthesisUtterance(text);
+    u.rate=ttsSettings.rate;u.pitch=ttsSettings.pitch;
+    if(voices[ttsSettings.voiceIdx])u.voice=voices[ttsSettings.voiceIdx];
+    u.onend=function(){if(onEnd)onEnd();};
+    u.onerror=function(){if(onEnd)onEnd();};
+    setTimeout(function(){window.speechSynthesis.speak(u);},80);
+  }
+  function stopSpeech(){if(window.speechSynthesis)window.speechSynthesis.cancel();}
+  return{
+    init:function(){initCtx();},
+    resumeCtx:resumeCtx,
+    setVolume:function(v){volume=v;if(masterGain)masterGain.gain.setValueAtTime(v,ctx.currentTime);},
+    playAmbient:function(n){initCtx();resumeCtx();stopAll();currentSound=n;if(G[n])G[n]();},
+    stopAmbient:stopAll,
+    getCurrentSound:function(){return currentSound;},
+    setTTS:function(s){ttsSettings=Object.assign({},ttsSettings,s);},
+    setAffirmPause:function(ms){affirmPauseMs=ms;},
+    getAffirmPause:function(){return affirmPauseMs;},
+    getVoices:function(){return window.speechSynthesis?window.speechSynthesis.getVoices():[];},
+    speak:speak,
+    stopSpeech:stopSpeech
+  };
+})();
+</script>
+
+<script>
+var MantraAudio=(function(){
+  var audio=null,card=null,mantra=null,stopped=false,progInt=null;
+  var overlay=document.getElementById("lyricsOverlay");
+  var lyricsLines=document.getElementById("lyricsLines");
+  var lyricsIcon=document.getElementById("lyricsIcon");
+  var lyricsTitle=document.getElementById("lyricsTitle");
+
+  function fmt(s){if(!s||!isFinite(s))return "0:00";var m=Math.floor(s/60),sec=Math.floor(s%60);return m+":"+(sec<10?"0":"")+sec;}
+
+  function resetCard(){
+    if(!card)return;
+    card.classList.remove("playing-card");
+    var btn=card.querySelector(".mc-play");
+    var stat=card.querySelector(".mc-status");
+    var fill=card.querySelector(".mc-progress-fill");
+    var pulse=card.querySelector(".mc-pulse-dot");
+    if(btn){btn.textContent="Play";btn.disabled=false;}
+    if(stat)stat.textContent="";
+    if(fill)fill.style.width="0%";
+    if(pulse)pulse.classList.remove("pulsing");
+  }
+
+  // Static lyrics view - all lines shown at once, no auto-scroll, no sync, no highlight movement.
+  // Just a clean readable list with a gentle one-time fade-in animation.
+  function buildLyricsLines(m){
+    lyricsLines.innerHTML="";
+    var arr=m.lines||[];
+    for(var i=0;i<arr.length;i++){
+      var line=arr[i];
+      var row=document.createElement("div");
+      row.className="lyrics-line static-fade";
+      row.style.animationDelay=(i*0.08)+"s";
+      row.innerHTML="<div class='lyrics-line-s'>"+line.s+"</div><div class='lyrics-line-t'>"+line.t+"</div><div class='lyrics-line-m'>"+line.m+"</div>";
+      lyricsLines.appendChild(row);
+    }
+  }
+
+  function stopCurrent(){
+    stopped=true;
+    clearInterval(progInt);
+    if(audio){
+      audio.pause();
+      audio.src="";
+      audio.load();
+      audio=null;
+    }
+    resetCard();
+    card=null;
+    mantra=null;
+  }
+
+  // Lyrics overlay is now ONLY opened on demand via the dedicated Lyrics button.
+  // It does not auto-open on play, and does not auto-close on stop.
+  function openOverlay(m){
+    lyricsIcon.textContent="";
+    lyricsTitle.textContent=m.name;
+    buildLyricsLines(m);
+    overlay.classList.add("open");
+    document.body.style.overflow="hidden";
+  }
+  function closeOverlay(){overlay.classList.remove("open");document.body.style.overflow="";}
+
+  document.getElementById("lyricsClose").addEventListener("click",closeOverlay);
+  overlay.addEventListener("click",function(e){if(e.target===overlay)closeOverlay();});
+
+  function play(m,c){
+    if(card===c&&audio){
+      if(audio.paused){
+        stopped=false;
+        audio.play().catch(function(){});
+      }else{
+        audio.pause();
+      }
+      return;
+    }
+    stopCurrent();
+    stopped=false;
+    card=c;
+    mantra=m;
+    c.classList.add("playing-card");
+    var btn=c.querySelector(".mc-play");
+    var fill=c.querySelector(".mc-progress-fill");
+    var stat=c.querySelector(".mc-status");
+    var timeEl=c.querySelector(".mc-time");
+    var pulse=c.querySelector(".mc-pulse-dot");
+    btn.textContent="...";
+    btn.disabled=true;
+    if(stat){stat.textContent="Loading audio...";stat.className="mc-status mc-loading";}
+
+    var a=new Audio();
+    a.preload="auto";
+    audio=a;
+
+    progInt=setInterval(function(){
+      if(!a.duration||a!==audio)return;
+      var pct=(a.currentTime/a.duration)*100;
+      if(fill)fill.style.width=pct+"%";
+      if(timeEl){
+        if(timeEl.children[0])timeEl.children[0].textContent=fmt(a.currentTime);
+        if(timeEl.children[1])timeEl.children[1].textContent=fmt(a.duration);
+      }
+    },500);
+
+    a.addEventListener("canplay",function(){
+      if(a!==audio)return;
+      btn.textContent="Pause";
+      btn.disabled=false;
+      if(stat){stat.textContent="Playing - tap Lyrics to view";stat.className="mc-status";}
+      if(pulse)pulse.classList.add("pulsing");
+      a.play().catch(function(){btn.textContent="Play";});
+    },{once:true});
+
+    a.addEventListener("error",function(){
+      if(a!==audio)return;
+      btn.textContent="Play";
+      btn.disabled=false;
+      if(stat){stat.textContent="Unavailable - check your internet connection";stat.className="mc-error";}
+      c.classList.remove("playing-card");
+      if(pulse)pulse.classList.remove("pulsing");
+      audio=null;card=null;mantra=null;
+    });
+
+    a.addEventListener("ended",function(){
+      if(stopped||a!==audio)return;
+      a.currentTime=0;
+      a.play().catch(function(){});
+    });
+
+    a.addEventListener("pause",function(){
+      if(a!==audio)return;
+      if(btn)btn.textContent="Play";
+      if(stat&&!stopped)stat.textContent="Paused";
+      if(pulse)pulse.classList.remove("pulsing");
+    });
+
+    a.addEventListener("play",function(){
+      if(a!==audio)return;
+      if(btn)btn.textContent="Pause";
+      if(stat){stat.textContent="Playing - tap Lyrics to view";stat.className="mc-status";}
+      if(pulse)pulse.classList.add("pulsing");
+    });
+
+    a.src=m.audioUrl;
+    a.load();
+  }
+
+  var LINES_PER_PAGE=8;
+  var currentPage=0;
+  var totalPages=0;
+  var currentLines=[];
+
+  function showLyrics(m){
+    document.getElementById("lyricsTitle").textContent=m.name;
+    document.getElementById("lyricsSub").textContent=(m.lines||[]).length+" verses - swipe pages to read all";
+    currentLines=m.lines||[];
+    totalPages=Math.max(1,Math.ceil(currentLines.length/LINES_PER_PAGE));
+    currentPage=0;
+    renderLyricsPage();
+    document.getElementById("lyricsOverlay").classList.add("open");
+    document.body.style.overflow="hidden";
+  }
+
+  function renderLyricsPage(){
+    var wrap=document.getElementById("lyricsPagesWrap");
+    wrap.innerHTML="";
+    var page=document.createElement("div");
+    page.className="lyrics-page active-page";
+    var start=currentPage*LINES_PER_PAGE;
+    var end=Math.min(start+LINES_PER_PAGE,currentLines.length);
+    for(var i=start;i<end;i++){
+      var line=currentLines[i];
+      var card=document.createElement("div");
+      card.className="lyrics-line-card";
+      card.style.animationDelay=((i-start)*0.06)+"s";
+      card.innerHTML=(line.s?"<div class='llc-verse'>"+line.s+"</div>":"")
+        +"<div class='llc-s'>"+line.t+"</div>"
+        +"<div class='llc-m'>"+line.m+"</div>";
+      page.appendChild(card);
+    }
+    wrap.appendChild(page);
+    // dots
+    var dots=document.getElementById("lnavDots");
+    dots.innerHTML="";
+    var maxDots=Math.min(totalPages,8);
+    for(var d=0;d<maxDots;d++){
+      (function(d){
+        var dot=document.createElement("button");
+        dot.className="lnav-dot"+(d===currentPage?" active":"");
+        dot.addEventListener("click",function(){currentPage=d;renderLyricsPage();});
+        dots.appendChild(dot);
+      })(d);
+    }
+    // buttons
+    document.getElementById("lyricsPrevPage").disabled=(currentPage===0);
+    document.getElementById("lyricsNextPage").disabled=(currentPage>=totalPages-1);
+    document.getElementById("lyrics-page-info-text") && (document.getElementById("lyrics-page-info-text").textContent="Page "+(currentPage+1)+" of "+totalPages);
+  }
+
+  document.getElementById("lyricsPrevPage").addEventListener("click",function(){if(currentPage>0){currentPage--;renderLyricsPage();}});
+  document.getElementById("lyricsNextPage").addEventListener("click",function(){if(currentPage<totalPages-1){currentPage++;renderLyricsPage();}});
+
+  return{play:play,stopAll:stopCurrent,showLyrics:showLyrics};
+})();
+
+var Player=(function(){
+  var modal=document.getElementById("playerModal");
+  var E={
+    close:document.getElementById("closePlayer"),title:document.getElementById("playerTitle"),
+    subtitle:document.getElementById("playerSubtitle"),crystals:document.getElementById("playerCrystals"),
+    timerDisp:document.getElementById("timerDisplay"),timerLabel:document.getElementById("timerLabel"),
+    ringFill:document.getElementById("ringFill"),affCount:document.getElementById("affirmCount"),
+    affText:document.getElementById("affirmText"),vizBox:document.getElementById("visualizeBox"),
+    playPause:document.getElementById("playPause"),prev:document.getElementById("prevAffirm"),
+    next:document.getElementById("nextAffirm"),repeat:document.getElementById("repeatToggle"),
+    progressFill:document.getElementById("progressFill"),progressLabel:document.getElementById("progressLabel")
+  };
+  var session=null,totalSecs=0,remainSecs=0,timerInterval=null,isPlaying=false;
+  var affIdx=0,repeatCount=0,repeatMax=21,autoSpeak=true,speakTimeout=null;
+  var CIRC=2*Math.PI*88;
+  function setRing(f){E.ringFill.style.strokeDashoffset=CIRC*(1-f);E.ringFill.style.stroke=f<.25?"#c9a84c":f<.5?"#c4a0f0":"#9b72d0";}
+  function fmt2(s){var m=Math.floor(s/60),sec=s%60;return (m<10?"0":"")+m+":"+(sec<10?"0":"")+sec;}
+  function open(sess){
+    session=sess;totalSecs=sess.durationMins*60;remainSecs=totalSecs;affIdx=0;repeatCount=0;repeatMax=sess.repeatCount||21;isPlaying=false;
+    E.title.textContent=sess.emoji+" "+sess.name;
+    E.subtitle.textContent=sess.purpose||"";
+    var html="";
+    (sess.crystals||[]).forEach(function(c){html+="<span class='player-crystal'>"+c+"</span>";});
+    E.crystals.innerHTML=html;
+    E.vizBox.textContent=sess.visualize?sess.visualize:"";
+    renderAff();updateTimer();setRing(1);updateProg();
+    if(sess.sound&&sess.sound!=="none")AudioEngine.playAmbient(sess.sound);
+    modal.classList.remove("hidden");document.body.style.overflow="hidden";
+  }
+  function renderAff(){
+    if(!session||!session.affirmations||!session.affirmations.length)return;
+    var affs=session.affirmations,cur=affs[affIdx%affs.length];
+    E.affText.textContent='"'+cur+'"';
+    E.affCount.textContent=(repeatCount+1)+" / "+repeatMax+" - #"+((affIdx%affs.length)+1)+"/"+affs.length;
+    E.affText.style.animation="none";void E.affText.offsetWidth;E.affText.style.animation="fadeText .5s ease";
+  }
+  function speakCurrent(){
+    if(!session||!autoSpeak)return;
+    var text=session.affirmations[affIdx%session.affirmations.length];
+    AudioEngine.speak(text,function(){
+      if(!isPlaying)return;
+      clearTimeout(speakTimeout);
+      speakTimeout=setTimeout(function(){if(isPlaying)advanceAff();},AudioEngine.getAffirmPause());
+    });
+  }
+  function advanceAff(){
+    if(!session)return;
+    repeatCount++;affIdx=(affIdx+1)%session.affirmations.length;
+    if(repeatCount>=repeatMax){complete();return;}
+    renderAff();speakCurrent();updateProg();
+  }
+  function startTimer(){clearInterval(timerInterval);timerInterval=setInterval(function(){if(!isPlaying)return;if(remainSecs<=0){complete();return;}remainSecs--;updateTimer();setRing(remainSecs/totalSecs);},1000);}
+  function updateTimer(){E.timerDisp.textContent=fmt2(remainSecs);E.timerLabel.textContent=remainSecs>0?"remaining":"complete";}
+  function updateProg(){var p=session?(repeatCount/repeatMax)*100:0;E.progressFill.style.width=p+"%";E.progressLabel.textContent=repeatCount+" of "+repeatMax+" affirmations";}
+  function togglePlay(){AudioEngine.resumeCtx();isPlaying=!isPlaying;E.playPause.textContent=isPlaying?"Pause":"Play";if(isPlaying){startTimer();speakCurrent();}else{clearTimeout(speakTimeout);AudioEngine.stopSpeech();}}
+  function complete(){
+    isPlaying=false;clearInterval(timerInterval);clearTimeout(speakTimeout);
+    E.playPause.textContent="Play";E.timerLabel.textContent="complete";
+    E.affText.textContent='"The practice is complete. Rest in stillness."';
+    E.affCount.textContent="Session Complete";setRing(0);E.progressFill.style.width="100%";
+    AudioEngine.speak("The practice is complete. Rest in stillness.");
+    showToast("Session complete");
+  }
+  function close(){isPlaying=false;clearInterval(timerInterval);clearTimeout(speakTimeout);AudioEngine.stopSpeech();modal.classList.add("hidden");document.body.style.overflow="";}
+  E.close.addEventListener("click",close);
+  modal.querySelector(".modal-backdrop").addEventListener("click",close);
+  E.playPause.addEventListener("click",togglePlay);
+  E.next.addEventListener("click",function(){AudioEngine.stopSpeech();clearTimeout(speakTimeout);if(repeatCount<repeatMax-1){repeatCount++;affIdx=(affIdx+1)%(session?session.affirmations.length:1);renderAff();updateProg();if(isPlaying)speakCurrent();}});
+  E.prev.addEventListener("click",function(){AudioEngine.stopSpeech();clearTimeout(speakTimeout);if(repeatCount>0){repeatCount--;affIdx=(affIdx-1+(session?session.affirmations.length:1))%(session?session.affirmations.length:1);renderAff();updateProg();if(isPlaying)speakCurrent();}});
+  E.repeat.addEventListener("click",function(){autoSpeak=!autoSpeak;E.repeat.textContent=autoSpeak?"Voice On":"Voice Off";E.repeat.classList.toggle("active",autoSpeak);showToast(autoSpeak?"Voice guidance on":"Voice guidance off");});
+  return{open:open,close:close};
+})();
+
+var Editor=(function(){
+  var modal=document.getElementById("editModal"),closeBtn=document.getElementById("closeEdit"),
+    saveBtn=document.getElementById("saveSession"),deleteBtn=document.getElementById("deleteSession"),
+    backdrop=modal.querySelector(".modal-backdrop"),
+    fName=document.getElementById("editName"),fEmoji=document.getElementById("editEmoji"),
+    fDuration=document.getElementById("editDuration"),fPurpose=document.getElementById("editPurpose"),
+    fCrystals=document.getElementById("editCrystals"),fVisualize=document.getElementById("editVisualize"),
+    fAffirm=document.getElementById("editAffirmations"),fSound=document.getElementById("editSound");
+  var currentId=null,currentType="session",weeklyIdx=null,onSaved=null;
+  function openSession(id,cb){
+    currentType="session";currentId=id;onSaved=cb;weeklyIdx=null;
+    var ss=DB.getSessions(),isNew=!id;
+    document.querySelector(".edit-title").textContent=isNew?"New Session":"Edit Session";
+    deleteBtn.style.display=isNew?"none":"inline-block";
+    if(isNew){fName.value="";fEmoji.value="*";fDuration.value="10";fPurpose.value="";fCrystals.value="";fVisualize.value="";fAffirm.value="";fSound.value="bowls";}
+    else{
+      var s=null;
+      for(var i=0;i<ss.length;i++){if(ss[i].id===id){s=ss[i];break;}}
+      if(!s)return;
+      fName.value=s.name||"";fEmoji.value=s.emoji||"*";fDuration.value=s.durationMins||10;fPurpose.value=s.purpose||"";
+      fCrystals.value=(s.crystals||[]).join("\n");fVisualize.value=s.visualize||"";fAffirm.value=(s.affirmations||[]).join("\n");fSound.value=s.sound||"none";
+    }
+    show();
+  }
+  function openWeekly(idx,cb){
+    currentType="weekly";currentId=null;weeklyIdx=idx;onSaved=cb;
+    var day=DB.getWeekly()[idx];
+    document.querySelector(".edit-title").textContent="Edit "+day.day;deleteBtn.style.display="none";
+    fName.value=day.day;fEmoji.value="*";fDuration.value="";fPurpose.value=day.focus||"";fCrystals.value=(day.crystals||[]).join("\n");fVisualize.value="";fAffirm.value="";fSound.value="none";
+    show();
+  }
+  function openCommute(cb){
+    currentType="commute";currentId=null;weeklyIdx=null;onSaved=cb;
+    var c=DB.getCommute();
+    document.querySelector(".edit-title").textContent="Edit Commute Kit";deleteBtn.style.display="none";
+    fName.value="Commute Kit";fEmoji.value="*";fDuration.value="";fPurpose.value="";fCrystals.value=(c.crystals||[]).join("\n");fVisualize.value="";fAffirm.value=(c.affirmations||[]).join("\n");fSound.value="none";
+    show();
+  }
+  function show(){
+    [fDuration,fPurpose,fVisualize,fAffirm,fSound].forEach(function(f){f.closest("label").style.display="";});
+    if(currentType==="weekly"){[fDuration,fVisualize,fAffirm,fSound].forEach(function(f){f.closest("label").style.display="none";});}
+    else if(currentType==="commute"){[fDuration,fPurpose,fVisualize,fSound].forEach(function(f){f.closest("label").style.display="none";});}
+    modal.classList.remove("hidden");document.body.style.overflow="hidden";fName.focus();
+  }
+  function hide(){modal.classList.add("hidden");document.body.style.overflow="";}
+  function save(){
+    if(currentType==="session"){
+      var ss=DB.getSessions(),cr=fCrystals.value.trim().split("\n").filter(Boolean),af=fAffirm.value.trim().split("\n").filter(Boolean);
+      if(!fName.value.trim()){showToast("Enter a name.");return;}
+      var d={id:currentId||("custom_"+Date.now()),name:fName.value.trim(),emoji:fEmoji.value.trim()||"*",durationMins:parseInt(fDuration.value)||10,purpose:fPurpose.value.trim(),crystals:cr,visualize:fVisualize.value.trim(),affirmations:af,sound:fSound.value,repeatCount:21,color:"#9b72d0"};
+      if(currentId){var idx=-1;for(var i=0;i<ss.length;i++){if(ss[i].id===currentId){idx=i;break;}}if(idx>=0)ss[idx]=d;}
+      else ss.push(d);
+      DB.saveSessions(ss);hide();showToast("Session saved");if(onSaved)onSaved();
+    }else if(currentType==="weekly"){
+      var w=DB.getWeekly();w[weeklyIdx]=Object.assign({},w[weeklyIdx],{crystals:fCrystals.value.trim().split("\n").filter(Boolean),focus:fPurpose.value.trim()});
+      DB.saveWeekly(w);hide();showToast("Saved");if(onSaved)onSaved();
+    }else{
+      DB.saveCommute({crystals:fCrystals.value.trim().split("\n").filter(Boolean),affirmations:fAffirm.value.trim().split("\n").filter(Boolean)});
+      hide();showToast("Saved");if(onSaved)onSaved();
+    }
+  }
+  closeBtn.addEventListener("click",hide);backdrop.addEventListener("click",hide);saveBtn.addEventListener("click",save);
+  deleteBtn.addEventListener("click",function(){
+    if(!currentId)return;
+    Confirm.show("Delete this session?",function(){
+      DB.saveSessions(DB.getSessions().filter(function(x){return x.id!==currentId;}));
+      hide();showToast("Deleted");if(onSaved)onSaved();
+    });
+  });
+  return{openSession:openSession,openWeekly:openWeekly,openCommute:openCommute};
+})();
+
+var Confirm=(function(){
+  var modal=document.getElementById("confirmModal"),msg=document.getElementById("confirmMsg"),
+    yes=document.getElementById("confirmYes"),no=document.getElementById("confirmNo"),
+    bd=modal.querySelector(".modal-backdrop");
+  var cb=null;
+  function show(m,c){msg.textContent=m;cb=c;modal.classList.remove("hidden");}
+  function hide(){modal.classList.add("hidden");cb=null;}
+  yes.addEventListener("click",function(){hide();if(cb)cb();});
+  no.addEventListener("click",hide);bd.addEventListener("click",hide);
+  return{show:show};
+})();
+
+function showToast(msg,dur){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},dur||2500);}
+
+function buildMediaCard(m){
+  var card=document.createElement("div");
+  card.className="mantra-card";
+  card.style.setProperty("--mc",m.color);
+  var lcount=(m.lines||[]).length;
+  var badge=lcount>10?"Full lyrics ("+lcount+" verses)":lcount+" verses";
+  card.innerHTML="<div class='mc-top'>"
+    +"<div class='mc-icon-wrap'>"+m.icon+"</div>"
+    +"<div class='mc-info'>"
+    +"<div class='mc-name'>"+m.name+"<span class='mc-pulse-dot'></span></div>"
+    +"<div class='mc-benefit'>"+m.benefit+"</div>"
+    +"<span class='mc-badge'>"+badge+"</span>"
+    +"</div></div>"
+    +"<div class='mc-divider'></div>"
+    +"<div class='mc-sanskrit'>"+m.sanskrit+"</div>"
+    +"<div class='mc-meaning'>"+m.meaning+"</div>"
+    +"<div class='mc-audio-bar'>"
+    +"<button class='mc-play'>&#9654;</button>"
+    +"<button class='mc-stop-btn'>&#9632;</button>"
+    +"<button class='mc-lyrics-btn'>Lyrics</button>"
+    +"<div class='mc-progress-wrap'>"
+    +"<div class='mc-prog-label'>Tap &#9654; to play &bull; Lyrics for full text</div>"
+    +"<div class='mc-progress'><div class='mc-progress-fill'></div></div>"
+    +"<div class='mc-time'><span>0:00</span><span>--:--</span></div>"
+    +"</div></div>"
+    +"<div class='mc-status'></div>";
+  card.querySelector(".mc-play").addEventListener("click",function(e){e.stopPropagation();MantraAudio.play(m,card);});
+  card.querySelector(".mc-stop-btn").addEventListener("click",function(e){e.stopPropagation();MantraAudio.stopAll();});
+  card.querySelector(".mc-lyrics-btn").addEventListener("click",function(e){e.stopPropagation();MantraAudio.showLyrics(m);});
+  return card;
+}
+
+
+function renderMantras(){
+  var grid=document.getElementById("mantraGrid");grid.innerHTML="";
+  MANTRAS.forEach(function(m){grid.appendChild(buildMediaCard(m));});
+}
+function renderAartis(){
+  var grid=document.getElementById("aartiGrid");grid.innerHTML="";
+  AARTIS.forEach(function(m){grid.appendChild(buildMediaCard(m));});
+}
+
+function renderHome(){
+  var ss=DB.getSessions(),grid=document.getElementById("dailySessions");grid.innerHTML="";
+  ss.forEach(function(sess){
+    var card=document.createElement("div");card.className="session-card";card.style.setProperty("--card-color",sess.color||"#9b72d0");
+    var crystalTags="";
+    var cr=sess.crystals||[];
+    for(var i=0;i<Math.min(3,cr.length);i++){crystalTags+="<span class='crystal-tag'>"+cr[i].split("-")[0].trim()+"</span>";}
+    if(cr.length>3)crystalTags+="<span class='crystal-tag'>+"+(cr.length-3)+"</span>";
+    card.innerHTML="<div class='card-header'><span class='card-emoji'>"+sess.emoji+"</span><div class='card-meta'><div class='card-title'>"+sess.name+"</div><div class='card-purpose'>"+(sess.purpose||"")+"</div></div><button class='card-edit'>Edit</button></div>"
+      +"<div class='card-duration'>"+sess.durationMins+" min</div>"
+      +"<div class='card-crystals'>"+crystalTags+"</div>"
+      +"<button class='start-btn'><span>Begin Practice</span><span>-></span></button>";
+    card.querySelector(".start-btn").addEventListener("click",function(){AudioEngine.resumeCtx();Player.open(sess);});
+    card.querySelector(".card-edit").addEventListener("click",function(e){e.stopPropagation();Editor.openSession(sess.id,function(){renderHome();renderManage();});});
+    grid.appendChild(card);
+  });
+  renderCommute();
+}
+
+function renderCommute(){
+  var c=DB.getCommute();
+  var html1="";c.crystals.forEach(function(x){html1+="<span class='crystal-tag'>"+x+"</span>";});
+  document.getElementById("commuteCrystals").innerHTML=html1;
+  var html2="";c.affirmations.forEach(function(a){html2+="<p>"+a+"</p>";});
+  document.getElementById("commuteAffirmations").innerHTML=html2;
+  document.getElementById("startCommute").onclick=function(){
+    AudioEngine.resumeCtx();
+    Player.open({id:"commute",emoji:"*",name:"Office and Train Commute",purpose:"Carry your pouch - 5 slow breaths",durationMins:5,sound:"none",crystals:c.crystals,visualize:"",affirmations:c.affirmations,repeatCount:10});
+  };
+  document.querySelector(".commute-header .edit-btn").onclick=function(){Editor.openCommute(renderHome);};
+}
+
+function renderWeekly(){
+  var w=DB.getWeekly(),days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var today=days[new Date().getDay()];
+  var grid=document.getElementById("weeklyGrid");grid.innerHTML="";
+  w.forEach(function(day,idx){
+    var card=document.createElement("div");card.className="weekly-card";
+    var crystalTags="";
+    (day.crystals||[]).forEach(function(c){crystalTags+="<span class='crystal-tag'>"+c.split("-")[0].trim()+"</span>";});
+    card.innerHTML="<div class='weekly-day "+(day.day===today?"today":"")+"'>"+day.day+(day.day===today?" (today)":"")+"</div>"
+      +"<div class='weekly-title'>"+(day.crystals||[]).join(" ").split("-")[0].trim()+"</div>"
+      +"<div class='weekly-focus'>"+(day.focus||"")+"</div>"
+      +"<div class='card-crystals' style='margin-bottom:.75rem'>"+crystalTags+"</div>"
+      +"<div style='display:flex;gap:.5rem'><button class='weekly-start'>Begin</button><button class='weekly-edit'>Edit</button></div>";
+    card.querySelector(".weekly-start").addEventListener("click",function(){
+      AudioEngine.resumeCtx();
+      Player.open({id:"w_"+day.day,emoji:"*",name:day.day+" Practice",purpose:day.focus||"",durationMins:10,sound:"bowls",crystals:day.crystals,visualize:"A calming light surrounding your entire being.",affirmations:["I am in harmony with this day.","My crystals support and guide me.","I am grounded and present.","Light flows through every part of me.","I am peaceful and strong."],repeatCount:7});
+    });
+    card.querySelector(".weekly-edit").addEventListener("click",function(){Editor.openWeekly(idx,renderWeekly);});
+    grid.appendChild(card);
+  });
+}
+
+function renderManage(){
+  var ss=DB.getSessions(),list=document.getElementById("manageList");list.innerHTML="";
+  ss.forEach(function(sess){
+    var item=document.createElement("div");item.className="manage-item";
+    item.innerHTML="<span class='mi-emoji'>"+sess.emoji+"</span><span class='mi-name'>"+sess.name+"</span><span class='mi-dur'>"+sess.durationMins+"m</span><button class='mi-edit'>Edit</button>";
+    item.querySelector(".mi-edit").addEventListener("click",function(){Editor.openSession(sess.id,function(){renderHome();renderManage();});});
+    list.appendChild(item);
+  });
+}
+document.getElementById("addSessionBtn").addEventListener("click",function(){Editor.openSession(null,function(){renderHome();renderManage();});});
+
+function initSettings(){
+  var s=DB.getSettings();
+  var vSel=document.getElementById("voiceSelect"),sRate=document.getElementById("speechRate"),sRateV=document.getElementById("speechRateVal"),sPitch=document.getElementById("speechPitch"),sPitchV=document.getElementById("speechPitchVal"),aPause=document.getElementById("affirmPause"),aPauseV=document.getElementById("affirmPauseVal");
+  function popVoices(){
+    var v=AudioEngine.getVoices();if(!v.length)return;
+    var html="";
+    for(var i=0;i<v.length;i++){html+="<option value='"+i+"'"+(i===s.voiceIdx?" selected":"")+">"+v[i].name+" ("+v[i].lang+")</option>";}
+    vSel.innerHTML=html;
+  }
+  popVoices();
+  [500,1500,3000,5000].forEach(function(t){setTimeout(popVoices,t);});
+  if(window.speechSynthesis)window.speechSynthesis.onvoiceschanged=popVoices;
+  document.getElementById("refreshVoices").addEventListener("click",function(){popVoices();showToast(AudioEngine.getVoices().length+" voices loaded");});
+  sRate.value=s.rate;sRateV.textContent=s.rate+"x";sPitch.value=s.pitch;sPitchV.textContent=s.pitch;aPause.value=s.affirmPause||2;aPauseV.textContent=(s.affirmPause||2)+"s";
+  AudioEngine.setAffirmPause((s.affirmPause||2)*1000);
+  function saveSett(){
+    var u={rate:parseFloat(sRate.value),pitch:parseFloat(sPitch.value),voiceIdx:parseInt(vSel.value)||0,darkMode:document.getElementById("darkModeToggle").checked,autoAdvance:document.getElementById("autoAdvance").checked,volume:parseFloat(document.getElementById("volSlider").value),ambientSound:AudioEngine.getCurrentSound(),affirmPause:parseFloat(aPause.value)};
+    DB.saveSettings(u);
+    AudioEngine.setTTS({rate:u.rate,pitch:u.pitch,voiceIdx:u.voiceIdx});
+    AudioEngine.setAffirmPause(u.affirmPause*1000);
+  }
+  sRate.addEventListener("input",function(){sRateV.textContent=sRate.value+"x";saveSett();});
+  sPitch.addEventListener("input",function(){sPitchV.textContent=sPitch.value;saveSett();});
+  aPause.addEventListener("input",function(){aPauseV.textContent=aPause.value+"s";saveSett();});
+  vSel.addEventListener("change",saveSett);
+  document.getElementById("testVoice").addEventListener("click",function(){AudioEngine.resumeCtx();AudioEngine.speak("My body is healing. I am strong and full of vitality.");});
+  var dark=document.getElementById("darkModeToggle");dark.checked=s.darkMode!==false;applyDark(dark.checked);dark.addEventListener("change",function(){applyDark(dark.checked);saveSett();});
+  document.getElementById("autoAdvance").checked=s.autoAdvance||false;document.getElementById("autoAdvance").addEventListener("change",saveSett);
+  var vol=document.getElementById("volSlider");vol.value=(s.volume!=null)?s.volume:0.4;AudioEngine.setVolume(parseFloat(vol.value));vol.addEventListener("input",function(){AudioEngine.setVolume(parseFloat(vol.value));saveSett();});
+  AudioEngine.setTTS({rate:s.rate,pitch:s.pitch,voiceIdx:s.voiceIdx});
+  document.getElementById("exportData").addEventListener("click",function(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([DB.exportData()],{type:"application/json"}));a.download="crystal-healing.json";a.click();});
+  document.getElementById("importDataBtn").addEventListener("click",function(){document.getElementById("importDataFile").click();});
+  document.getElementById("importDataFile").addEventListener("change",function(e){
+    var file=e.target.files[0];if(!file)return;
+    var r=new FileReader();
+    r.onload=function(ev){try{DB.importData(ev.target.result);renderAll();showToast("Imported");}catch(err){showToast("Import failed");}};
+    r.readAsText(file);
+  });
+  document.getElementById("resetData").addEventListener("click",function(){Confirm.show("Reset all sessions to defaults?",function(){DB.reset();renderAll();showToast("Reset done");});});
+  var savedTheme=localStorage.getItem("cm_theme")||"";
+  if(savedTheme)document.body.classList.add(savedTheme);
+  var themeChips=document.querySelectorAll(".theme-chip");
+  themeChips.forEach(function(chip){
+    chip.classList.toggle("active",chip.getAttribute("data-theme")===savedTheme);
+    chip.addEventListener("click",function(){
+      ["theme-forest","theme-sunset","theme-ocean","theme-rose","theme-gold"].forEach(function(t){document.body.classList.remove(t);});
+      var th=chip.getAttribute("data-theme");
+      if(th)document.body.classList.add(th);
+      localStorage.setItem("cm_theme",th||"");
+      themeChips.forEach(function(c){c.classList.toggle("active",c===chip);});
+    });
+  });
+}
+function applyDark(on){document.body.classList.toggle("light",!on);}
+
+function initAmbientBar(){
+  var s=DB.getSettings(),chips=document.querySelectorAll(".sound-chip");
+  chips.forEach(function(c){c.classList.toggle("active",c.getAttribute("data-sound")===(s.ambientSound||"none"));});
+  chips.forEach(function(c){
+    c.addEventListener("click",function(){
+      AudioEngine.resumeCtx();
+      chips.forEach(function(x){x.classList.remove("active");});
+      c.classList.add("active");
+      AudioEngine.playAmbient(c.getAttribute("data-sound"));
+      var sv=DB.getSettings();sv.ambientSound=c.getAttribute("data-sound");DB.saveSettings(sv);
+    });
+  });
+  document.getElementById("volSlider").addEventListener("input",function(e){AudioEngine.setVolume(parseFloat(e.target.value));});
+}
+
+var VIEWS={home:"viewHome",mantras:"viewMantras",aartis:"viewAartis",weekly:"viewWeekly",sessions:"viewSessions",settings:"viewSettings"};
+function showView(name){
+  for(var k in VIEWS){var el=document.getElementById(VIEWS[k]);if(el)el.classList.remove("active");}
+  var el2=document.getElementById(VIEWS[name]);if(el2)el2.classList.add("active");
+  document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-view")===name);});
+  document.querySelector(".header-nav").classList.remove("open");
+}
+document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showView(b.getAttribute("data-view"));});});
+document.getElementById("menuToggle").addEventListener("click",function(){document.querySelector(".header-nav").classList.toggle("open");});
+
+function initParticles(){
+  var canvas=document.getElementById("particleCanvas"),ctx=canvas.getContext("2d"),W,H;
+  var C=["#9b72d0","#c9a84c","#4caf85","#d07899","#c4a0f0","#c94c6a","#4c82c9"];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  window.addEventListener("resize",resize);resize();
+  function P(){this.x=Math.random()*W;this.y=H+10;this.r=.3+Math.random()*1.8;this.a=.04+Math.random()*.25;this.vx=(Math.random()-.5)*.3;this.vy=-.12-Math.random()*.4;this.color=C[Math.floor(Math.random()*C.length)];this.life=0;this.max=150+Math.random()*350;}
+  P.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;this.life++;if(this.life>this.max||this.y<-10){this.x=Math.random()*W;this.y=H+10;this.life=0;}};
+  P.prototype.draw=function(){var p=this.life/this.max,a=this.a*(p<.15?p/.15:p>.85?(1-p)/.15:1);ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.color;ctx.globalAlpha=a;ctx.fill();};
+  var ps=[];for(var i=0;i<100;i++)ps.push(new P());
+  function animate(){ctx.clearRect(0,0,W,H);ctx.globalAlpha=1;ps.forEach(function(p){p.update();p.draw();});requestAnimationFrame(animate);}
+  animate();
+}
+
+function renderAll(){renderHome();renderWeekly();renderManage();renderMantras();renderAartis();}
+
+(function(){
+  AudioEngine.init();
+  initParticles();
+  initSettings();
+  initAmbientBar();
+  renderAll();
+  showView("home");
+  document.addEventListener("touchstart",function(){AudioEngine.resumeCtx();},{once:true});
+  document.addEventListener("click",function(){AudioEngine.resumeCtx();},{once:true});
+})();
+</script>
+
+</body>
+</html>
